@@ -3,15 +3,17 @@
 #include "structs/object.h"
 #include "enums/object_type.h"
 #include "utils/screen_utils.h"
+#include "utils/arg_parser.h"
 #include "core/ncurses_loop.h"
+#include "setup/input_handler.h"
 
-int main()
+int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "");
 
-    double nKg;
-    std::cout << "mass (kg): ";
-    std::cin >> nKg;
+    auto parsedArgs = parseCmdArgs(argc, argv);
+
+    double nKg = std::stod(getArgOrPrompt(parsedArgs, "m", "mass (kg): "));
 
     Object mainObject(OBJECT_TYPE::OBJECT_BALL, nKg);
     mainObject.position = getCenterPosition();
