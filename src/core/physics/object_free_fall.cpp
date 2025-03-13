@@ -13,7 +13,7 @@ void handleObjectFreeFall(Object& object)
     const double epochAtStart = getEpochAsDecimal();
     const double initHeight = height;
     const double termVelocity = object.terminalVelocity;
-    while (height > 0.0)
+    while (true)
     {
         if (!object.isActionUsed) {
             break;
@@ -31,6 +31,10 @@ void handleObjectFreeFall(Object& object)
 
         int rowAtHeight = getRowAtHeight(height);
         object.position.row = rowAtHeight;
+
+        if (height <= 0.0){
+            break;
+        }
 
         sleepCurrentThread(20);
     }
