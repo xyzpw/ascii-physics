@@ -51,3 +51,18 @@ double calculateTerminalVelocity(Object& obj)
     }
     return 0.0;
 }
+
+// Calculate the velocity of an object thrown upward at a specified time.
+double calculateVelocityUpAtTime(double velocity, double seconds)
+{
+    double currentVelocity = velocity - g * seconds;
+    return currentVelocity;
+}
+
+// Calculate height of object thrown upward at specified time.
+double calculateDistanceUpAtTime(double velocity, double seconds)
+{
+    double currentVelocity = velocity * seconds;
+    currentVelocity -= 0.5 * g * seconds * seconds;
+    return currentVelocity;
+}
