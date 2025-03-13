@@ -18,6 +18,11 @@ int main(int argc, char* argv[])
     Object mainObject(OBJECT_TYPE::OBJECT_BALL, nKg);
     mainObject.position = getCenterPosition();
 
+    if (parsedArgs.checkKeyExists("cor")){
+        double val = std::stod(parsedArgs.getKeyValue("cor"));
+        mainObject.coefficientOfRestitution = val;
+    }
+
     startNcursesLoop(mainObject);
 
     return 0;
