@@ -4,7 +4,7 @@
 #include "structs/object.h"
 #include "enums/object_type.h"
 
-const double g = GRAVITY_ACCELERATION;
+const double& g = GRAVITY_ACCELERATION;
 
 // Return distance traveled at a specified time since an object was dropped.
 double calculateFreeFallDistanceAtTime(Object& object, double seconds)
