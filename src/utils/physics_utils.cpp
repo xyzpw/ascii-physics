@@ -38,9 +38,9 @@ double calculateTerminalVelocity(Object& obj)
     const double mass = obj.mass;
 
     const double diameter = 1.0;//NOTE: each char is 1 meter
+    const double Cd = obj.dragCoefficient;
     switch (objType){
         case OBJECT_TYPE::OBJECT_BALL:{
-            double Cd = 0.47;//drag coefficient
             double area = (diameter/2.0) * (diameter/2.0) * M_PI;
             double numerator = 2 * mass * g;
             double denominator = AIR_DENSITY * area * Cd;
