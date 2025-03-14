@@ -25,6 +25,7 @@ void startNcursesLoop(Object object)
         char keyPressed = getch();
 
         if (keyPressed == 'q'){
+            object.reset();
             break;
         }
 
