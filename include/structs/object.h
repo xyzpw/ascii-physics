@@ -11,6 +11,7 @@ struct Object {
     double height;
     double velocity = 0.0;
     double terminalVelocity;
+    double dragCoefficient;
     double coefficientOfRestitution = 0.0;
 
     bool isActionUsed = false;
