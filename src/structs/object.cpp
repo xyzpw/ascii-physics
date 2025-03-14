@@ -30,4 +30,5 @@ void Object::reset()
     this->height = getObjectHeight(*this);
     this->velocity = 0.0;
     this->isActionUsed = false;
+    this->terminalVelocity = calculateTerminalVelocity(*this);
 }
