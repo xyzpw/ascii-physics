@@ -17,6 +17,6 @@ struct Object {
     bool isActionUsed = false;
 
     Object(OBJECT_TYPE, double kg);
-    void drop();
     void reset();
+    void drop();
 };

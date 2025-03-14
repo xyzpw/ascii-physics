@@ -18,12 +18,6 @@ Object::Object(OBJECT_TYPE type, double kg)
     this->terminalVelocity = calculateTerminalVelocity(*this);
 }
 
-void Object::drop()
-{
-    std::thread fallThread(handleObjectFreeFall, std::ref(*this));
-    fallThread.detach();
-}
-
 void Object::reset()
 {
     this->position = getCenterPosition();
@@ -31,4 +25,10 @@ void Object::reset()
     this->velocity = 0.0;
     this->isActionUsed = false;
     this->terminalVelocity = calculateTerminalVelocity(*this);
+}
+
+void Object::drop()
+{
+    std::thread fallThread(handleObjectFreeFall, std::ref(*this));
+    fallThread.detach();
 }
