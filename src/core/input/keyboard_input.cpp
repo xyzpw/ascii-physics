@@ -35,7 +35,6 @@ void handleKeyPress(const char key, Object& object)
             int next = object.position.row - 1;
             if (checkRowInside(objRow - 1)){
                 objRow -= 1;
-                object.height += 1.0;
                 object.positionVector.y += 1;
             }
             break;
@@ -43,7 +42,6 @@ void handleKeyPress(const char key, Object& object)
         case CONTROL_KEY::KEY_MOVEDOWN:{
             if (checkRowInside(objRow + 1)){
                 objRow += 1;
-                object.height += 1.0;
                 object.positionVector.y -= 1;
             }
             break;

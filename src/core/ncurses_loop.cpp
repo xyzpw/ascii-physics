@@ -16,7 +16,6 @@ void startNcursesLoop(Object object)
     Position &objectPosition = object.position;
     int& objectColumn = object.position.column;
     int& objectRow = object.position.row;
-    double& currentObjectHeight = object.height;
 
     while (true)
     {
@@ -32,10 +31,6 @@ void startNcursesLoop(Object object)
         handleKeyPress(keyPressed, object);
 
         mvprintw(objectRow, objectColumn, OBJECT_BALL_CHAR);
-
-        if (!object.isActionUsed){
-            currentObjectHeight = getObjectHeight(object);
-        }
 
         printObjectInfo(object);
         printFloor();

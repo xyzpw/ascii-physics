@@ -12,8 +12,6 @@ struct Object {
     Vector2D velocityVector{0, 0};
 
     double mass;
-    double height;
-    double velocity = 0.0;
     double terminalVelocity;
     double dragCoefficient;
     double coefficientOfRestitution = 0.0;
