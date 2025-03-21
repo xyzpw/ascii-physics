@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include "utils/screen_utils.h"
 #include "structs/position.h"
+#include "structs/vector2d.h"
 
 winsize getWindowSize()
 {
@@ -19,4 +20,17 @@ Position getCenterPosition()
 
     Position pos{.column=centerCol, .row=centerRow};
     return pos;
+}
+
+Vector2D positionToVector(Position pos)
+{
+    struct winsize ws = getWindowSize();
+
+    int floorRow  = ws.ws_row - 1;
+
+    double x = pos.column;
+    double y = floorRow - pos.row;
+    y -= 1.0;
+
+    return Vector2D{x, y};
 }
