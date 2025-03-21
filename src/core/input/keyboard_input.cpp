@@ -36,6 +36,7 @@ void handleKeyPress(const char key, Object& object)
             if (checkRowInside(objRow - 1)){
                 objRow -= 1;
                 object.height += 1.0;
+                object.positionVector.y += 1;
             }
             break;
         }
@@ -43,18 +44,21 @@ void handleKeyPress(const char key, Object& object)
             if (checkRowInside(objRow + 1)){
                 objRow += 1;
                 object.height += 1.0;
+                object.positionVector.y -= 1;
             }
             break;
         }
         case CONTROL_KEY::KEY_MOVERIGHT:{
             if (checkColInside(objCol + 1)){
                 objCol += 1;
+                object.positionVector.x += 1;
             }
             break;
         }
         case CONTROL_KEY::KEY_MOVELEFT:{
             if (checkColInside(objCol - 1)){
                 objCol -= 1;
+                object.positionVector.x -= 1;
             }
             break;
         }
