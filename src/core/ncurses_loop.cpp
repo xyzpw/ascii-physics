@@ -35,7 +35,6 @@ void startNcursesLoop(Object object)
 
         handleKeyPress(keyPressed, object);
 
-        mvprintw(objectRow, objectColumn, OBJECT_BALL_CHAR);
 
         printObjectInfo(object);
         printFloor();
