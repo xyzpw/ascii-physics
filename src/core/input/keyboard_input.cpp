@@ -35,28 +35,28 @@ void handleKeyPress(const char key, Object& object)
             int next = object.position.row - 1;
             if (checkRowInside(objRow - 1)){
                 objRow -= 1;
-                object.positionVector.y += 1;
+                object.vectors.position.y += 1;
             }
             break;
         }
         case CONTROL_KEY::KEY_MOVEDOWN:{
             if (checkRowInside(objRow + 1)){
                 objRow += 1;
-                object.positionVector.y -= 1;
+                object.vectors.position.y -= 1;
             }
             break;
         }
         case CONTROL_KEY::KEY_MOVERIGHT:{
             if (checkColInside(objCol + 1)){
                 objCol += 1;
-                object.positionVector.x += 1;
+                object.vectors.position.x += 1;
             }
             break;
         }
         case CONTROL_KEY::KEY_MOVELEFT:{
             if (checkColInside(objCol - 1)){
                 objCol -= 1;
-                object.positionVector.x -= 1;
+                object.vectors.position.x -= 1;
             }
             break;
         }
