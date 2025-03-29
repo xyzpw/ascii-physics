@@ -16,11 +16,15 @@ Object::Object(OBJECT_TYPE type, double kg)
     }
 
     this->terminalVelocity = calculateTerminalVelocity(*this);
+    this->vectors.acceleration = Vector2D{0.0, -GRAVITY_ACCELERATION};
 }
 
 void Object::reset()
 {
     this->position = getCenterPosition();
+    this->vectors.position = positionToVector(this->position);
+    this->vectors.velocity = Vector2D{0.0, 0.0};
+    this->vectors.acceleration = Vector2D{0.0, -GRAVITY_ACCELERATION};
     this->isActionUsed = false;
     this->terminalVelocity = calculateTerminalVelocity(*this);
 }
