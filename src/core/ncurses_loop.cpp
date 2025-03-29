@@ -35,6 +35,7 @@ void startNcursesLoop(Object object)
 
         handleKeyPress(keyPressed, object);
 
+        object.position = vectorToPosition(object.vectors.position);
 
         printObjectInfo(object);
         printFloor();
