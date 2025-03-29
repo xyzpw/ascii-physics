@@ -16,6 +16,7 @@ Object createObject(OBJECT_TYPE type, ParsedArgs args)
     Object object(type, mass);
 
     object.position = getCenterPosition();
+    object.vectors.position = positionToVector(object.position);
 
     if (args.checkKeyExists("cor")){
         double cor = stod( args.getKeyValue("cor") );
