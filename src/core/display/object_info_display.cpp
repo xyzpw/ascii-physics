@@ -6,8 +6,6 @@
 
 void printObjectInfo(Object& object)
 {
-    Vector2D& positionVector = object.positionVector;
-    Vector2D& velocityVector = object.velocityVector;
 
     std::stringstream infoStr;
 
