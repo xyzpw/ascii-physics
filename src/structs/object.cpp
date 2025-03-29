@@ -21,8 +21,6 @@ Object::Object(OBJECT_TYPE type, double kg)
 void Object::reset()
 {
     this->position = getCenterPosition();
-    this->positionVector = positionToVector(this->position);
-    this->velocityVector = Vector2D{0.0, 0.0};
     this->isActionUsed = false;
     this->terminalVelocity = calculateTerminalVelocity(*this);
 }
