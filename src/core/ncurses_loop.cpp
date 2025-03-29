@@ -37,6 +37,10 @@ void startNcursesLoop(Object object)
 
         object.position = vectorToPosition(object.vectors.position);
 
+        if (checkPositionInsideDisplay(objectPosition)){
+            mvprintw(objectRow, objectColumn, OBJECT_BALL_CHAR);
+        }
+
         printObjectInfo(object);
         printFloor();
 
