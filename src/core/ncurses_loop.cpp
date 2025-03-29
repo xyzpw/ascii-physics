@@ -17,15 +17,20 @@ void startNcursesLoop(Object object)
     int& objectColumn = object.position.column;
     int& objectRow = object.position.row;
 
-    while (true)
+    bool isRunning = true;
+    while (isRunning)
     {
         clear();
+
+        if (!isRunning){
+            break;
+        }
 
         char keyPressed = getch();
 
         if (keyPressed == 'q'){
             object.reset();
-            break;
+            isRunning = false;
         }
 
         handleKeyPress(keyPressed, object);
