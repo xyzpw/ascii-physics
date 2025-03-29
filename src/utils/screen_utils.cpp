@@ -1,5 +1,6 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <cmath>
 #include "utils/screen_utils.h"
 #include "structs/position.h"
 #include "structs/vector2d.h"
@@ -22,6 +23,19 @@ Position getCenterPosition()
     return pos;
 }
 
+bool checkPositionInsideDisplay(Position pos)
+{
+    struct winsize ws = getWindowSize();
+
+    int maxCol = ws.ws_col - 1;
+    int maxRow = ws.ws_row - 2;
+
+    bool canDisplayCol = pos.column <= maxCol && pos.column >= 0;
+    bool canDisplayRow = pos.row >= 0 && pos.row <= maxRow;
+
+    return canDisplayCol && canDisplayRow;
+}
+
 Vector2D positionToVector(Position pos)
 {
     struct winsize ws = getWindowSize();
@@ -33,4 +47,16 @@ Vector2D positionToVector(Position pos)
     y -= 1.0;
 
     return Vector2D{x, y};
+}
+
+Position vectorToPosition(Vector2D vector)
+{
+    struct winsize ws = getWindowSize();
+
+    int rowFloor = ws.ws_row - 1;
+
+    int col = vector.x;
+    int row = std::round(rowFloor - (vector.y + 1));
+
+    return Position{col, row};
 }

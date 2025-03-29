@@ -5,5 +5,7 @@
 #include "structs/vector2d.h"
 
 winsize getWindowSize();
+bool checkPositionInsideDisplay(Position);
 Position getCenterPosition();
 Vector2D positionToVector(Position);
+Position vectorToPosition(Vector2D);
