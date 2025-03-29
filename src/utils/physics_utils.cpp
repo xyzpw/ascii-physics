@@ -66,3 +66,13 @@ double calculateDistanceUpAtTime(double velocity, double seconds)
     currentVelocity -= 0.5 * g * seconds * seconds;
     return currentVelocity;
 }
+
+double calculateVelocityFinal(double velocity, double acceleration, double t)
+{
+    return velocity + acceleration * t;
+}
+
+double calculateDisplacement(double velocity, double acceleration, double t)
+{
+    return velocity * t + 0.5 * acceleration * t * t;
+}

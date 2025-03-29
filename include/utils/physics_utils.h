@@ -8,3 +8,5 @@ double calculateFreeFallVelocityAtTime(Object&, double seconds);
 double calculateTerminalVelocity(Object&);
 double calculateVelocityUpAtTime(double velocity, double seconds);
 double calculateDistanceUpAtTime(double velocity, double seconds);
+double calculateVelocityFinal(double velocity, double acceleration, double t);
+double calculateDisplacement(double velocity, double acceleration, double t);
