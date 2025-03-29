@@ -6,6 +6,8 @@
 
 void printObjectInfo(Object& object)
 {
+    Vector2D& positionVector = object.vectors.position;
+    Vector2D& velocityVector = object.vectors.velocity;
 
     std::stringstream infoStr;
 
@@ -14,7 +16,7 @@ void printObjectInfo(Object& object)
 
     if (object.isActionUsed){
         infoStr << "\n";
-        infoStr << "velocity: " << velocityVector.getMagnitude() << " m/s";
+        infoStr << "speed: " << velocityVector.getMagnitude() << " m/s";
     }
 
     mvprintw(0, 0, infoStr.str().c_str());
