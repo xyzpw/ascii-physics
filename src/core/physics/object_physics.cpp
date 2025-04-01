@@ -20,7 +20,11 @@ void updateObjectPhysicsYAxis(Object& object, double t)
 
     const double yScale = velocity.y >= 0.0 ? 1.0 : -1.0;
 
+    double netAcceleration = acceleration - (dragForce / object.mass) * yScale;
 
+    double newVelocity = calculateVelocityFinal(velocity.y, netAcceleration, t);
+
+    double newPos = calculateDisplacement(newVelocity, netAcceleration, t);
     newPos += position.y;
 
     velocity.y = newVelocity;
