@@ -19,6 +19,7 @@ struct Object {
     double terminalVelocity;
     double dragCoefficient;
     double coefficientOfRestitution = 0.0;
+    double crossSectionalArea;
 
     bool isActionUsed = false;
 
