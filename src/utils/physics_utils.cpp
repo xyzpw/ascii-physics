@@ -6,32 +6,6 @@
 
 const double& g = GRAVITY_ACCELERATION;
 
-// Return distance traveled at a specified time since an object was dropped.
-double calculateFreeFallDistanceAtTime(Object& object, double seconds)
-{
-    const double termVel = object.terminalVelocity;
-    bool hasReachedTermVel = g * seconds > termVel;
-    if (hasReachedTermVel){
-        double timeAtTermVel = termVel / g;
-        double distAtTermVel = 0.5 * g * timeAtTermVel * timeAtTermVel;
-        double timeSinceTermVel = seconds - timeAtTermVel;
-        double distance = timeSinceTermVel * termVel + distAtTermVel;
-        return distance;
-    }
-    return 0.5 * g * seconds * seconds;
-}
-
-// Return velocity of an object in free fall at a specified time.
-double calculateFreeFallVelocityAtTime(Object& object, double seconds)
-{
-    const double termVel = object.terminalVelocity;
-    double velocity = g * seconds;
-    if (velocity > termVel){
-        velocity = termVel;
-    }
-    return velocity;
-}
-
 double calculateTerminalVelocity(Object& obj)
 {
     OBJECT_TYPE objType = obj.type;
@@ -50,21 +24,6 @@ double calculateTerminalVelocity(Object& obj)
         }
     }
     return 0.0;
-}
-
-// Calculate the velocity of an object thrown upward at a specified time.
-double calculateVelocityUpAtTime(double velocity, double seconds)
-{
-    double currentVelocity = velocity - g * seconds;
-    return currentVelocity;
-}
-
-// Calculate height of object thrown upward at specified time.
-double calculateDistanceUpAtTime(double velocity, double seconds)
-{
-    double currentVelocity = velocity * seconds;
-    currentVelocity -= 0.5 * g * seconds * seconds;
-    return currentVelocity;
 }
 
 double calculateVelocityFinal(double velocity, double acceleration, double t)
