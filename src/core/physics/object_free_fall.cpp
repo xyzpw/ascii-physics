@@ -2,7 +2,6 @@
 #include "core/physics/object_free_fall.h"
 #include "core/physics/object_physics.h"
 #include "utils/sleep_utils.h"
-#include "utils/object_utils.h"
 #include "utils/physics_utils.h"
 #include "utils/epoch_utils.h"
 #include "utils/screen_utils.h"
