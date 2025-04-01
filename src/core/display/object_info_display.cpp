@@ -15,9 +15,6 @@ void printObjectInfo(Object& object)
     infoStr << "height: " << positionVector.y << " m";
 
     if (object.isActionUsed){
-        infoStr << "\n";
         infoStr << "speed: " << velocityVector.getMagnitude() << " m/s";
     }
-
-    mvprintw(0, 0, infoStr.str().c_str());
 }
