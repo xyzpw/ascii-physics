@@ -6,6 +6,8 @@
 void updateObjectPhysicsYAxis(Object& object, double t)
 {
     const double& termVel = object.terminalVelocity;
+    const double& dragCoefficient = object.dragCoefficient;
+    const double& sectionalArea = object.crossSectionalArea;
 
     Vector2D& velocity = object.vectors.velocity;
     Vector2D& position = object.vectors.position;
