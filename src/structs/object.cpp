@@ -1,7 +1,6 @@
 #include <thread>
 #include "structs/object.h"
 #include "utils/screen_utils.h"
-#include "utils/object_utils.h"
 #include "utils/physics_utils.h"
 #include "core/physics/object_free_fall.h"
 #include "constants/physics_constants.h"
