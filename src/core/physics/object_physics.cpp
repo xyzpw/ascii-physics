@@ -14,10 +14,7 @@ void updateObjectPhysicsYAxis(Object& object, double t)
 
     const double yScale = velocity.y >= 0.0 ? 1.0 : -1.0;
 
-    double newVelocity = calculateVelocityFinal(velocity.y, acceleration, t);
-    newVelocity = std::abs(newVelocity) < termVel ? newVelocity : termVel * yScale;
 
-    double newPos = calculateDisplacement(newVelocity, acceleration, t);
     newPos += position.y;
 
     velocity.y = newVelocity;
