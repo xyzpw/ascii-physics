@@ -10,11 +10,17 @@ void printObjectInfo(Object& object)
     Vector2D& velocityVector = object.vectors.velocity;
 
     std::stringstream infoStr;
+    int row = 0;
 
     infoStr << std::fixed << std::setprecision(2);
     infoStr << "height: " << positionVector.y << " m";
 
+    mvprintw(row++, 0, infoStr.str().c_str());
+    infoStr.str("");
+
     if (object.isActionUsed){
         infoStr << "speed: " << velocityVector.getMagnitude() << " m/s";
+        mvprintw(row++, 0, infoStr.str().c_str());
+        infoStr.str("");
     }
 }
