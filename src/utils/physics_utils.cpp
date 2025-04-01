@@ -25,6 +25,13 @@ double calculateTerminalVelocity(Object& obj)
     return 0.0;
 }
 
+double calculateDragForce(double velocity, double dragCoeff, double area)
+{
+    double vSquared = velocity * velocity;
+
+    return 0.5 * AIR_DENSITY * vSquared * dragCoeff * area;
+}
+
 double calculateVelocityFinal(double velocity, double acceleration, double t)
 {
     return velocity + acceleration * t;
