@@ -47,3 +47,27 @@ void updateObjectPhysicsYAxis(Object& object, double t)
     velocity.y = newVelocity;
     position.y = newPos;
 }
+
+void updateObjectPhysicsXAxis(Object& object, double tDelta)
+{
+    Vector2D& velocity = object.vectors.velocity;
+    Vector2D& position = object.vectors.position;
+    Vector2D& acceleration = object.vectors.acceleration;
+    const double& mass = object.mass;
+
+    double dragForce = calculateDragForce(
+        velocity.x, object.dragCoefficient, object.crossSectionalArea
+    );
+
+    const double yScale = velocity.x >= 0.0 ? 1.0 : -1.0;
+
+    double netAccelerationX = acceleration.x - (dragForce / mass) * yScale;
+
+    double newVelocity = calculateVelocityFinal(velocity.x, netAccelerationX, tDelta);
+
+    double newPos = calculateDisplacement(newVelocity, netAccelerationX, tDelta);
+    newPos += position.x;
+
+    velocity.x = newVelocity;
+    position.x = newPos;
+}
