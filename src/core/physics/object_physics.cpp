@@ -3,6 +3,8 @@
 #include "structs/object.h"
 #include "utils/physics_utils.h"
 
+const double VELOCITY_Y_MIN = 0.01;
+
 void updateObjectPhysicsYAxis(Object& object, double t)
 {
     Vector2D& velocity = object.vectors.velocity;
