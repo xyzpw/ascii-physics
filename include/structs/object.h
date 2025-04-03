@@ -25,5 +25,5 @@ struct Object {
 
     Object(OBJECT_TYPE, double kg);
     void reset();
-    void drop();
+    void simulate();
 };

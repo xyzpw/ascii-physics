@@ -3,6 +3,7 @@
 #include "utils/screen_utils.h"
 #include "utils/physics_utils.h"
 #include "constants/physics_constants.h"
+#include "core/physics/object_physics.h"
 
 const double PI = 3.141592653589793238;
 
@@ -30,10 +31,10 @@ void Object::reset()
     configureObjectProperties(*this);
 }
 
-void Object::drop()
+void Object::simulate()
 {
-    std::thread fallThread(handleObjectFreeFall, std::ref(*this));
-    fallThread.detach();
+    std::thread motionThread(simulateObjectMotion, std::ref(*this));
+    motionThread.detach();
 }
 
 void configureObjectProperties(Object& object)
