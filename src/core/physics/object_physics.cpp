@@ -71,3 +71,9 @@ void updateObjectPhysicsXAxis(Object& object, double tDelta)
     velocity.x = newVelocity;
     position.x = newPos;
 }
+
+void updateObjectVectors(Object& object, double tDelta)
+{
+    updateObjectPhysicsXAxis(object, tDelta);
+    updateObjectPhysicsYAxis(object, tDelta);
+}
