@@ -3,6 +3,7 @@
 #include "core/physics/object_collision.h"
 #include "structs/object.h"
 #include "utils/physics_utils.h"
+#include "utils/sleep_utils.h"
 
 const double VELOCITY_Y_MIN = 0.01;
 
@@ -76,4 +77,15 @@ void updateObjectVectors(Object& object, double tDelta)
 {
     updateObjectPhysicsXAxis(object, tDelta);
     updateObjectPhysicsYAxis(object, tDelta);
+}
+
+void simulateObjectMotion(Object& object)
+{
+    const double deltaInterval = 0.01;
+
+    while (object.isActionUsed)
+    {
+        updateObjectVectors(object, deltaInterval);
+        sleepCurrentThread(10);
+    }
 }
