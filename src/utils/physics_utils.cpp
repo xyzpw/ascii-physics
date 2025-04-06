@@ -2,6 +2,7 @@
 #include "utils/physics_utils.h"
 #include "constants/physics_constants.h"
 #include "structs/object.h"
+#include "structs/vector2d.h"
 #include "enums/object_type.h"
 
 const double& g = GRAVITY_ACCELERATION;
@@ -40,4 +41,14 @@ double calculateVelocityFinal(double velocity, double acceleration, double t)
 double calculateDisplacement(double velocity, double acceleration, double t)
 {
     return velocity * t + 0.5 * acceleration * t * t;
+}
+
+Vector2D degreesToVector(double deg)
+{
+    double rad = deg * M_PI / 180.0;
+
+    double x = std::cos(rad);
+    double y = std::sin(rad);
+
+    return Vector2D{x, y};
 }
