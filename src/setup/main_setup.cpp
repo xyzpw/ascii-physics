@@ -27,6 +27,16 @@ Object createObject(OBJECT_TYPE type, ParsedArgs args)
         changeGravityAcceleration(gravity);
         object.reset();
     }
+    if (args.checkKeyExists("launch")){
+        double angle = stod(
+            getArgOrPrompt(args, "angle", "launch angle: ")
+        );
+        double velocity = stod(
+            getArgOrPrompt(args, "velocity", "launch velocity: ")
+        );
+        object.launchInfo.launchAngleDeg = angle;
+        object.launchInfo.velocity = velocity;
+    }
 
     return object;
 }
