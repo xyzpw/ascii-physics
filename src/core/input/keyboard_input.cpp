@@ -61,7 +61,6 @@ void handleKeyPress(const char key, Object& object)
             break;
         }
         case CONTROL_KEY::KEY_ACTION:{
-            object.isActionUsed = true;
             object.simulate();
             break;
         }

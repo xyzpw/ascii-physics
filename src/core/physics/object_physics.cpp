@@ -81,6 +81,11 @@ void updateObjectVectors(Object& object, double tDelta)
 
 void simulateObjectMotion(Object& object)
 {
+    if (object.isActionUsed)
+        return;
+    else
+        object.isActionUsed = true;
+
     const double deltaInterval = 0.01;
 
     while (object.isActionUsed)
