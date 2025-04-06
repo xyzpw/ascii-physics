@@ -55,7 +55,7 @@ Position vectorToPosition(Vector2D vector)
 
     int rowFloor = ws.ws_row - 1;
 
-    int col = vector.x;
+    int col = std::round(vector.x);
     int row = std::round(rowFloor - (vector.y + 1));
 
     return Position{col, row};
