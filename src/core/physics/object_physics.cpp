@@ -60,9 +60,9 @@ void updateObjectPhysicsXAxis(Object& object, double tDelta)
         velocity.x, object.dragCoefficient, object.crossSectionalArea
     );
 
-    const double yScale = velocity.x >= 0.0 ? 1.0 : -1.0;
+    const double xScale = velocity.x >= 0.0 ? 1.0 : -1.0;
 
-    double netAccelerationX = acceleration.x - (dragForce / mass) * yScale;
+    double netAccelerationX = acceleration.x - (dragForce / mass) * xScale;
 
     double newVelocity = calculateVelocityFinal(velocity.x, netAccelerationX, tDelta);
 
