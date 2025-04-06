@@ -6,6 +6,7 @@
 #include "utils/sleep_utils.h"
 
 const double VELOCITY_Y_MIN = 0.01;
+const double VELOCITY_X_MIN = 0.01;
 
 void updateObjectPhysicsYAxis(Object& object, double t)
 {
@@ -15,10 +16,13 @@ void updateObjectPhysicsYAxis(Object& object, double t)
     bool hasCollidedFloor = checkHasCollidedWithFloor(object);
     if (hasCollidedFloor){
         position.y = 0.0;
-        velocity.y *= -object.coefficientOfRestitution;
+        if (velocity.y < 0){
+            velocity.y *= -object.coefficientOfRestitution;
+        }
         if (std::abs(velocity.y) < VELOCITY_Y_MIN){
             velocity.y = 0.0;
-            return;
+            if (velocity.x < VELOCITY_X_MIN)
+                return;
         }
     }
 
@@ -40,7 +44,10 @@ void updateObjectPhysicsYAxis(Object& object, double t)
     if (hasCollidedFloor && newPos <= 0.0){
         velocity.y = 0.0;
         position.y = 0.0;
-        return;
+        newVelocity = 0.0;
+        newPos = 0.0;
+        if (velocity.x < VELOCITY_Y_MIN)
+            return;
     }
 
     newPos += position.y;
