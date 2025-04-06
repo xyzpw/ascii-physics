@@ -1,6 +1,7 @@
 #include "core/input/keyboard_input.h"
 #include "structs/object.h"
 #include "utils/screen_utils.h"
+#include "utils/physics_utils.h"
 #include "constants/control_keys.h"
 
 void handleKeyPress(const char key, Object& object)
@@ -62,6 +63,16 @@ void handleKeyPress(const char key, Object& object)
         }
         case CONTROL_KEY::KEY_ACTION:{
             object.simulate();
+            break;
+        }
+        case CONTROL_KEY::KEY_LAUNCH:{
+            auto& angle = object.launchInfo.launchAngleDeg;
+            auto& velocity = object.launchInfo.velocity;
+
+            if (angle <= 360 && angle >= 0 && velocity > 0){
+                object.launch(degreesToVector(angle) * velocity);
+            }
+
             break;
         }
     }
