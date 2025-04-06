@@ -9,6 +9,8 @@ enum class CONTROL_KEY {
     KEY_MOVEDOWN = 's',
     KEY_MOVERIGHT = 'd',
     KEY_MOVELEFT = 'a',
+
+    KEY_LAUNCH = 'l',
 };
 
 CONTROL_KEY getKeyControl(const char key)
