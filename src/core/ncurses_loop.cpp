@@ -35,7 +35,7 @@ void startNcursesLoop(World world)
             isRunning = false;
         }
 
-        handleKeyPress(keyPressed, object);
+        handleKeyPress(keyPressed, world);
 
         object.position = vectorToPosition(object.vectors.position);
 
