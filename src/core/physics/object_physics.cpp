@@ -53,6 +53,12 @@ void updateObjectPhysicsYAxis(World& world, Object& object, double t)
 
     newPos += position.y;
 
+    // Bounce off ceiling.
+    if (newPos >= world.worldBounds.ceiling - 1){
+        newPos = world.worldBounds.ceiling - 1;
+        newVelocity *= -object.coefficientOfRestitution;
+    }
+
     velocity.y = newVelocity;
     position.y = newPos;
 }
@@ -76,6 +82,16 @@ void updateObjectPhysicsXAxis(World& world, Object& object, double tDelta)
 
     double newPos = calculateDisplacement(newVelocity, netAccelerationX, tDelta);
     newPos += position.x;
+
+    // Bounce off of walls.
+    if (newPos <= world.worldBounds.leftWall){
+        newPos = world.worldBounds.leftWall;
+        newVelocity *= -object.coefficientOfRestitution;
+    }
+    else if (newPos >= world.worldBounds.rightWall){
+        newPos = world.worldBounds.rightWall;
+        newVelocity *= -object.coefficientOfRestitution;
+    }
 
     velocity.x = newVelocity;
     position.x = newPos;
