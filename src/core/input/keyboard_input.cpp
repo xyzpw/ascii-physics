@@ -1,10 +1,11 @@
 #include "core/input/keyboard_input.h"
 #include "structs/object.h"
+#include "structs/world.h"
 #include "utils/screen_utils.h"
 #include "utils/physics_utils.h"
 #include "constants/control_keys.h"
 
-void handleKeyPress(const char key, Object& object)
+void handleKeyPress(const char key, World& world)
 {
     CONTROL_KEY keyControl = getKeyControl(key);
 

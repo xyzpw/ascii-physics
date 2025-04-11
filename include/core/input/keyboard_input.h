@@ -1,5 +1,5 @@
 #pragma once
 
-#include "structs/object.h"
+#include "structs/world.h"
 
-void handleKeyPress(const char key, Object& object);
+void handleKeyPress(const char key, World& world);
