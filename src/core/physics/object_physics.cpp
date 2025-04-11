@@ -2,13 +2,14 @@
 #include "core/physics/object_physics.h"
 #include "core/physics/object_collision.h"
 #include "structs/object.h"
+#include "structs/world.h"
 #include "utils/physics_utils.h"
 #include "utils/sleep_utils.h"
 
 const double VELOCITY_Y_MIN = 0.01;
 const double VELOCITY_X_MIN = 0.01;
 
-void updateObjectPhysicsYAxis(Object& object, double t)
+void updateObjectPhysicsYAxis(World& world, Object& object, double t)
 {
     Vector2D& velocity = object.vectors.velocity;
     Vector2D& position = object.vectors.position;
@@ -56,7 +57,7 @@ void updateObjectPhysicsYAxis(Object& object, double t)
     position.y = newPos;
 }
 
-void updateObjectPhysicsXAxis(Object& object, double tDelta)
+void updateObjectPhysicsXAxis(World& world, Object& object, double tDelta)
 {
     Vector2D& velocity = object.vectors.velocity;
     Vector2D& position = object.vectors.position;
@@ -80,13 +81,13 @@ void updateObjectPhysicsXAxis(Object& object, double tDelta)
     position.x = newPos;
 }
 
-void updateObjectVectors(Object& object, double tDelta)
+void updateObjectVectors(World& world, Object& object, double tDelta)
 {
-    updateObjectPhysicsXAxis(object, tDelta);
-    updateObjectPhysicsYAxis(object, tDelta);
+    updateObjectPhysicsXAxis(world, object, tDelta);
+    updateObjectPhysicsYAxis(world, object, tDelta);
 }
 
-void simulateObjectMotion(Object& object)
+void simulateObjectMotion(World& world, Object& object)
 {
     if (object.isActionUsed)
         return;
@@ -97,7 +98,7 @@ void simulateObjectMotion(Object& object)
 
     while (object.isActionUsed)
     {
-        updateObjectVectors(object, deltaInterval);
+        updateObjectVectors(world, object, deltaInterval);
         sleepCurrentThread(10);
     }
 }
