@@ -28,6 +28,8 @@ struct Object {
 
     bool isActionUsed = false;
 
+    int id;
+
     Object(OBJECT_TYPE, double kg);
     void reset();
     void simulate();
