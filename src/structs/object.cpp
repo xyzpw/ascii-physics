@@ -34,12 +34,6 @@ void Object::reset()
     configureObjectProperties(*this);
 }
 
-void Object::simulate()
-{
-    std::thread motionThread(simulateObjectMotion, std::ref(*this));
-    motionThread.detach();
-}
-
 void Object::launch(Vector2D velocity)
 {
     this->vectors.velocity += velocity;

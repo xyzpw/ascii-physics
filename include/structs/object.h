@@ -32,6 +32,5 @@ struct Object {
 
     Object(OBJECT_TYPE, double kg);
     void reset();
-    void simulate();
     void launch(Vector2D velocity);
 };
