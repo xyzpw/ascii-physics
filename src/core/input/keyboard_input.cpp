@@ -1,4 +1,6 @@
+#include <thread>
 #include "core/input/keyboard_input.h"
+#include "core/physics/object_physics.h"
 #include "structs/object.h"
 #include "structs/world.h"
 #include "utils/screen_utils.h"
@@ -8,6 +10,8 @@
 void handleKeyPress(const char key, World& world)
 {
     CONTROL_KEY keyControl = getKeyControl(key);
+
+    Object& object = world.getObjectById(world.activeObjectId);
 
     if (keyControl == CONTROL_KEY::KEY_RESET){
         object.reset();
@@ -63,15 +67,18 @@ void handleKeyPress(const char key, World& world)
             break;
         }
         case CONTROL_KEY::KEY_ACTION:{
-            object.simulate();
+            std::thread th(simulateObjectMotion, std::ref(world), std::ref(object));
+            th.detach();
             break;
         }
         case CONTROL_KEY::KEY_LAUNCH:{
             auto& angle = object.launchInfo.launchAngleDeg;
             auto& velocity = object.launchInfo.velocity;
 
-            if (angle <= 360 && angle >= 0 && velocity > 0){
+            if (angle <= 360 && angle >= 0 && velocity >= 0){
                 object.launch(degreesToVector(angle) * velocity);
+                std::thread th(simulateObjectMotion, std::ref(world), std::ref(object));
+                th.detach();
             }
 
             break;
