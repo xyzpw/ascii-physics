@@ -1,5 +1,5 @@
 #pragma once
 
-#include "structs/object.h"
+#include "structs/world.h"
 
-void startNcursesLoop(Object object);
+void startNcursesLoop(World world);

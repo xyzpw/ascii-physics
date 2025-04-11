@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include "structs/world.h"
 #include "core/ncurses_loop.h"
 #include "setup/ncurses_setup.h"
 #include "core/input/keyboard_input.h"
@@ -7,9 +8,11 @@
 #include "display/object_info_display.h"
 #include "constants/object_char_constants.h"
 
-void startNcursesLoop(Object object)
+void startNcursesLoop(World world)
 {
     initializeNcurses();
+
+    Object& object = world.getObjectById(world.activeObjectId);
 
     // Reference variables used to access object while keeping code clean.
     Position &objectPosition = object.position;
