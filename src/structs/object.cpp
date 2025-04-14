@@ -21,6 +21,39 @@ Object::Object(OBJECT_TYPE type, double kg)
     this->id = randInt();
 }
 
+void Object::resetVectors()
+{
+    this->vectors.position = positionToVector(this->position);
+    this->vectors.velocity = Vector2D{0.0, 0.0};
+    this->vectors.acceleration = Vector2D{0.0, -GRAVITY_ACCELERATION};
+}
+
+void Object::resetPositionToCenter(double charSize)
+{
+    Position pos = getCenterPosition();
+    Vector2D vec = positionToVector(getCenterPosition()) * charSize;
+    pos = vectorToPosition(vec);
+
+    this->position = pos;
+}
+
+void Object::resetActionStates()
+{
+    this->isActionUsed = false;
+}
+
+void Object::resetPhysicsProperties(double charSize)
+{
+    switch (this->type)
+    {
+        case OBJECT_TYPE::OBJECT_BALL: {
+            this->dragCoefficient = DRAG_COEFFICIENT_BALL;
+            this->crossSectionalArea = (charSize/2.0) * (charSize/2.0) * PI;
+            this->terminalVelocity = calculateTerminalVelocity(*this);
+        }
+    }
+}
+
 void Object::reset()
 {
     this->position = getCenterPosition();

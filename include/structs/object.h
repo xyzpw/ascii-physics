@@ -31,6 +31,10 @@ struct Object {
     int id;
 
     Object(OBJECT_TYPE, double kg);
+    void resetVectors();
+    void resetPositionToCenter(double charSize);
+    void resetActionStates();
+    void resetPhysicsProperties(double charSize);
     void reset();
     void launch(Vector2D velocity);
 };
