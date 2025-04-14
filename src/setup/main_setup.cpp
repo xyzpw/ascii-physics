@@ -26,7 +26,6 @@ Object createObject(OBJECT_TYPE type, ParsedArgs args)
     if (args.checkKeyExists("g")){
         double gravity = stod( args.getKeyValue("g") );
         changeGravityAcceleration(gravity);
-        object.reset();
     }
     if (args.checkKeyExists("launch")){
         double angle = stod(
