@@ -7,6 +7,8 @@
 #include "utils/physics_utils.h"
 #include "constants/control_keys.h"
 
+bool checkIsControlKeyMovement(CONTROL_KEY);
+
 void handleKeyPress(const char key, World& world)
 {
     CONTROL_KEY keyControl = getKeyControl(key);
@@ -88,4 +90,16 @@ void handleKeyPress(const char key, World& world)
             break;
         }
     }
+}
+
+bool checkIsControlKeyMovement(CONTROL_KEY key)
+{
+    if (key == CONTROL_KEY::KEY_MOVEUP ||
+        key == CONTROL_KEY::KEY_MOVEDOWN ||
+        key == CONTROL_KEY::KEY_MOVERIGHT ||
+        key == CONTROL_KEY::KEY_MOVELEFT)
+    {
+        return true;
+    }
+    return false;
 }
