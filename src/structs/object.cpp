@@ -54,16 +54,6 @@ void Object::resetPhysicsProperties(double charSize)
     }
 }
 
-void Object::reset()
-{
-    this->position = getCenterPosition();
-    this->vectors.position = positionToVector(this->position);
-    this->vectors.velocity = Vector2D{0.0, 0.0};
-    this->vectors.acceleration = Vector2D{0.0, -GRAVITY_ACCELERATION};
-    this->isActionUsed = false;
-    this->terminalVelocity = calculateTerminalVelocity(*this);
-}
-
 void Object::launch(Vector2D velocity)
 {
     this->vectors.velocity += velocity;

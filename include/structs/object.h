@@ -35,6 +35,5 @@ struct Object {
     void resetPositionToCenter(double charSize);
     void resetActionStates();
     void resetPhysicsProperties(double charSize);
-    void reset();
     void launch(Vector2D velocity);
 };
