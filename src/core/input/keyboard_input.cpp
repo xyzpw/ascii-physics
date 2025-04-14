@@ -21,7 +21,7 @@ void handleKeyPress(const char key, World& world)
         world.resetObjectById(object.id);
         return;
     }
-    else if (object.isActionUsed){
+    else if (object.isActionUsed && checkIsControlKeyMovement(keyControl)){
         return;
     }
 
