@@ -12,6 +12,8 @@ void handleKeyPress(const char key, World& world)
     CONTROL_KEY keyControl = getKeyControl(key);
 
     Object& object = world.getObjectById(world.activeObjectId);
+    auto& worldBounds = world.worldBounds;
+    const double& metersPerChar = world.metersPerChar;
 
     if (keyControl == CONTROL_KEY::KEY_RESET){
         object.reset();
