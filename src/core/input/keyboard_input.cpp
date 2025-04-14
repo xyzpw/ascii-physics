@@ -16,7 +16,7 @@ void handleKeyPress(const char key, World& world)
     const double& metersPerChar = world.metersPerChar;
 
     if (keyControl == CONTROL_KEY::KEY_RESET){
-        object.reset();
+        world.resetObjectById(object.id);
         return;
     }
     else if (object.isActionUsed){
