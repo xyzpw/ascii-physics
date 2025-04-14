@@ -54,8 +54,8 @@ void updateObjectPhysicsYAxis(World& world, Object& object, double t)
     newPos += position.y;
 
     // Bounce off ceiling.
-    if (newPos >= world.worldBounds.ceiling - 1){
-        newPos = world.worldBounds.ceiling - 1;
+    if (newPos >= world.worldBounds.ceiling - world.metersPerChar){
+        newPos = world.worldBounds.ceiling - world.metersPerChar;
         newVelocity *= -object.coefficientOfRestitution;
     }
 
