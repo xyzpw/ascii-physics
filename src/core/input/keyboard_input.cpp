@@ -76,8 +76,11 @@ void handleKeyPress(const char key, World& world)
 
             if (angle <= 360 && angle >= 0 && velocity >= 0){
                 object.launch(degreesToVector(angle) * velocity);
-                std::thread th(simulateObjectMotion, std::ref(world), std::ref(object));
-                th.detach();
+
+                if (!object.isActionUsed){
+                    std::thread th(simulateObjectMotion, std::ref(world), std::ref(object));
+                    th.detach();
+                }
             }
 
             break;
