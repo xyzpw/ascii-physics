@@ -31,7 +31,7 @@ void startNcursesLoop(World world)
         char keyPressed = getch();
 
         if (keyPressed == 'q'){
-            object.reset();
+            world.resetObjectById(object.id);
             isRunning = false;
         }
 
