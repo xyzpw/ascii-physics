@@ -37,7 +37,7 @@ void startNcursesLoop(World world)
 
         handleKeyPress(keyPressed, world);
 
-        object.position = vectorToPosition(object.vectors.position);
+        object.position = vectorToPosition(object.vectors.position / world.metersPerChar);
 
         if (checkPositionInsideDisplay(objectPosition)){
             mvprintw(objectRow, objectColumn, OBJECT_BALL_CHAR);
