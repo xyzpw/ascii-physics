@@ -40,3 +40,16 @@ Object createObject(OBJECT_TYPE type, ParsedArgs args)
 
     return object;
 }
+
+World createWorldWithArgs(ParsedArgs args)
+{
+    World world;
+
+    if (args.checkKeyExists("char-size")){
+        double scale = stod(args.getKeyValue("char-size"));
+        world.metersPerChar = scale;
+        world.setWorldBounds();
+    }
+
+    return world;
+}

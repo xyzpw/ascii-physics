@@ -6,3 +6,4 @@
 #include "utils/arg_parser.h"
 
 Object createObject(OBJECT_TYPE, ParsedArgs);
+World createWorldWithArgs(ParsedArgs);
