@@ -13,6 +13,8 @@ struct World {
     };
     __WorldBorders worldBounds;
 
+    double metersPerChar = 1.0;
+
     World();
     Object& getObjectById(int id);
 };
