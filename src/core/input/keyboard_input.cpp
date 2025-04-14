@@ -38,31 +38,30 @@ void handleKeyPress(const char key, World& world)
     switch (keyControl)
     {
         case CONTROL_KEY::KEY_MOVEUP:{
-            int next = object.position.row - 1;
             if (checkRowInside(objRow - 1)){
                 objRow -= 1;
-                object.vectors.position.y += 1;
+                object.vectors.position.y += 1.0 * metersPerChar;
             }
             break;
         }
         case CONTROL_KEY::KEY_MOVEDOWN:{
             if (checkRowInside(objRow + 1)){
                 objRow += 1;
-                object.vectors.position.y -= 1;
+                object.vectors.position.y -= 1.0 * metersPerChar;
             }
             break;
         }
         case CONTROL_KEY::KEY_MOVERIGHT:{
             if (checkColInside(objCol + 1)){
                 objCol += 1;
-                object.vectors.position.x += 1;
+                object.vectors.position.x += 1.0 * metersPerChar;
             }
             break;
         }
         case CONTROL_KEY::KEY_MOVELEFT:{
             if (checkColInside(objCol - 1)){
                 objCol -= 1;
-                object.vectors.position.x -= 1;
+                object.vectors.position.x -= 1.0 * metersPerChar;
             }
             break;
         }
