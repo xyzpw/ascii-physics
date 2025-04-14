@@ -15,9 +15,10 @@ int main(int argc, char* argv[])
 
     Object mainObject = createObject(OBJECT_TYPE::OBJECT_BALL, parsedArgs);
 
-    World simulationWorld;
+    World simulationWorld = createWorldWithArgs(parsedArgs);
     simulationWorld.objects.push_back(mainObject);
     simulationWorld.activeObjectId = mainObject.id;
+    simulationWorld.resetObjectById(mainObject.id);
 
     startNcursesLoop(simulationWorld);
 
