@@ -6,14 +6,7 @@
 
 World::World()
 {
-    auto windowSize = getWindowSize();
-
-    auto& bounds = this->worldBounds;
-
-    bounds.rightWall = windowSize.ws_col - 1;
-    bounds.leftWall = 0;
-    bounds.ceiling = (windowSize.ws_row - 1);
-    bounds.floor = 0;
+    this->setWorldBounds();
 }
 
 Object& World::getObjectById(int id)
@@ -27,4 +20,16 @@ Object& World::getObjectById(int id)
     errMsg << "no object with id " << id << " exists";
 
     throw std::invalid_argument(errMsg.str());
+}
+
+void World::setWorldBounds()
+{
+    auto windowSize = getWindowSize();
+
+    auto& bounds = this->worldBounds;
+
+    bounds.rightWall = (windowSize.ws_col - 1) * this->metersPerChar;
+    bounds.leftWall = 0;
+    bounds.ceiling = (windowSize.ws_row - 1) * this->metersPerChar;
+    bounds.floor = 0;
 }

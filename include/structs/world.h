@@ -16,5 +16,6 @@ struct World {
     double metersPerChar = 1.0;
 
     World();
+    void setWorldBounds();
     Object& getObjectById(int id);
 };
