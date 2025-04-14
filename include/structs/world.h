@@ -18,4 +18,5 @@ struct World {
     World();
     void setWorldBounds();
     Object& getObjectById(int id);
+    void resetObjectById(int id);
 };

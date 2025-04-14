@@ -22,6 +22,16 @@ Object& World::getObjectById(int id)
     throw std::invalid_argument(errMsg.str());
 }
 
+void World::resetObjectById(int id)
+{
+    Object& object = this->getObjectById(id);
+
+    object.resetActionStates();
+    object.resetPositionToCenter(this->metersPerChar);
+    object.resetVectors();
+    object.resetPhysicsProperties(this->metersPerChar);
+}
+
 void World::setWorldBounds()
 {
     auto windowSize = getWindowSize();
