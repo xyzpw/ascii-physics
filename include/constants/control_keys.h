@@ -16,6 +16,9 @@ enum class CONTROL_KEY {
 
     KEY_SCALE_CONTROL_UP = static_cast<char>(KEY_UP),
     KEY_SCALE_CONTROL_DOWN = static_cast<char>(KEY_DOWN),
+
+    KEY_SELECT_PARAM_LAUNCH_VELOCITY = 'V',
+    KEY_SELECT_PARAM_LAUNCH_ANGLE = 'L',
 };
 
 CONTROL_KEY getKeyControl(const char key)
