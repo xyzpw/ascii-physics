@@ -5,7 +5,7 @@
 #include "core/input/keyboard_input.h"
 #include "utils/screen_utils.h"
 #include "display/floor_display.h"
-#include "display/object_info_display.h"
+#include "display/info_display.h"
 #include "constants/object_char_constants.h"
 
 void startNcursesLoop(World world)
@@ -43,7 +43,7 @@ void startNcursesLoop(World world)
             mvprintw(objectRow, objectColumn, OBJECT_BALL_CHAR);
         }
 
-        printObjectInfo(object);
+        displaySimulationText(world);
         printFloor();
 
         refresh();
