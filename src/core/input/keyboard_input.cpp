@@ -1,10 +1,13 @@
 #include <thread>
+#include <sstream>
 #include "core/input/keyboard_input.h"
+#include "core/input/object_control_scale.h"
 #include "core/physics/object_physics.h"
 #include "structs/object.h"
 #include "structs/world.h"
 #include "utils/screen_utils.h"
 #include "utils/physics_utils.h"
+#include "utils/epoch_utils.h"
 #include "constants/control_keys.h"
 
 bool checkIsControlKeyMovement(CONTROL_KEY);
