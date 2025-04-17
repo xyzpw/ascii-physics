@@ -23,6 +23,14 @@ The coefficient of restitution can also be customized with the `cor` arg:
 $ ./physics --cor 0.5
 ```
 
+Changing size of objects:
+```bash
+# Sets the size of each char to 0.5 meters.
+$ ./physics --char-size 0.5
+```
+> [!NOTE]
+> Each char is 1 meter by default.
+
 ### Controls
 - `q`: quit
 - `wasd`: move object
