@@ -1,5 +1,7 @@
 #pragma once
 
+#include <ncurses.h>
+
 enum class CONTROL_KEY {
     KEY_QUIT = 'q',
     KEY_RESET_OBJECT = 'r',
@@ -11,6 +13,9 @@ enum class CONTROL_KEY {
     KEY_MOVELEFT = 'a',
 
     KEY_LAUNCH = 'l',
+
+    KEY_SCALE_CONTROL_UP = static_cast<char>(KEY_UP),
+    KEY_SCALE_CONTROL_DOWN = static_cast<char>(KEY_DOWN),
 };
 
 CONTROL_KEY getKeyControl(const char key)
