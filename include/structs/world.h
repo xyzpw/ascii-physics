@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "structs/object.h"
+#include "enums/select_parameter.h"
 
 struct World {
     std::vector<Object> objects;
@@ -22,6 +23,8 @@ struct World {
     __OverlayText overlayText;
 
     double metersPerChar = 1.0;
+
+    SELECT_PARAMETER selectParameter = SELECT_PARAMETER::LAUNCH_ANGLE;
 
     World();
     void setWorldBounds();
