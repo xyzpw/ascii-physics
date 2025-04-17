@@ -2,7 +2,7 @@
 
 enum class CONTROL_KEY {
     KEY_QUIT = 'q',
-    KEY_RESET = 'r',
+    KEY_RESET_OBJECT = 'r',
 
     KEY_ACTION = ' ',
     KEY_MOVEUP = 'w',
