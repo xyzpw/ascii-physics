@@ -11,6 +11,8 @@
 #include "constants/control_keys.h"
 
 bool checkIsControlKeyMovement(CONTROL_KEY);
+void changeSelectParam(World&, SELECT_PARAMETER);
+void changeSelectParamValueOnInput(World&, SELECT_PARAMETER, bool isPositive);
 
 void handleKeyPress(const char key, World& world)
 {
@@ -105,4 +107,46 @@ bool checkIsControlKeyMovement(CONTROL_KEY key)
         return true;
     }
     return false;
+}
+
+void changeSelectParam(World& world, SELECT_PARAMETER param)
+{
+    auto& overlayText = world.overlayText;
+
+    std::stringstream stream;
+    stream << "selected parameter: ";
+
+    if (param == SELECT_PARAMETER::LAUNCH_ANGLE){
+        stream << "launch angle";
+    }
+    else if (param == SELECT_PARAMETER::LAUNCH_VELOCITY){
+        stream << "launch velocity";
+    }
+
+    world.selectParameter = param;
+
+    overlayText.text = stream.str();
+    overlayText.displayUntil = getEpochAsDecimal() + 1.0;
+    overlayText.shouldDisplay = true;
+}
+
+void changeSelectParamValueOnInput(World& world, SELECT_PARAMETER param,
+                                   bool isPositive)
+{
+    Object& object = world.getObjectById(world.activeObjectId);
+
+    std::stringstream stream;
+
+    if (world.selectParameter == SELECT_PARAMETER::LAUNCH_ANGLE){
+        scaleActiveControl(world, isPositive ? 10 : -10);
+        stream << "launch angle: " << object.launchInfo.launchAngleDeg;
+    }
+    else if (world.selectParameter == SELECT_PARAMETER::LAUNCH_VELOCITY){
+        scaleActiveControl(world, (isPositive ? 10 : -10) * world.metersPerChar);
+        stream << "launch velocity: " << object.launchInfo.velocity << " m/s";
+    }
+
+    world.overlayText.text = stream.str();
+    world.overlayText.displayUntil = getEpochAsDecimal() + 1;
+    world.overlayText.shouldDisplay = true;
 }
