@@ -37,3 +37,11 @@ $ ./physics --char-size 0.5
 - `space`: drop object
 - `r`: reset simulation
 - `l`: launch
+
+#### Changing Values
+- `KEY_UP`: Increment selected value
+- `KEY_DOWN`: Decrement selected value
+
+##### Selecting Values to Change
+- `L` Select launch angle
+- `V` Select launch velocity
