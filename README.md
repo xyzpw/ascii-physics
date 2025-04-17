@@ -36,3 +36,4 @@ $ ./physics --char-size 0.5
 - `wasd`: move object
 - `space`: drop object
 - `r`: reset simulation
+- `l`: launch
