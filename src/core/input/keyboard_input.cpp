@@ -94,6 +94,22 @@ void handleKeyPress(const char key, World& world)
 
             break;
         }
+        case CONTROL_KEY::KEY_SCALE_CONTROL_UP:{
+            changeSelectParamValueOnInput(world, world.selectParameter, true);
+            break;
+        }
+        case CONTROL_KEY::KEY_SCALE_CONTROL_DOWN:{
+            changeSelectParamValueOnInput(world, world.selectParameter, false);
+            break;
+        }
+        case CONTROL_KEY::KEY_SELECT_PARAM_LAUNCH_ANGLE:{
+            changeSelectParam(world, SELECT_PARAMETER::LAUNCH_ANGLE);
+            break;
+        }
+        case CONTROL_KEY::KEY_SELECT_PARAM_LAUNCH_VELOCITY:{
+            changeSelectParam(world, SELECT_PARAMETER::LAUNCH_VELOCITY);
+            break;
+        }
     }
 }
 
