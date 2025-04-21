@@ -1,8 +1,11 @@
 #include <stdexcept>
 #include <sstream>
+#include <thread>
 #include "structs/world.h"
 #include "structs/object.h"
+#include "enums/object_type.h"
 #include "utils/screen_utils.h"
+#include "core/physics/object_physics.h"
 
 World::World()
 {
