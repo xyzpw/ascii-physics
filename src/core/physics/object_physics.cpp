@@ -102,19 +102,3 @@ void updateObjectVectors(World& world, Object& object, double tDelta)
     updateObjectPhysicsXAxis(world, object, tDelta);
     updateObjectPhysicsYAxis(world, object, tDelta);
 }
-
-void simulateObjectMotion(World& world, Object& object)
-{
-    if (object.isActionUsed)
-        return;
-    else
-        object.isActionUsed = true;
-
-    const double deltaInterval = 0.01;
-
-    while (object.isActionUsed)
-    {
-        updateObjectVectors(world, object, deltaInterval);
-        sleepCurrentThread(10);
-    }
-}
