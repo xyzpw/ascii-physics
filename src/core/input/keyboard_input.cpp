@@ -80,8 +80,8 @@ void handleKeyPress(const char key, World& world)
             break;
         }
         case CONTROL_KEY::KEY_LAUNCH:{
-            auto& angle = object.launchInfo.launchAngleDeg;
-            auto& velocity = object.launchInfo.velocity;
+            auto& angle = world.objectInputInfo.objectLaunchAngle;
+            auto& velocity = world.objectInputInfo.objectLaunchVelocity;
 
             if (angle <= 360 && angle >= 0 && velocity >= 0){
                 object.launch(degreesToVector(angle) * velocity);
