@@ -55,9 +55,7 @@ void displayObjectInfo(Object& object)
     mvprintw(row++, 0, stream.str().c_str());
     stream.str("");
 
-    if (object.isActionUsed){
-        stream << "speed: " << velocity.getMagnitude() << " m/s";
-        mvprintw(row++, 0, stream.str().c_str());
-        stream.str("");
-    }
+    stream << "speed: " << velocity.getMagnitude() << " m/s";
+    mvprintw(row++, 0, stream.str().c_str());
+    stream.str("");
 }
