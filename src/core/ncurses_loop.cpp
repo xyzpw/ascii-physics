@@ -14,11 +14,6 @@ void startNcursesLoop(World world)
 
     Object& object = world.getObjectById(world.activeObjectId);
 
-    // Reference variables used to access object while keeping code clean.
-    Position &objectPosition = object.position;
-    int& objectColumn = object.position.column;
-    int& objectRow = object.position.row;
-
     bool isRunning = true;
     while (isRunning)
     {
