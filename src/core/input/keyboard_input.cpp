@@ -23,7 +23,7 @@ void handleKeyPress(const char key, World& world)
     const double& metersPerChar = world.metersPerChar;
 
     if (keyControl == CONTROL_KEY::KEY_RESET_OBJECT){
-        world.resetObjectById(object.id);
+        world.resetSimulation();
         return;
     }
     else if (object.isActionUsed && checkIsControlKeyMovement(keyControl)){
