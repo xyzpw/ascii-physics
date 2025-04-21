@@ -13,12 +13,7 @@ struct Object {
         Vector2D acceleration{0, 0};
         Vector2D position{0, 0};
     };
-    struct __LaunchInfo {
-        double launchAngleDeg;
-        double velocity;
-    };
     __VectorsList vectors;
-    __LaunchInfo launchInfo;
 
     double mass;
     double terminalVelocity;
