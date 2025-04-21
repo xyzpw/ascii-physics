@@ -48,7 +48,12 @@ struct World {
     SELECT_PARAMETER selectParameter = SELECT_PARAMETER::LAUNCH_ANGLE;
 
     World();
+    void startSimulation();
+    void stopSimulation();
+    void resetSimulation();
     void setWorldBounds();
     Object& getObjectById(int id);
     void resetObjectById(int id);
+    void addObject(OBJECT_TYPE, double kg);
+    void removeAllObjects();
 };
