@@ -23,6 +23,8 @@ struct __ObjectInputInfo {
 };
 
 struct World {
+    bool isSimulating = false;
+
     std::vector<Object> objects;
     int activeObjectId;
 
