@@ -4,6 +4,8 @@
 #include <string>
 #include "structs/object.h"
 #include "enums/select_parameter.h"
+#include "enums/object_type.h"
+#include "constants/physics_constants.h"
 
 struct World {
     std::vector<Object> objects;
