@@ -7,6 +7,21 @@
 #include "enums/object_type.h"
 #include "constants/physics_constants.h"
 
+// Default values for added objects.
+struct __WorldDefaultObjectValues {
+    OBJECT_TYPE objectType = OBJECT_TYPE::OBJECT_BALL;
+    double objectMass = 1.0;
+    double coefficientOfRestitution = 0.0;
+    double crossSectionalArea = 1.0;
+    double dragCoefficient = DRAG_COEFFICIENT_BALL;
+};
+
+struct __ObjectInputInfo {
+    double objectLaunchVelocity = 0.0;
+    double objectLaunchAngle = 0.0;
+    SELECT_PARAMETER selectParameter;
+};
+
 struct World {
     std::vector<Object> objects;
     int activeObjectId;
@@ -23,6 +38,8 @@ struct World {
     };
     __WorldBorders worldBounds;
     __OverlayText overlayText;
+    __WorldDefaultObjectValues defaultObjectValues;
+    __ObjectInputInfo objectInputInfo;
 
     double metersPerChar = 1.0;
 
