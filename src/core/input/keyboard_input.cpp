@@ -21,6 +21,7 @@ void handleKeyPress(const char key, World& world)
     Object& object = world.getObjectById(world.activeObjectId);
     auto& worldBounds = world.worldBounds;
     const double& metersPerChar = world.metersPerChar;
+    auto& selectParam = world.objectInputInfo.selectParameter;
 
     if (keyControl == CONTROL_KEY::KEY_RESET_OBJECT){
         world.resetSimulation();
@@ -95,11 +96,11 @@ void handleKeyPress(const char key, World& world)
             break;
         }
         case CONTROL_KEY::KEY_SCALE_CONTROL_UP:{
-            changeSelectParamValueOnInput(world, world.selectParameter, true);
+            changeSelectParamValueOnInput(world, selectParam, true);
             break;
         }
         case CONTROL_KEY::KEY_SCALE_CONTROL_DOWN:{
-            changeSelectParamValueOnInput(world, world.selectParameter, false);
+            changeSelectParamValueOnInput(world, selectParam, false);
             break;
         }
         case CONTROL_KEY::KEY_SELECT_PARAM_LAUNCH_ANGLE:{
@@ -139,7 +140,7 @@ void changeSelectParam(World& world, SELECT_PARAMETER param)
         stream << "launch velocity";
     }
 
-    world.selectParameter = param;
+    world.objectInputInfo.selectParameter = param;
 
     overlayText.text = stream.str();
     overlayText.displayUntil = getEpochAsDecimal() + 1.0;
@@ -152,14 +153,15 @@ void changeSelectParamValueOnInput(World& world, SELECT_PARAMETER param,
     Object& object = world.getObjectById(world.activeObjectId);
 
     std::stringstream stream;
+    auto& inputInfo = world.objectInputInfo;
 
-    if (world.selectParameter == SELECT_PARAMETER::LAUNCH_ANGLE){
+    if (inputInfo.selectParameter == SELECT_PARAMETER::LAUNCH_ANGLE){
         scaleActiveControl(world, isPositive ? 10 : -10);
-        stream << "launch angle: " << object.launchInfo.launchAngleDeg;
+        stream << "launch angle: " << inputInfo.objectLaunchAngle;
     }
-    else if (world.selectParameter == SELECT_PARAMETER::LAUNCH_VELOCITY){
+    else if (inputInfo.selectParameter == SELECT_PARAMETER::LAUNCH_VELOCITY){
         scaleActiveControl(world, (isPositive ? 10 : -10) * world.metersPerChar);
-        stream << "launch velocity: " << object.launchInfo.velocity << " m/s";
+        stream << "launch velocity: " << inputInfo.objectLaunchVelocity;
     }
 
     world.overlayText.text = stream.str();
