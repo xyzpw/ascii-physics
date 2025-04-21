@@ -37,6 +37,16 @@ void startNcursesLoop(World world)
 
         handleKeyPress(keyPressed, world);
 
+        // Display all object in the simulation.
+        for (auto& obj : world.objects)
+        {
+            obj.position = vectorToPosition(obj.vectors.position / world.metersPerChar);
+            Position pos = obj.position;
+            if (checkPositionInsideDisplay(pos)){
+                mvprintw(pos.row, pos.column, OBJECT_BALL_CHAR);
+            }
+        }
+
         displaySimulationText(world);
         printFloor();
 
