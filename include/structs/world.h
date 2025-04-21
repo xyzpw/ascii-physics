@@ -45,8 +45,6 @@ struct World {
 
     double metersPerChar = 1.0;
 
-    SELECT_PARAMETER selectParameter = SELECT_PARAMETER::LAUNCH_ANGLE;
-
     World();
     void startSimulation();
     void stopSimulation();
