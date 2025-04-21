@@ -76,8 +76,7 @@ void handleKeyPress(const char key, World& world)
             break;
         }
         case CONTROL_KEY::KEY_ACTION:{
-            std::thread th(simulateObjectMotion, std::ref(world), std::ref(object));
-            th.detach();
+            world.startSimulation();
             break;
         }
         case CONTROL_KEY::KEY_LAUNCH:{
@@ -87,9 +86,8 @@ void handleKeyPress(const char key, World& world)
             if (angle <= 360 && angle >= 0 && velocity >= 0){
                 object.launch(degreesToVector(angle) * velocity);
 
-                if (!object.isActionUsed){
-                    std::thread th(simulateObjectMotion, std::ref(world), std::ref(object));
-                    th.detach();
+                if (!world.isSimulating){
+                    world.startSimulation();
                 }
             }
 
