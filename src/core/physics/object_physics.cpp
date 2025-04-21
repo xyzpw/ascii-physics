@@ -102,3 +102,16 @@ void updateObjectVectors(World& world, Object& object, double tDelta)
     updateObjectPhysicsXAxis(world, object, tDelta);
     updateObjectPhysicsYAxis(world, object, tDelta);
 }
+
+void simulateObjectsInWorld(World& world)
+{
+    const double deltaInterval = 0.01;
+
+    while (world.isSimulating)
+    {
+        for (auto& object : world.objects){
+            updateObjectVectors(world, object, deltaInterval);
+        }
+        sleepCurrentThread(10);
+    }
+}
