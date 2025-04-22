@@ -33,6 +33,12 @@ $ ./physics --char-size 0.5
 > [!NOTE]
 > Each char is 1 meter by default.
 
+Changing launch values:
+```bash
+# Set launch velocity to 5 m/s and angle to 45 degrees.
+$ ./physics --lvelocity 5 --langle 45
+```
+
 ### Controls
 - `q`: quit
 - `wasd`: move object
