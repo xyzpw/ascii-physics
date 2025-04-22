@@ -26,7 +26,7 @@ void handleKeyPress(const char key, World& world)
         world.resetSimulation();
         return;
     }
-    else if (object.isActionUsed && checkIsControlKeyMovement(keyControl)){
+    else if (world.isSimulating && checkIsControlKeyMovement(keyControl)){
         return;
     }
 
