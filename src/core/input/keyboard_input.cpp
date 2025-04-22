@@ -19,7 +19,6 @@ void handleKeyPress(const char key, World& world)
     CONTROL_KEY keyControl = getKeyControl(key);
 
     Object& object = world.getObjectById(world.activeObjectId);
-    auto& worldBounds = world.worldBounds;
     const double& metersPerChar = world.metersPerChar;
     auto& selectParam = world.objectInputInfo.selectParameter;
 
