@@ -108,6 +108,10 @@ void handleKeyPress(const char key, World& world)
             changeSelectParam(world, SELECT_PARAMETER::LAUNCH_VELOCITY);
             break;
         }
+        case CONTROL_KEY::KEY_SELECT_PARAM_MASS:{
+            changeSelectParam(world, SELECT_PARAMETER::OBJECT_MASS);
+            break;
+        }
     }
 }
 
@@ -136,6 +140,10 @@ void changeSelectParam(World& world, SELECT_PARAMETER param)
     else if (param == SELECT_PARAMETER::LAUNCH_VELOCITY){
         stream << "launch velocity";
     }
+    else if (param == SELECT_PARAMETER::OBJECT_MASS)
+    {
+        stream << "object mass";
+    }
 
     world.objectInputInfo.selectParameter = param;
 
@@ -159,6 +167,10 @@ void changeSelectParamValueOnInput(World& world, SELECT_PARAMETER param,
     else if (inputInfo.selectParameter == SELECT_PARAMETER::LAUNCH_VELOCITY){
         scaleActiveControl(world, (isPositive ? 10 : -10) * world.metersPerChar);
         stream << "launch velocity: " << inputInfo.objectLaunchVelocity;
+    }
+    else if (inputInfo.selectParameter == SELECT_PARAMETER::OBJECT_MASS){
+        scaleActiveControl(world, (isPositive ? 0.1 : -0.1) * object.mass);
+        stream << "object mass: " << object.mass;
     }
 
     world.overlayText.text = stream.str();
