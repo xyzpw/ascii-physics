@@ -121,11 +121,14 @@ void updateObjectVectors(World& world, Object& object, double tDelta)
 void simulateObjectsInWorld(World& world)
 {
     const double deltaInterval = 0.005;
+    const int iterStepCount = 4;
 
     while (world.isSimulating)
     {
-        for (auto& object : world.objects){
-            updateObjectVectors(world, object, deltaInterval);
+        for (int s = 0; s < iterStepCount; ++s){
+            for (auto& object : world.objects){
+                updateObjectVectors(world, object, deltaInterval / iterStepCount);
+            }
         }
         sleepCurrentThread(static_cast<int>(deltaInterval * 1e+3));
     }
