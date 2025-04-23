@@ -87,6 +87,7 @@ void World::addObject(OBJECT_TYPE type, double kg)
     newObject.crossSectionalArea = this->defaultObjectValues.crossSectionalArea;
     newObject.coefficientOfRestitution =
               this->defaultObjectValues.coefficientOfRestitution;
+    newObject.mLength = this->metersPerChar;
 
     this->objects.push_back(newObject);
     this->resetObjectById(newObject.id);
