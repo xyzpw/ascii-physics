@@ -25,3 +25,45 @@ bool checkObjectsCollided(Object& objA, Object& objB)
 
     return distSq <= minDist * minDist;
 }
+
+void resolveObjectCollision(Object& objA, Object& objB)
+{
+    Vector2D delta = objA.vectors.position - objB.vectors.position;
+    double distance = delta.getMagnitude();
+    double minDist = (objA.mLength + objB.mLength) / 2.0;
+
+    if (distance < minDist && distance > 0.0)
+    {
+        // Normalize the delta to get the collision normal.
+        Vector2D normal = delta / distance;
+
+        // Minimum translation distance to push objects apart.
+        double overlap = minDist - distance;
+        Vector2D correction = normal * (overlap / 2.0);
+        objA.vectors.position += correction;
+        objB.vectors.position -= correction;
+
+        // Relative velocity.
+        Vector2D relVel = objA.vectors.velocity - objB.vectors.velocity;
+
+        // Calculate relative velocity along the normal.
+        double velAlongNormal = relVel.x * normal.x + relVel.y * normal.y;
+
+        // Do not resolve if velocities are separating.
+        if (velAlongNormal > 0)
+            return;
+
+        double e = (objA.coefficientOfRestitution + objB.coefficientOfRestitution) / 2.0;
+        double invMassA = 1.0 / objA.mass;
+        double invMassB = 1.0 / objB.mass;
+
+        // Calculate impulse scalar.
+        double j = -(1 + e) * velAlongNormal;
+        j /= (invMassA + invMassB);
+
+        // Apply impulse.
+        Vector2D impulse = normal * j;
+        objA.vectors.velocity += impulse * invMassA;
+        objB.vectors.velocity -= impulse * invMassB;
+    }
+}
