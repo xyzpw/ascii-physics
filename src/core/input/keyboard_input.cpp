@@ -112,6 +112,12 @@ void handleKeyPress(const char key, World& world)
             changeSelectParam(world, SELECT_PARAMETER::OBJECT_MASS);
             break;
         }
+        case CONTROL_KEY::KEY_NEW_OBJECT:{
+            world.addObject(
+                OBJECT_TYPE::OBJECT_BALL, world.defaultObjectValues.objectMass
+            );
+            break;
+        }
     }
 }
 
