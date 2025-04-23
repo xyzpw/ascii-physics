@@ -20,6 +20,7 @@ struct Object {
     double dragCoefficient;
     double coefficientOfRestitution = 0.0;
     double crossSectionalArea;
+    double mLength; //length of object
 
     bool isActionUsed = false;
 
