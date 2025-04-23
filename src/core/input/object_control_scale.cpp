@@ -26,6 +26,11 @@ void scaleActiveControl(World& world, double valueStep)
         double& targetValue = world.objectInputInfo.objectLaunchVelocity;
         scaleValue(targetValue, valueStep, minValue, maxValue);
     }
+    else if (selectParam == SELECT_PARAMETER::OBJECT_MASS){
+        minValue = 0;
+        double& targetValue = object.mass;
+        scaleValue(targetValue, valueStep, minValue, maxValue);
+    }
 }
 
 void scaleValue(double& value, double step, double min, double max)
