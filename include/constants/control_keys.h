@@ -19,6 +19,7 @@ enum class CONTROL_KEY {
 
     KEY_SELECT_PARAM_LAUNCH_VELOCITY = 'V',
     KEY_SELECT_PARAM_LAUNCH_ANGLE = 'L',
+    KEY_SELECT_PARAM_MASS = 'M',
 };
 
 CONTROL_KEY getKeyControl(const char key)
