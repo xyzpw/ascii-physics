@@ -100,8 +100,13 @@ void World::addObject(OBJECT_TYPE type, double kg)
               this->defaultObjectValues.coefficientOfRestitution;
     newObject.mLength = this->metersPerChar;
 
+    newObject.position = getNewObjectPosition(*this);
+    if (!checkPositionInsideDisplay(newObject.position))
+        return;
+    newObject.resetActionStates();
+    newObject.resetVectors();
+    newObject.resetPhysicsProperties(this->metersPerChar);
     this->objects.push_back(newObject);
-    this->resetObjectById(newObject.id);
     this->activeObjectId = newObject.id;
 }
 
