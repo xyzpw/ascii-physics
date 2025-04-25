@@ -24,6 +24,8 @@ struct Object {
 
     bool isActionUsed = false;
 
+    bool isHighlighted = false;
+
     int id;
 
     Object(OBJECT_TYPE, double kg);
