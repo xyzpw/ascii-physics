@@ -9,6 +9,7 @@
 #include "core/physics/object_physics.h"
 
 void highlightObject(Object&, double seconds);
+Position getNewObjectPosition(World&);
 
 World::World()
 {
@@ -117,4 +118,32 @@ void highlightObject(Object& object, double seconds)
     object.isHighlighted = true;
     sleepCurrentThread(static_cast<int>(seconds * 1e+3));
     object.isHighlighted = false;
+}
+
+Position getNewObjectPosition(World& world)
+{
+    Position center = getCenterPosition();
+
+    if (world.objects.size() == 1)
+        return center;
+
+    for (int row = center.row - 1; row > 0; --row)
+    {
+        const Position pos{center.column, row};
+
+        bool isOpen = true;
+
+        for (const auto it : world.objects)
+        {
+            if (it.position == pos || !checkPositionInsideDisplay(pos)){
+                isOpen = false;
+                break;
+            }
+        }
+
+        if (isOpen)
+            return pos;
+    }
+
+    return Position{-1, -1};
 }
