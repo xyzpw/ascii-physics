@@ -100,6 +100,11 @@ void handleKeyPress(const char key, World& world)
             changeSelectParamValueOnInput(world, selectParam, false);
             break;
         }
+        case CONTROL_KEY::KEY_OBJECT_SELECT_NEXT:
+        case CONTROL_KEY::KEY_OBJECT_SELECT_PREV:
+            selectObjectNextOrPrev(world, keyControl);
+            world.highlightObjectById(world.activeObjectId, 0.5);
+            break;
         case CONTROL_KEY::KEY_SELECT_PARAM_LAUNCH_ANGLE:{
             changeSelectParam(world, SELECT_PARAMETER::LAUNCH_ANGLE);
             break;
