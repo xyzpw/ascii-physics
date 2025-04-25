@@ -1,4 +1,5 @@
 #include <cmath>
+#include <set>
 #include "core/physics/object_physics.h"
 #include "core/physics/object_collision.h"
 #include "structs/object.h"
@@ -8,6 +9,7 @@
 
 const double VELOCITY_Y_MIN = 0.01;
 const double VELOCITY_X_MIN = 0.01;
+std::set<std::pair<int, int>> activeCollisions;
 
 void updateObjectPhysicsYAxis(World& world, Object& object, double t)
 {
@@ -118,6 +120,36 @@ void updateObjectVectors(World& world, Object& object, double tDelta)
     }
 }
 
+void resolveAllObjectCollisions(World& world)
+{
+    std::set<std::pair<int, int>> newCollisions;
+
+    for (int i = 0; i < world.objects.size(); ++i)
+    {
+        for (int j = i + 1; j < world.objects.size(); ++j)
+        {
+            Object& A = world.objects[i];
+            Object& B = world.objects[j];
+
+            std::pair<int, int> pairKey{A.id, B.id};
+
+            if (checkObjectsCollided(A, B))
+            {
+                resolveObjectCollision(A, B);
+
+                if (activeCollisions.find(pairKey) == activeCollisions.end())
+                {
+                    ++A.collisionCount;
+                    ++B.collisionCount;
+                }
+
+                newCollisions.insert(pairKey);
+            }
+        }
+    }
+    activeCollisions = std::move(newCollisions);
+}
+
 void simulateObjectsInWorld(World& world)
 {
     const double deltaInterval = 0.005;
@@ -129,6 +161,8 @@ void simulateObjectsInWorld(World& world)
             for (auto& object : world.objects){
                 updateObjectVectors(world, object, deltaInterval / iterStepCount);
             }
+
+            resolveAllObjectCollisions(world);
         }
         sleepCurrentThread(static_cast<int>(deltaInterval * 1e+3));
     }
