@@ -24,7 +24,7 @@ enum class CONTROL_KEY {
     KEY_NEW_OBJECT = 'n',
 };
 
-CONTROL_KEY getKeyControl(const char key)
+inline CONTROL_KEY getKeyControl(const char key)
 {
     auto val = static_cast<CONTROL_KEY>(key);
     return val;
