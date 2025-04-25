@@ -5,7 +5,10 @@
 #include "structs/object.h"
 #include "enums/object_type.h"
 #include "utils/screen_utils.h"
+#include "utils/sleep_utils.h"
 #include "core/physics/object_physics.h"
+
+void highlightObject(Object&, double seconds);
 
 World::World()
 {
@@ -97,4 +100,14 @@ void World::addObject(OBJECT_TYPE type, double kg)
 void World::removeAllObjects()
 {
     this->objects = {};
+}
+
+void highlightObject(Object& object, double seconds)
+{
+    if (object.isHighlighted)
+        return;
+
+    object.isHighlighted = true;
+    sleepCurrentThread(static_cast<int>(seconds * 1e+3));
+    object.isHighlighted = false;
 }
