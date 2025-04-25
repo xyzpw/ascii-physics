@@ -23,7 +23,7 @@ Object::Object(OBJECT_TYPE type, double kg)
 
 void Object::resetVectors()
 {
-    this->vectors.position = positionToVector(this->position);
+    this->vectors.position = positionToVector(this->position) * this->mLength;
     this->vectors.velocity = Vector2D{0.0, 0.0};
     this->vectors.acceleration = Vector2D{0.0, -GRAVITY_ACCELERATION};
 }
