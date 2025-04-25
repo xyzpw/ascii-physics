@@ -22,6 +22,8 @@ struct Object {
     double crossSectionalArea;
     double mLength; //length of object
 
+    int collisionCount = 0;
+
     bool isActionUsed = false;
 
     bool isHighlighted = false;
