@@ -4,6 +4,7 @@
 #include "structs/world.h"
 #include "structs/object.h"
 #include "enums/select_parameter.h"
+#include "constants/control_keys.h"
 
 void scaleValue(double& value, double step, double min, double max);
 
@@ -44,5 +45,30 @@ void scaleValue(double& value, double step, double min, double max)
     }
     else {
         value = isIncreasing ? max : min;
+    }
+}
+
+void selectObjectNextOrPrev(World& world, CONTROL_KEY key)
+{
+    int currentIndex = -1;
+
+    for (int i = 0; i < world.objects.size(); ++i)
+    {
+        if (world.objects[i].id == world.activeObjectId){
+            currentIndex = i;
+            break;
+        }
+    }
+
+    if (currentIndex == -1)
+        return;
+
+    bool canIncrement = world.objects.size() > currentIndex + 1;
+
+    if (CONTROL_KEY::KEY_OBJECT_SELECT_NEXT == key && canIncrement){
+        world.activeObjectId = world.objects[currentIndex + 1].id;
+    }
+    else if (CONTROL_KEY::KEY_OBJECT_SELECT_PREV == key && 0 < currentIndex){
+        world.activeObjectId = world.objects[currentIndex - 1].id;
     }
 }
