@@ -52,6 +52,7 @@ struct World {
     void setWorldBounds();
     Object& getObjectById(int id);
     void resetObjectById(int id);
+    void highlightObjectById(int id, double duration);
     void addObject(OBJECT_TYPE, double kg);
     void removeAllObjects();
 };
