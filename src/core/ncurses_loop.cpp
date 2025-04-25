@@ -8,6 +8,8 @@
 #include "display/info_display.h"
 #include "constants/object_char_constants.h"
 
+void updatePosAndDisplayObjects(World&);
+
 void startNcursesLoop(World world)
 {
     initializeNcurses();
@@ -50,4 +52,24 @@ void startNcursesLoop(World world)
     }
 
     endwin();
+}
+
+void updatePosAndDisplayObjects(World& world)
+{
+    for (auto& obj : world.objects)
+    {
+        obj.position = vectorToPosition(obj.vectors.position / world.metersPerChar);
+        const Position& pos = obj.position;
+        if (checkPositionInsideDisplay(pos))
+        {
+            mvprintw(pos.row, pos.column, OBJECT_BALL_CHAR);
+            if (obj.isHighlighted)
+            {
+                mvchgat(
+                    pos.row, pos.column, 1, A_NORMAL,
+                    ITEM_HIGHLIGHT_YELLOW_PAIR_NUM, nullptr
+                );
+            }
+        }
+    }
 }
