@@ -103,21 +103,6 @@ void updateObjectVectors(World& world, Object& object, double tDelta)
 {
     updateObjectPhysicsXAxis(world, object, tDelta);
     updateObjectPhysicsYAxis(world, object, tDelta);
-
-    // Check for collision between objects.
-    for (int i = 0; i < world.objects.size(); ++i)
-    {
-        for (int j = i + 1; j < world.objects.size(); ++j)
-        {
-            Object& A = world.objects[i];
-            Object& B = world.objects[j];
-
-            if (checkObjectsCollided(A, B))
-            {
-                resolveObjectCollision(A, B);
-            }
-        }
-    }
 }
 
 void resolveAllObjectCollisions(World& world)
