@@ -69,6 +69,13 @@ void World::resetObjectById(int id)
     object.resetPhysicsProperties(this->metersPerChar);
 }
 
+void World::highlightObjectById(int id, double duration)
+{
+    Object& object = this->getObjectById(id);
+    std::thread thHighlight(highlightObject, std::ref(object), duration);
+    thHighlight.detach();
+}
+
 void World::setWorldBounds()
 {
     auto windowSize = getWindowSize();
