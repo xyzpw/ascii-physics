@@ -8,7 +8,7 @@
 #include "constants/physics_constants.h"
 
 // Default values for added objects.
-struct __WorldDefaultObjectValues {
+struct _WorldDefaultObjectValues {
     OBJECT_TYPE objectType = OBJECT_TYPE::OBJECT_BALL;
     double objectMass = 1.0;
     double coefficientOfRestitution = 0.0;
@@ -16,7 +16,7 @@ struct __WorldDefaultObjectValues {
     double dragCoefficient = DRAG_COEFFICIENT_BALL;
 };
 
-struct __ObjectInputInfo {
+struct _ObjectInputInfo {
     double objectLaunchVelocity = 0.0;
     double objectLaunchAngle = 0.0;
     SELECT_PARAMETER selectParameter;
@@ -28,20 +28,20 @@ struct World {
     std::vector<Object> objects;
     int activeObjectId;
 
-    struct __WorldBorders {
+    struct _WorldBorders {
         double ceiling, floor;
         double rightWall, leftWall;
     };
     // Additional info that appears on screen.
-    struct __OverlayText {
+    struct _OverlayText {
         std::string text = "";
         bool shouldDisplay = false;
         double displayUntil = 0;
     };
-    __WorldBorders worldBounds;
-    __OverlayText overlayText;
-    __WorldDefaultObjectValues defaultObjectValues;
-    __ObjectInputInfo objectInputInfo;
+    _WorldBorders worldBounds;
+    _OverlayText overlayText;
+    _WorldDefaultObjectValues defaultObjectValues;
+    _ObjectInputInfo objectInputInfo;
 
     double metersPerChar = 1.0;
 

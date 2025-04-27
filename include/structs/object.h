@@ -8,12 +8,12 @@ struct Object {
     OBJECT_TYPE type;
     Position position;
 
-    struct __VectorsList {
+    struct _VectorsList {
         Vector2D velocity{0, 0};
         Vector2D acceleration{0, 0};
         Vector2D position{0, 0};
     };
-    __VectorsList vectors;
+    _VectorsList vectors;
 
     double mass;
     double terminalVelocity;
