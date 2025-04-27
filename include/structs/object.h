@@ -13,7 +13,11 @@ struct Object {
         Vector2D acceleration{0, 0};
         Vector2D position{0, 0};
     };
+    struct _Stats {
+        int collisionCount = 0;
+    };
     _VectorsList vectors;
+    _Stats statistics;
 
     double mass;
     double terminalVelocity;
@@ -21,8 +25,6 @@ struct Object {
     double coefficientOfRestitution = 0.0;
     double crossSectionalArea;
     double mLength; //length of object
-
-    int collisionCount = 0;
 
     bool isActionUsed = false;
 

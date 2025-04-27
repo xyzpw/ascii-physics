@@ -124,8 +124,8 @@ void resolveAllObjectCollisions(World& world)
 
                 if (activeCollisions.find(pairKey) == activeCollisions.end())
                 {
-                    ++A.collisionCount;
-                    ++B.collisionCount;
+                    ++A.statistics.collisionCount;
+                    ++B.statistics.collisionCount;
                 }
 
                 newCollisions.insert(pairKey);
