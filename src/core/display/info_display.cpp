@@ -65,6 +65,7 @@ void displayObjectInfo(Object& object)
 void displayWorldObjectStats(World& world)
 {
     Object& object = world.getObjectById(world.activeObjectId);
+    auto& visibleStats = world.displayedStats;
     auto& stats = object.statistics;
 
     const Position centerPos = getCenterPosition();
@@ -73,14 +74,16 @@ void displayWorldObjectStats(World& world)
 
     std::stringstream stream;
 
-    auto printAndResetStream = [&](int r){
-        int col = centerCol - stream.str().length() / 2;
-        mvprintw(r, col, stream.str().c_str());
-        stream.str("");
+    auto printStat = [&](bool canDisplay, std::string label, auto val,
+                         std::string suffix="")
+    {
+        if (canDisplay){
+            stream << label << val << suffix;
+            int col = centerCol - stream.str().length() / 2;
+            mvprintw(row++, col, stream.str().c_str());
+            stream.str("");
+        }
     };
 
-    if (world.displayedStats.isCollisionCountVisible){
-        stream << "collisions: " << stats.collisionCount;
-        printAndResetStream(row++);
-    }
+    printStat(visibleStats.isCollisionCountVisible, "collisions: ", stats.collisionCount);
 }
