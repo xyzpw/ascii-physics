@@ -7,6 +7,7 @@ inline const std::string ARG_NAME_COR = "cor";
 inline const std::string ARG_NAME_CHAR_SIZE = "char-size";
 inline const std::string ARG_NAME_LAUNCH_VELOCITY = "lvelocity";
 inline const std::string ARG_NAME_LAUNCH_ANGLE = "langle";
+inline const std::string ARG_NAME_STAT_COLLISIONS = "stat-collisions";
 
 const std::vector<std::pair<std::string, std::string>> helpMenu = {
     {"-m <n>", "mass of object (in kilograms)"},
@@ -15,4 +16,5 @@ const std::vector<std::pair<std::string, std::string>> helpMenu = {
     {"--char-size <n>", "size of each character on screen (in meters)"},
     {"--lvelocity <n>", "launch velocity"},
     {"--langle <n>", "launch angle (in degrees)"},
+    {"--stat-collisions", "display the number of collisions for the selected object"}
 };
