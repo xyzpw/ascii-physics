@@ -65,6 +65,7 @@ void displayObjectInfo(Object& object)
 void displayWorldObjectStats(World& world)
 {
     Object& object = world.getObjectById(world.activeObjectId);
+    auto& stats = object.statistics;
 
     const Position centerPos = getCenterPosition();
     const int centerCol = centerPos.column;
@@ -79,7 +80,7 @@ void displayWorldObjectStats(World& world)
     };
 
     if (world.displayedStats.isCollisionCountVisible){
-        stream << "collisions: " << object.statistics.collisionCount;
+        stream << "collisions: " << stats.collisionCount;
         printAndResetStream(row++);
     }
 }
