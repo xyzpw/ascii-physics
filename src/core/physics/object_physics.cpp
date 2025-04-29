@@ -135,6 +135,13 @@ void resolveAllObjectCollisions(World& world)
     activeCollisions = std::move(newCollisions);
 }
 
+void updateObjectStatistics(Object& object)
+{
+    if (object.vectors.velocity.getMagnitude() > object.statistics.maxSpeed){
+        object.statistics.maxSpeed = object.vectors.velocity.getMagnitude();
+    }
+}
+
 void simulateObjectsInWorld(World& world)
 {
     const double deltaInterval = 0.005;
@@ -145,6 +152,7 @@ void simulateObjectsInWorld(World& world)
         for (int s = 0; s < iterStepCount; ++s){
             for (auto& object : world.objects){
                 updateObjectVectors(world, object, deltaInterval / iterStepCount);
+                updateObjectStatistics(object);
             }
 
             resolveAllObjectCollisions(world);
