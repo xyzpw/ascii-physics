@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include "setup/main_setup.h"
 #include "setup/input_handler.h"
 #include "structs/object.h"
@@ -45,4 +46,18 @@ World createWorldWithArgs(ParsedArgs args)
     world.activeObjectId = world.objects.at(0).id;
 
     return world;
+}
+
+void displayArgHelp()
+{
+    const int spaces = 32;
+
+    std::cout << "options:\n\n";
+
+    for (auto it : helpMenu){
+        std::string line = "  " + it.first;
+        line += std::string(spaces - line.length(), ' ');
+        line += it.second;
+        std::cout << line << std::endl;
+    }
 }

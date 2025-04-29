@@ -6,3 +6,4 @@
 #include "utils/arg_parser.h"
 
 World createWorldWithArgs(ParsedArgs);
+void displayArgHelp();
