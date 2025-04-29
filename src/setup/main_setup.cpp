@@ -26,27 +26,27 @@ World createWorldWithArgs(ParsedArgs args)
         }
     };
 
-    if (args.checkKeyExists(ARG_NAME_CHAR_SIZE)){
-        double scale = stod(args.getKeyValue(ARG_NAME_CHAR_SIZE));
-        world.metersPerChar = scale;
+    setDoubleIfExists(ARG_NAME_CHAR_SIZE, [&](double val){
+        world.metersPerChar = val;
         world.setWorldBounds();
-    }
-    if (args.checkKeyExists(ARG_NAME_COR)){
-        double cor = stod(args.getKeyValue(ARG_NAME_COR));
-        world.defaultObjectValues.coefficientOfRestitution = cor;
-    }
-    if (args.checkKeyExists("g")){
-        double gravity = stod(args.getKeyValue("g"));
-        changeGravityAcceleration(gravity);
-    }
-    if (args.checkKeyExists(ARG_NAME_LAUNCH_VELOCITY)){
-        double velocity = stod(args.getKeyValue(ARG_NAME_LAUNCH_VELOCITY));
-        world.objectInputInfo.objectLaunchVelocity = velocity;
-    }
-    if (args.checkKeyExists(ARG_NAME_LAUNCH_ANGLE)){
-        double angle = stod(args.getKeyValue(ARG_NAME_LAUNCH_ANGLE));
-        world.objectInputInfo.objectLaunchAngle = angle;
-    }
+    });
+
+    setDoubleIfExists(ARG_NAME_COR, [&](double val){
+        world.defaultObjectValues.coefficientOfRestitution = val;
+    });
+
+    setDoubleIfExists("g", [&](double val){
+        changeGravityAcceleration(val);
+    });
+
+    setDoubleIfExists(ARG_NAME_LAUNCH_VELOCITY, [&](double val){
+        world.objectInputInfo.objectLaunchVelocity = val;
+    });
+
+    setDoubleIfExists(ARG_NAME_LAUNCH_ANGLE, [&](double val){
+        world.objectInputInfo.objectLaunchAngle = val;
+    });
+
     if (args.checkKeyExists(ARG_NAME_STAT_COLLISIONS)){
         world.displayedStats.isCollisionCountVisible = true;
     }
