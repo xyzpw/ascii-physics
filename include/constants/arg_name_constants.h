@@ -8,6 +8,7 @@ inline const std::string ARG_NAME_CHAR_SIZE = "char-size";
 inline const std::string ARG_NAME_LAUNCH_VELOCITY = "lvelocity";
 inline const std::string ARG_NAME_LAUNCH_ANGLE = "langle";
 inline const std::string ARG_NAME_STAT_COLLISIONS = "stat-collisions";
+inline const std::string ARG_NAME_STAT_MAXSPEED = "stat-maxspeed";
 
 const std::vector<std::pair<std::string, std::string>> helpMenu = {
     {"-m <n>", "mass of object (in kilograms)"},
@@ -17,4 +18,5 @@ const std::vector<std::pair<std::string, std::string>> helpMenu = {
     {"--lvelocity <n>", "launch velocity"},
     {"--langle <n>", "launch angle (in degrees)"},
     {"--stat-collisions", "display the number of collisions for the selected object"},
+    {"--stat-maxspeed", "display the maximum speed achieved for the selected object"},
 };
