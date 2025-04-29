@@ -20,6 +20,12 @@ World createWorldWithArgs(ParsedArgs args)
 
     world.defaultObjectValues.objectMass = mass;
 
+    auto setDoubleIfExists = [&](std::string key, auto setter){
+        if (args.checkKeyExists(key)){
+            setter(stod(args.getKeyValue(key)));
+        }
+    };
+
     if (args.checkKeyExists(ARG_NAME_CHAR_SIZE)){
         double scale = stod(args.getKeyValue(ARG_NAME_CHAR_SIZE));
         world.metersPerChar = scale;
