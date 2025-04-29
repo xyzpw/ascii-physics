@@ -15,6 +15,7 @@ struct Object {
     };
     struct _Stats {
         int collisionCount = 0;
+        double maxSpeed = 0;
     };
     _VectorsList vectors;
     _Stats statistics;
