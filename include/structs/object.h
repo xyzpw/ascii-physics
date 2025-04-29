@@ -17,8 +17,13 @@ struct Object {
         int collisionCount = 0;
         double maxSpeed = 0;
     };
+    struct _HighlightInfo {
+        bool isHighlighted = false;
+
+    };
     _VectorsList vectors;
     _Stats statistics;
+    _HighlightInfo highlightInfo;
 
     double mass;
     double terminalVelocity;
@@ -28,8 +33,6 @@ struct Object {
     double mLength; //length of object
 
     bool isActionUsed = false;
-
-    bool isHighlighted = false;
 
     int id;
 
