@@ -41,6 +41,9 @@ World createWorldWithArgs(ParsedArgs args)
         double angle = stod(args.getKeyValue(ARG_NAME_LAUNCH_ANGLE));
         world.objectInputInfo.objectLaunchAngle = angle;
     }
+    if (args.checkKeyExists(ARG_NAME_STAT_COLLISIONS)){
+        world.displayedStats.isCollisionCountVisible = true;
+    }
 
     world.addObject(OBJECT_TYPE::OBJECT_BALL, mass);
     world.activeObjectId = world.objects.at(0).id;
