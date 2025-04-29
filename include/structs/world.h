@@ -41,6 +41,7 @@ struct World {
     // Keep track of what stats to display.
     struct _DisplayedStats {
         bool isCollisionCountVisible;
+        bool isMaxSpeedVisible;
     };
     _WorldBorders worldBounds;
     _OverlayText overlayText;
