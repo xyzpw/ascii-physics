@@ -11,6 +11,7 @@
 
 void displayWorldMiscDisplayText(World&);
 void displayObjectInfo(Object&);
+void displayWorldObjectStats(World&);
 
 void displaySimulationText(World& world)
 {
@@ -29,6 +30,7 @@ void displaySimulationText(World& world)
     Object& activeObject = world.getObjectById(world.activeObjectId);
 
     displayObjectInfo(activeObject);
+    displayWorldObjectStats(world);
 }
 
 void displayWorldMiscDisplayText(World& world)
@@ -58,4 +60,26 @@ void displayObjectInfo(Object& object)
     stream << "speed: " << velocity.getMagnitude() << " m/s";
     mvprintw(row++, 0, stream.str().c_str());
     stream.str("");
+}
+
+void displayWorldObjectStats(World& world)
+{
+    Object& object = world.getObjectById(world.activeObjectId);
+
+    const Position centerPos = getCenterPosition();
+    const int centerCol = centerPos.column;
+    int row = 0;
+
+    std::stringstream stream;
+
+    auto printAndResetStream = [&](int r){
+        int col = centerCol - stream.str().length() / 2;
+        mvprintw(r, col, stream.str().c_str());
+        stream.str("");
+    };
+
+    if (world.displayedStats.isCollisionCountVisible){
+        stream << "collisions: " << object.statistics.collisionCount;
+        printAndResetStream(row++);
+    }
 }
