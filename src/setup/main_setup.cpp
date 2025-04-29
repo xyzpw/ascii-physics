@@ -51,6 +51,10 @@ World createWorldWithArgs(ParsedArgs args)
         world.displayedStats.isCollisionCountVisible = true;
     }
 
+    if (args.checkKeyExists(ARG_NAME_STAT_MAXSPEED)){
+        world.displayedStats.isMaxSpeedVisible = true;
+    }
+
     world.addObject(OBJECT_TYPE::OBJECT_BALL, mass);
     world.activeObjectId = world.objects.at(0).id;
 
