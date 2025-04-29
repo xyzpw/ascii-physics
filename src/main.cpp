@@ -13,6 +13,11 @@ int main(int argc, char* argv[])
 
     auto parsedArgs = parseCmdArgs(argc, argv);
 
+    if (parsedArgs.checkKeyExistsOther("h", "help")){
+        displayArgHelp();
+        return 0;
+    }
+
     World simulationWorld = createWorldWithArgs(parsedArgs);
 
     startNcursesLoop(simulationWorld);
