@@ -56,7 +56,7 @@ void updatePosAndDisplayObjects(World& world)
         if (checkPositionInsideDisplay(pos))
         {
             mvprintw(pos.row, pos.column, OBJECT_BALL_CHAR);
-            if (obj.isHighlighted)
+            if (obj.highlightInfo.isHighlighted)
             {
                 mvchgat(
                     pos.row, pos.column, 1, A_NORMAL,

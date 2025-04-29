@@ -117,12 +117,12 @@ void World::removeAllObjects()
 
 void highlightObject(Object& object, double seconds)
 {
-    if (object.isHighlighted)
+    if (object.highlightInfo.isHighlighted)
         return;
 
-    object.isHighlighted = true;
+    object.highlightInfo.isHighlighted = true;
     sleepCurrentThread(static_cast<int>(seconds * 1e+3));
-    object.isHighlighted = false;
+    object.highlightInfo.isHighlighted = false;
 }
 
 Position getNewObjectPosition(World& world)
