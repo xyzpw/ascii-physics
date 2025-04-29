@@ -38,10 +38,15 @@ struct World {
         bool shouldDisplay = false;
         double displayUntil = 0;
     };
+    // Keep track of what stats to display.
+    struct _DisplayedStats {
+        bool isCollisionCountVisible;
+    };
     _WorldBorders worldBounds;
     _OverlayText overlayText;
     _WorldDefaultObjectValues defaultObjectValues;
     _ObjectInputInfo objectInputInfo;
+    _DisplayedStats displayedStats;
 
     double metersPerChar = 1.0;
 
