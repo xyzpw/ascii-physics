@@ -5,16 +5,26 @@
 #include "structs/object.h"
 #include "structs/world.h"
 #include "enums/object_type.h"
+#include "enums/object_preset.h"
 #include "utils/arg_parser.h"
 #include "utils/screen_utils.h"
 #include "constants/physics_constants.h"
 #include "constants/arg_name_constants.h"
+#include "constants/object_preset_constants.h"
 
 using std::stod;
+
+OBJECT_PRESET strToObjectPreset(std::string str);
+void setArgsByPreset(ParsedArgs&, OBJECT_PRESET);
 
 World createWorldWithArgs(ParsedArgs args)
 {
     World world;
+
+    if (args.checkKeyExists("preset")){
+        OBJECT_PRESET preset = strToObjectPreset(args.getKeyValue("preset"));
+        setArgsByPreset(args, preset);
+    }
 
     double mass = stod(getArgOrPrompt(args, "m", "mass (kg): "));
 
@@ -76,5 +86,36 @@ void displayArgHelp()
         line += std::string(spaces - line.length(), ' ');
         line += it.second;
         std::cout << line << std::endl;
+    }
+}
+
+void displayListPreset()
+{
+    std::cout << "\n";
+
+    for (auto it : presetMenu){
+        std::cout << it.first << ": " << it.second << std::endl;
+    }
+}
+
+OBJECT_PRESET strToObjectPreset(std::string str)
+{
+    if (str == "tennis"){
+        return OBJECT_PRESET::TENNIS_BALL;
+    }
+
+    throw std::invalid_argument("preset does not exist");
+}
+
+void setArgsByPreset(ParsedArgs& args, OBJECT_PRESET type)
+{
+    switch (type)
+    {
+        case OBJECT_PRESET::TENNIS_BALL:{
+            args.args[ARG_NAME_CHAR_SIZE] = std::to_string(TENNIS_BALL_DIAMETER);
+            args.args["m"] = std::to_string(TENNIS_BALL_MASS);
+            args.args["cor"] = std::to_string(TENNIS_BALL_COR);
+            break;
+        }
     }
 }
