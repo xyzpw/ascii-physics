@@ -14,6 +14,11 @@ $ ./physics
 ```
 
 ### Arguments
+To view all arguments, use the help arg:
+```bash
+$ ./physics --help
+```
+
 Mass can be customized with args:
 ```bash
 # Set mass to 50 kg.
@@ -37,6 +42,14 @@ Changing launch values:
 ```bash
 # Set launch velocity to 5 m/s and angle to 45 degrees.
 $ ./physics --lvelocity 5 --langle 45
+```
+
+Preset objects can be used, the list can be shown via:
+```bash
+# List presets.
+$ ./physics --list-preset
+# Tennis ball.
+$ ./physics --preset tennis
 ```
 
 ### Controls
