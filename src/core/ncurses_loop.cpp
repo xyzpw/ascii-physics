@@ -62,12 +62,13 @@ void updatePosAndDisplayObjects(World& world)
 
         mvprintw(pos.row, pos.column, OBJECT_BALL_CHAR);
 
-        if (obj.highlightInfo.isHighlighted)
+        if (obj.highlightInfo.isHighlighted || obj.highlightInfo.isHitFlashing)
         {
-            mvchgat(
-                pos.row, pos.column, 1, A_NORMAL,
-                PAIR_NUM_YELLOW_FG, nullptr
-            );
+            const int pairNum = obj.highlightInfo.isHighlighted ?
+                                PAIR_NUM_YELLOW_FG :
+                                PAIR_NUM_RED_FG;
+            mvchgat(pos.row, pos.column, 1, A_NORMAL, pairNum, nullptr);
+            fixHighlightColors(obj);
         }
     }
 }
