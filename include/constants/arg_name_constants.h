@@ -11,6 +11,7 @@ inline const std::string ARG_NAME_STAT_COLLISIONS = "stat-collisions";
 inline const std::string ARG_NAME_STAT_MAXSPEED = "stat-maxspeed";
 inline const std::string ARG_NAME_HIT_FLASH = "hit-flash";
 inline const std::string ARG_NAME_PRESET = "preset";
+inline const std::string ARG_NAME_LIST_PRESET = "list-preset";
 
 const std::vector<std::pair<std::string, std::string>> helpMenu = {
     {"-m <n>", "mass of object (in kilograms)"},
@@ -24,4 +25,8 @@ const std::vector<std::pair<std::string, std::string>> helpMenu = {
     {"--hit-flash", "objects flash red during collisions"},
     {"--preset <item>", "select object preset"},
     {"--list-preset", "list presets"},
+};
+
+const std::vector<std::pair<std::string, std::string>> presetMenu = {
+    {"tennis", "mass 57 g, diameter 6.6 cm, cor 0.84"},
 };
