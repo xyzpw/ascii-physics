@@ -32,17 +32,20 @@ struct World {
         double ceiling, floor;
         double rightWall, leftWall;
     } worldBounds;
+
     // Additional info that appears on screen.
     struct _OverlayText {
         std::string text = "";
         bool shouldDisplay = false;
         double displayUntil = 0;
     } overlayText;
+
     // Keep track of what stats to display.
     struct _DisplayedStats {
         bool isCollisionCountVisible;
         bool isMaxSpeedVisible;
     } displayedStats;
+
     _WorldDefaultObjectValues defaultObjectValues;
     _ObjectInputInfo objectInputInfo;
 
