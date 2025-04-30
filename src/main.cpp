@@ -17,6 +17,10 @@ int main(int argc, char* argv[])
         displayArgHelp();
         return 0;
     }
+    else if (parsedArgs.checkKeyExists("list-preset")){
+        displayListPreset();
+        return 0;
+    }
 
     World simulationWorld = createWorldWithArgs(parsedArgs);
 
