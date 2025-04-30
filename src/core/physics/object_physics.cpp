@@ -9,6 +9,7 @@
 
 const double VELOCITY_Y_MIN = 0.01;
 const double VELOCITY_X_MIN = 0.01;
+const double HIT_FLASH_DURATION = 0.1;
 std::set<std::pair<int, int>> activeCollisions;
 
 void updateObjectPhysicsYAxis(World& world, Object& object, double t)
@@ -126,6 +127,12 @@ void resolveAllObjectCollisions(World& world)
                 {
                     ++A.statistics.collisionCount;
                     ++B.statistics.collisionCount;
+
+                    // Add flash effect for objects colliding.
+                    if (world.visualEffects.isHitFlashesVisible){
+                        world.hitFlashObjectById(A.id, HIT_FLASH_DURATION);
+                        world.hitFlashObjectById(B.id, HIT_FLASH_DURATION);
+                    }
                 }
 
                 newCollisions.insert(pairKey);
