@@ -6,6 +6,7 @@
 #include "enums/object_type.h"
 #include "utils/screen_utils.h"
 #include "utils/sleep_utils.h"
+#include "utils/epoch_utils.h"
 #include "core/physics/object_physics.h"
 
 void highlightObject(Object&, double seconds);
@@ -73,8 +74,8 @@ void World::resetObjectById(int id)
 void World::highlightObjectById(int id, double duration)
 {
     Object& object = this->getObjectById(id);
-    std::thread thHighlight(highlightObject, std::ref(object), duration);
-    thHighlight.detach();
+    object.highlightInfo.highlightUntil = getEpochAsDecimal() + duration;
+    object.highlightInfo.isHighlighted = true;
 }
 
 void World::setWorldBounds()
