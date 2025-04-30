@@ -53,16 +53,19 @@ void updatePosAndDisplayObjects(World& world)
     {
         obj.position = vectorToPosition(obj.vectors.position / world.metersPerChar);
         const Position& pos = obj.position;
-        if (checkPositionInsideDisplay(pos))
+
+        if (!checkPositionInsideDisplay(pos)){
+            continue;
+        }
+
+        mvprintw(pos.row, pos.column, OBJECT_BALL_CHAR);
+
+        if (obj.highlightInfo.isHighlighted)
         {
-            mvprintw(pos.row, pos.column, OBJECT_BALL_CHAR);
-            if (obj.highlightInfo.isHighlighted)
-            {
-                mvchgat(
-                    pos.row, pos.column, 1, A_NORMAL,
-                    ITEM_HIGHLIGHT_YELLOW_PAIR_NUM, nullptr
-                );
-            }
+            mvchgat(
+                pos.row, pos.column, 1, A_NORMAL,
+                ITEM_HIGHLIGHT_YELLOW_PAIR_NUM, nullptr
+            );
         }
     }
 }
