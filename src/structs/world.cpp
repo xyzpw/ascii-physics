@@ -78,6 +78,13 @@ void World::highlightObjectById(int id, double duration)
     object.highlightInfo.isHighlighted = true;
 }
 
+void World::hitFlashObjectById(int id, double duration)
+{
+    Object& object = this->getObjectById(id);
+    object.highlightInfo.hitFlashingUntil = getEpochAsDecimal() + duration;
+    object.highlightInfo.isHitFlashing = true;
+}
+
 void World::setWorldBounds()
 {
     auto windowSize = getWindowSize();

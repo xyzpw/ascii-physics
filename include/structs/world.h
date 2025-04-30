@@ -46,6 +46,10 @@ struct World {
         bool isMaxSpeedVisible;
     } displayedStats;
 
+    struct _VisualEffects {
+        bool isHitFlashesVisible;
+    } visualEffects;
+
     _WorldDefaultObjectValues defaultObjectValues;
     _ObjectInputInfo objectInputInfo;
 
@@ -59,6 +63,7 @@ struct World {
     Object& getObjectById(int id);
     void resetObjectById(int id);
     void highlightObjectById(int id, double duration);
+    void hitFlashObjectById(int id, double duration);
     void addObject(OBJECT_TYPE, double kg);
     void removeAllObjects();
 };
