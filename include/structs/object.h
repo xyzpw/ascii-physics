@@ -19,7 +19,6 @@ struct Object {
     };
     struct _HighlightInfo {
         bool isHighlighted = false;
-
     };
     _VectorsList vectors;
     _Stats statistics;
