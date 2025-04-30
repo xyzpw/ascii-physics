@@ -55,6 +55,10 @@ World createWorldWithArgs(ParsedArgs args)
         world.displayedStats.isMaxSpeedVisible = true;
     }
 
+    if (args.checkKeyExists(ARG_NAME_HIT_FLASH)){
+        world.visualEffects.isHitFlashesVisible = true;
+    }
+
     world.addObject(OBJECT_TYPE::OBJECT_BALL, mass);
     world.activeObjectId = world.objects.at(0).id;
 
