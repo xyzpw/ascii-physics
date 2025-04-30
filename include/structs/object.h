@@ -19,7 +19,9 @@ struct Object {
     };
     struct _HighlightInfo {
         bool isHighlighted = false;
+        bool isHitFlashing = false;
         double highlightUntil;
+        double hitFlashingUntil;
     };
     _VectorsList vectors;
     _Stats statistics;
