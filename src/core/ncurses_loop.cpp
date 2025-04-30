@@ -4,11 +4,13 @@
 #include "setup/ncurses_setup.h"
 #include "core/input/keyboard_input.h"
 #include "utils/screen_utils.h"
+#include "utils/epoch_utils.h"
 #include "display/floor_display.h"
 #include "display/info_display.h"
 #include "constants/object_char_constants.h"
 
 void updatePosAndDisplayObjects(World&);
+void fixHighlightColors(Object& object);
 
 void startNcursesLoop(World world)
 {
@@ -67,5 +69,19 @@ void updatePosAndDisplayObjects(World& world)
                 PAIR_NUM_YELLOW_FG, nullptr
             );
         }
+    }
+}
+
+// Disable object highlighting if highlight until time has expired.
+void fixHighlightColors(Object& object)
+{
+    auto& info = object.highlightInfo;
+
+    if (info.isHighlighted && getEpochAsDecimal() > info.highlightUntil){
+        info.isHighlighted = false;
+    }
+
+    if (info.isHitFlashing && getEpochAsDecimal() > info.hitFlashingUntil){
+        info.isHitFlashing = false;
     }
 }
