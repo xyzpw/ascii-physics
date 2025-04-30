@@ -1,6 +1,7 @@
 # ascii-physics
 
 ![downloads](https://img.shields.io/github/downloads/xyzpw/ascii-physics/total)
+![timestamp](https://img.shields.io/date/1741367040?label=repo%20creation)
 
 Ncurses application to simulate physics.
 
