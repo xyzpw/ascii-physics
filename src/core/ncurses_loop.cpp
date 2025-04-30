@@ -64,7 +64,7 @@ void updatePosAndDisplayObjects(World& world)
         {
             mvchgat(
                 pos.row, pos.column, 1, A_NORMAL,
-                ITEM_HIGHLIGHT_YELLOW_PAIR_NUM, nullptr
+                PAIR_NUM_YELLOW_FG, nullptr
             );
         }
     }

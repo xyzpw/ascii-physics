@@ -11,5 +11,5 @@ void initializeNcurses()
     keypad(stdscr, true);
     start_color();
     use_default_colors();
-    init_pair(ITEM_HIGHLIGHT_YELLOW_PAIR_NUM, COLOR_YELLOW, -1);
+    init_pair(PAIR_NUM_YELLOW_FG, COLOR_YELLOW, -1);
 }
