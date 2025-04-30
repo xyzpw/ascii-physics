@@ -43,11 +43,8 @@ struct World {
         bool isCollisionCountVisible;
         bool isMaxSpeedVisible;
     };
-    _WorldBorders worldBounds;
-    _OverlayText overlayText;
     _WorldDefaultObjectValues defaultObjectValues;
     _ObjectInputInfo objectInputInfo;
-    _DisplayedStats displayedStats;
 
     double metersPerChar = 1.0;
 
