@@ -65,10 +65,14 @@ void selectObjectNextOrPrev(World& world, CONTROL_KEY key)
 
     bool canIncrement = world.objects.size() > currentIndex + 1;
 
-    if (CONTROL_KEY::KEY_OBJECT_SELECT_NEXT == key && canIncrement){
-        world.activeObjectId = world.objects[currentIndex + 1].id;
+    if (CONTROL_KEY::KEY_OBJECT_SELECT_NEXT == key){
+        world.activeObjectId = canIncrement ?
+                               world.objects[currentIndex + 1].id :
+                               world.objects[0].id;
     }
-    else if (CONTROL_KEY::KEY_OBJECT_SELECT_PREV == key && 0 < currentIndex){
-        world.activeObjectId = world.objects[currentIndex - 1].id;
+    else if (CONTROL_KEY::KEY_OBJECT_SELECT_PREV == key){
+        world.activeObjectId = 0 < currentIndex ?
+                               world.objects[currentIndex - 1].id :
+                               world.objects[world.objects.size() - 1].id;
     }
 }
