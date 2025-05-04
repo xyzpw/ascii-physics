@@ -68,3 +68,4 @@ $ ./physics --preset tennis
 ##### Selecting Values to Change
 - `L` Select launch angle
 - `V` Select launch velocity
+- `M` Select object mass
