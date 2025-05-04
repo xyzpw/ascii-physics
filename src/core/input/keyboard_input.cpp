@@ -203,9 +203,7 @@ void changeSelectParam(World& world, SELECT_PARAMETER param)
 
     world.objectInputInfo.selectParameter = param;
 
-    overlayText.text = stream.str();
-    overlayText.displayUntil = getEpochAsDecimal() + 1.0;
-    overlayText.shouldDisplay = true;
+    world.setOverlayText(stream.str(), 1);
 }
 
 void changeSelectParamValueOnInput(World& world, SELECT_PARAMETER param,
