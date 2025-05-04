@@ -12,17 +12,17 @@ struct Object {
         Vector2D velocity{0, 0};
         Vector2D acceleration{0, 0};
         Vector2D position{0, 0};
-    };
+    } vectors;
     struct _Stats {
         int collisionCount = 0;
         double maxSpeed = 0;
-    };
+    } statistics;
     struct _HighlightInfo {
         bool isHighlighted = false;
         bool isHitFlashing = false;
         double highlightUntil;
         double hitFlashingUntil;
-    };
+    } highlightInfo;
 
     double mass;
     double terminalVelocity;
