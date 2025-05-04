@@ -13,4 +13,6 @@ void initializeNcurses()
     use_default_colors();
     init_pair(PAIR_NUM_YELLOW_FG, COLOR_YELLOW, -1);
     init_pair(PAIR_NUM_RED_FG, COLOR_RED, -1);
+    init_pair(PAIR_NUM_BRIGHT_GRAY_FG, 251, -1);
+    init_pair(PAIR_NUM_DARK_GRAY_FG, 241, -1);
 }
