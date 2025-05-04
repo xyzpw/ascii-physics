@@ -23,9 +23,6 @@ struct Object {
         double highlightUntil;
         double hitFlashingUntil;
     };
-    _VectorsList vectors;
-    _Stats statistics;
-    _HighlightInfo highlightInfo;
 
     double mass;
     double terminalVelocity;
