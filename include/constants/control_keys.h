@@ -24,6 +24,8 @@ enum class CONTROL_KEY {
     KEY_SELECT_PARAM_MASS = 'M',
 
     KEY_NEW_OBJECT = 'n',
+
+    KEY_CUSTOM_INPUT = 'I',
 };
 
 inline CONTROL_KEY getKeyControl(const char key)
