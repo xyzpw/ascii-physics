@@ -51,6 +51,7 @@ struct World {
 
     struct _VisualEffects {
         bool isHitFlashesVisible;
+        bool isTrailVisible = false;
     } visualEffects;
 
     _WorldDefaultObjectValues defaultObjectValues;
