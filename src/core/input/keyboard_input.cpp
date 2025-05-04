@@ -19,6 +19,11 @@ void setParamValueFromCustomInput(World&);
 
 void handleKeyPress(const char key, World& world)
 {
+    if (world.objectInputInfo.isTakingInput){
+        handleCustomInput(key, world);
+        return;
+    }
+
     CONTROL_KEY keyControl = getKeyControl(key);
 
     Object& object = world.getObjectById(world.activeObjectId);
@@ -124,6 +129,13 @@ void handleKeyPress(const char key, World& world)
             world.addObject(
                 OBJECT_TYPE::OBJECT_BALL, world.defaultObjectValues.objectMass
             );
+            break;
+        }
+        case CONTROL_KEY::KEY_CUSTOM_INPUT:{
+            std::string txt = "input " + selectParamToStr(selectParam) + ":";
+            world.setOverlayText(txt, 3);
+            world.objectInputInfo.isTakingInput = true;
+            world.objectInputInfo.takeInputUntil = getEpochAsDecimal() + 3;
             break;
         }
     }
