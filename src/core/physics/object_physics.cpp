@@ -149,6 +149,15 @@ void updateObjectStatistics(Object& object)
     }
 }
 
+void updateObjectTrail(World& world)
+{
+    if (!world.visualEffects.isTrailVisible)
+        return;
+
+    Object& object = world.getObjectById(world.activeObjectId);
+    object.addTrail(object.position);
+}
+
 void simulateObjectsInWorld(World& world)
 {
     const double deltaInterval = 0.005;
@@ -160,6 +169,7 @@ void simulateObjectsInWorld(World& world)
             for (auto& object : world.objects){
                 updateObjectVectors(world, object, deltaInterval / iterStepCount);
                 updateObjectStatistics(object);
+                updateObjectTrail(world);
             }
 
             resolveAllObjectCollisions(world);
