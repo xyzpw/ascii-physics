@@ -262,7 +262,7 @@ void setParamValueFromCustomInput(World& world)
             return;
         }
         case SELECT_PARAMETER::LAUNCH_VELOCITY:{
-            world.objectInputInfo.objectLaunchVelocity = newVal;
+            inputInfo.objectLaunchVelocity = newVal;
             return;
         }
         case SELECT_PARAMETER::LAUNCH_ANGLE:{
