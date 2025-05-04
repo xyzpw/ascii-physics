@@ -1,5 +1,6 @@
 #include <thread>
 #include <sstream>
+#include <cctype>
 #include "core/input/keyboard_input.h"
 #include "core/input/object_control_scale.h"
 #include "core/physics/object_physics.h"
@@ -13,6 +14,8 @@
 bool checkIsControlKeyMovement(CONTROL_KEY);
 void changeSelectParam(World&, SELECT_PARAMETER);
 void changeSelectParamValueOnInput(World&, SELECT_PARAMETER, bool isPositive);
+void handleCustomInput(const char key, World& world);
+void setParamValueFromCustomInput(World&);
 
 void handleKeyPress(const char key, World& world)
 {
@@ -126,6 +129,48 @@ void handleKeyPress(const char key, World& world)
     }
 }
 
+void handleCustomInput(const char key, World& world)
+{
+    auto& inputInfo = world.objectInputInfo;
+    bool& isTakingInput = world.objectInputInfo.isTakingInput;
+    double& takeInputUntil = world.objectInputInfo.takeInputUntil;
+    std::string& customInputValue = world.objectInputInfo.customInputValue;
+
+    const bool hasInputFinished = getEpochAsDecimal() > takeInputUntil;
+    const bool isInputValid = std::isdigit(key) || key == '.';
+
+    if (hasInputFinished){
+        try {
+            setParamValueFromCustomInput(world);
+            world.setOverlayText("value set");
+        } catch (...){
+            world.setOverlayText("invalid input; value not set", 2);
+        }
+        isTakingInput = false;
+        return;
+    }
+
+    if (!isInputValid && key != static_cast<char>(KEY_BACKSPACE)){
+        return;
+    }
+
+    if (key == static_cast<char>(KEY_BACKSPACE)){
+        customInputValue.pop_back();
+    }
+    else {
+        customInputValue.push_back(key);
+    }
+
+    takeInputUntil = getEpochAsDecimal() + 1;
+
+    std::stringstream stream;
+    stream << "input ";
+    stream << selectParamToStr(inputInfo.selectParameter);
+    stream << ": " << customInputValue;
+
+    world.setOverlayText(stream.str());
+}
+
 bool checkIsControlKeyMovement(CONTROL_KEY key)
 {
     if (key == CONTROL_KEY::KEY_MOVEUP ||
@@ -187,4 +232,32 @@ void changeSelectParamValueOnInput(World& world, SELECT_PARAMETER param,
     world.overlayText.text = stream.str();
     world.overlayText.displayUntil = getEpochAsDecimal() + 1;
     world.overlayText.shouldDisplay = true;
+}
+
+// Set the active select parameter to the value of custom input value.
+void setParamValueFromCustomInput(World& world)
+{
+    Object& object = world.getObjectById(world.activeObjectId);
+    auto& inputInfo = world.objectInputInfo;
+    auto& activeParam = world.objectInputInfo.selectParameter;
+    std::string& inputValue = world.objectInputInfo.customInputValue;
+
+    double newVal = std::stod(inputValue);
+    inputValue = "";
+
+    switch (inputInfo.selectParameter)
+    {
+        case SELECT_PARAMETER::OBJECT_MASS:{
+            object.mass = newVal;
+            return;
+        }
+        case SELECT_PARAMETER::LAUNCH_VELOCITY:{
+            world.objectInputInfo.objectLaunchVelocity = newVal;
+            return;
+        }
+        case SELECT_PARAMETER::LAUNCH_ANGLE:{
+            inputInfo.objectLaunchAngle = newVal;
+            return;
+        }
+    }
 }
