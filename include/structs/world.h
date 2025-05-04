@@ -60,6 +60,7 @@ struct World {
     void stopSimulation();
     void resetSimulation();
     void setWorldBounds();
+    void setOverlayText(std::string text, double duration=1.0);
     Object& getObjectById(int id);
     void resetObjectById(int id);
     void highlightObjectById(int id, double duration);

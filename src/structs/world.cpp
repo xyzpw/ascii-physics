@@ -97,6 +97,13 @@ void World::setWorldBounds()
     bounds.floor = 0;
 }
 
+void World::setOverlayText(std::string text, double duration)
+{
+    this->overlayText.text = text;
+    this->overlayText.displayUntil = getEpochAsDecimal() + duration;
+    this->overlayText.shouldDisplay = true;
+}
+
 void World::addObject(OBJECT_TYPE type, double kg)
 {
     Object newObject(type, kg);
