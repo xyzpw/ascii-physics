@@ -1,8 +1,18 @@
 #pragma once
 
+#include <vector>
 #include "enums/object_type.h"
 #include "structs/position.h"
 #include "structs/vector2d.h"
+#include "constants/object_char_constants.h"
+
+struct Trail {
+    Position position;
+    int frameAge = 0;
+    int colorPairNum = PAIR_NUM_BRIGHT_GRAY_FG;
+    bool isOld = false;
+    const char* displayChar = ":";
+};
 
 struct Object {
     OBJECT_TYPE type;
@@ -33,6 +43,8 @@ struct Object {
     double crossSectionalArea;
     double mLength; //length of object
 
+    std::vector<Trail> trails; // trails to highlight (if enabled)
+
     bool isActionUsed = false;
 
     int id;
@@ -42,5 +54,8 @@ struct Object {
     void resetPositionToCenter(double charSize);
     void resetActionStates();
     void resetPhysicsProperties(double charSize);
+    void addTrail(Position pos);
+    void updateTrails();
+    void removeExpiredTrails();
     void launch(Vector2D velocity);
 };

@@ -1,9 +1,11 @@
 #include <thread>
+#include <algorithm>
 #include "structs/object.h"
 #include "utils/screen_utils.h"
 #include "utils/physics_utils.h"
 #include "utils/random_utils.h"
 #include "constants/physics_constants.h"
+#include "constants/object_char_constants.h"
 #include "core/physics/object_physics.h"
 
 const double PI = 3.141592653589793238;
@@ -52,6 +54,40 @@ void Object::resetPhysicsProperties(double charSize)
             this->terminalVelocity = calculateTerminalVelocity(*this);
         }
     }
+}
+
+void Object::addTrail(Position pos)
+{
+    // Return if trail already exists.
+    for (const auto& tr : trails){
+        if (tr.position == pos)
+            return;
+    }
+
+    trails.push_back(Trail{.position=pos});
+}
+
+// Update trail values for each frame step.
+void Object::updateTrails()
+{
+    for (auto& tr : trails)
+    {
+        ++tr.frameAge;
+        if (!tr.isOld && TRAIL_FRAME_AGE_OLD < tr.frameAge){
+            tr.isOld = true;
+            tr.displayChar = ".";
+            tr.colorPairNum = PAIR_NUM_DARK_GRAY_FG;
+        }
+    }
+}
+
+void Object::removeExpiredTrails()
+{
+    auto removalIt = std::remove_if(trails.begin(), trails.end(), [](Trail& t){
+        return TRAIL_FRAME_AGE_MAX < t.frameAge;
+    });
+
+    trails.erase(removalIt, trails.end());
 }
 
 void Object::launch(Vector2D velocity)
