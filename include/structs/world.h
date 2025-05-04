@@ -20,6 +20,9 @@ struct _ObjectInputInfo {
     double objectLaunchVelocity = 0.0;
     double objectLaunchAngle = 0.0;
     SELECT_PARAMETER selectParameter;
+    bool isTakingInput = false;
+    double takeInputUntil;
+    std::string customInputValue = "";
 };
 
 struct World {
