@@ -53,6 +53,19 @@ void updatePosAndDisplayObjects(World& world)
 {
     for (auto& obj : world.objects)
     {
+        obj.updateTrails();
+        for (auto& tr : obj.trails){
+            const Position& pos = tr.position;
+            if (!checkPositionInsideDisplay(pos)) continue;
+
+            mvprintw(pos.row, pos.column, tr.displayChar);
+            mvchgat(pos.row, pos.column, 1, A_NORMAL, tr.colorPairNum, nullptr);
+        }
+        obj.removeExpiredTrails();
+    }
+
+    for (auto& obj : world.objects)
+    {
         obj.position = vectorToPosition(obj.vectors.position / world.metersPerChar);
         const Position& pos = obj.position;
 
