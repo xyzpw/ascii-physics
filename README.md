@@ -59,6 +59,7 @@ $ ./physics --preset tennis
 - `space`: drop object
 - `r`: reset simulation
 - `l`: launch
+- `I`: input mode
 
 #### Changing Values
 - `KEY_UP`: Increment selected value
