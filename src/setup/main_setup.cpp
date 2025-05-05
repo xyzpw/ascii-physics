@@ -65,6 +65,10 @@ World createWorldWithArgs(ParsedArgs args)
         world.displayedStats.isMaxSpeedVisible = true;
     }
 
+    if (args.checkKeyExists(ARG_NAME_STAT_HMAX)){
+        world.displayedStats.isMaxHeightVisible = true;
+    }
+
     if (args.checkKeyExists(ARG_NAME_HIT_FLASH)){
         world.visualEffects.isHitFlashesVisible = true;
     }
