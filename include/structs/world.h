@@ -45,13 +45,13 @@ struct World {
 
     // Keep track of what stats to display.
     struct _DisplayedStats {
-        bool isCollisionCountVisible;
-        bool isMaxSpeedVisible;
+        bool isCollisionCountVisible = false;
+        bool isMaxSpeedVisible = false;
         bool isMaxHeightVisible = false;
     } displayedStats;
 
     struct _VisualEffects {
-        bool isHitFlashesVisible;
+        bool isHitFlashesVisible = false;
         bool isTrailVisible = false;
     } visualEffects;
 
