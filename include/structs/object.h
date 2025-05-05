@@ -27,6 +27,7 @@ struct Object {
     struct _Stats {
         int collisionCount = 0;
         double maxSpeed = 0;
+        double maxHeight = 0;
     } statistics;
 
     struct _HighlightInfo {
