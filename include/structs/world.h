@@ -47,6 +47,7 @@ struct World {
     struct _DisplayedStats {
         bool isCollisionCountVisible;
         bool isMaxSpeedVisible;
+        bool isMaxHeightVisible = false;
     } displayedStats;
 
     struct _VisualEffects {
