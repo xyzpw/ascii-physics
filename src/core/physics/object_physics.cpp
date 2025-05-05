@@ -147,6 +147,10 @@ void updateObjectStatistics(Object& object)
     if (object.vectors.velocity.getMagnitude() > object.statistics.maxSpeed){
         object.statistics.maxSpeed = object.vectors.velocity.getMagnitude();
     }
+
+    if (object.vectors.position.y > object.statistics.maxHeight){
+        object.statistics.maxHeight = object.vectors.position.y;
+    }
 }
 
 void updateObjectTrail(World& world)
