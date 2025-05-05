@@ -87,4 +87,5 @@ void displayWorldObjectStats(World& world)
 
     printStat(visibleStats.isCollisionCountVisible, "collisions: ", stats.collisionCount);
     printStat(visibleStats.isMaxSpeedVisible, "max speed: ", stats.maxSpeed, " m/s");
+    printStat(visibleStats.isMaxHeightVisible, "max height: ", stats.maxHeight, " m");
 }
