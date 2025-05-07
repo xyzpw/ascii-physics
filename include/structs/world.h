@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include "structs/object.h"
+#include "structs/obstacle.h"
 #include "enums/select_parameter.h"
 #include "enums/object_type.h"
 #include "constants/physics_constants.h"
@@ -29,7 +30,9 @@ struct World {
     bool isSimulating = false;
 
     std::vector<Object> objects;
+    std::vector<Obstacle> obstacles;
     int activeObjectId;
+    int activeEntityId = -1;
 
     struct _WorldBorders {
         double ceiling, floor;
@@ -67,9 +70,14 @@ struct World {
     void setWorldBounds();
     void setOverlayText(std::string text, double duration=1.0);
     Object& getObjectById(int id);
+    Obstacle& getObstacleById(int id);
+    Vector2D& getActiveEntityVectorPosition();
+    Position& getActiveEntityPosition();
     void resetObjectById(int id);
     void highlightObjectById(int id, double duration);
     void hitFlashObjectById(int id, double duration);
     void addObject(OBJECT_TYPE, double kg);
+    void addObstacle();
     void removeAllObjects();
+    void removeAllObstacles();
 };
