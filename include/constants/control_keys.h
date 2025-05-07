@@ -24,6 +24,7 @@ enum class CONTROL_KEY {
     KEY_SELECT_PARAM_MASS = 'M',
 
     KEY_NEW_OBJECT = 'n',
+    KEY_NEW_OBSTACLE = 'N',
 
     KEY_CUSTOM_INPUT = 'I',
 };
