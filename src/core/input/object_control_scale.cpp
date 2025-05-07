@@ -75,4 +75,6 @@ void selectObjectNextOrPrev(World& world, CONTROL_KEY key)
                                world.objects[currentIndex - 1].id :
                                world.objects[world.objects.size() - 1].id;
     }
+
+    world.activeEntityId = world.activeObjectId;
 }
