@@ -142,6 +142,25 @@ void resolveAllObjectCollisions(World& world)
     activeCollisions = std::move(newCollisions);
 }
 
+void resolveAllObstacleCollisions(World& world)
+{
+    for (auto& object : world.objects)
+    {
+        for (auto& obstacle : world.obstacles)
+        {
+            if (checkCircleSquareCollision(object, obstacle)){
+                resolveCircleSquareCollision(object, obstacle);
+                ++object.statistics.collisionCount;
+
+                // Add hit flash if enabled.
+                if (world.visualEffects.isHitFlashesVisible){
+                    world.hitFlashObjectById(object.id, HIT_FLASH_DURATION);
+                }
+            }
+        }
+    }
+}
+
 void updateObjectStatistics(Object& object)
 {
     if (object.vectors.velocity.getMagnitude() > object.statistics.maxSpeed){
@@ -177,6 +196,7 @@ void simulateObjectsInWorld(World& world)
             }
 
             resolveAllObjectCollisions(world);
+            resolveAllObstacleCollisions(world);
         }
         sleepCurrentThread(static_cast<int>(deltaInterval * 1e+3));
     }

@@ -1,5 +1,8 @@
+#include <cmath>
 #include "core/physics/object_collision.h"
 #include "structs/object.h"
+#include "structs/obstacle.h"
+#include "structs/world.h"
 #include "structs/vector2d.h"
 
 bool checkHasCollidedWithFloor(Object& object)
@@ -25,6 +28,31 @@ bool checkObjectsCollided(Object& objA, Object& objB)
 
     return distSq <= minDist * minDist;
 }
+
+bool checkCircleSquareCollision(Object& circle, Obstacle& square)
+{
+    if (circle.vectors.velocity.getMagnitude() <= 0)
+        return false;
+
+    double circleX = circle.vectors.position.x;
+    double circleY = circle.vectors.position.y;
+    double radius  = circle.mLength / 2.0;
+
+    double halfSize = square.mLength / 2.0;
+    double squareX = square.vectors.position.x;
+    double squareY = square.vectors.position.y;
+
+    // Clamp circle center to the nearest point on the square.
+    double closestX = std::max(squareX - halfSize, std::min(circleX, squareX + halfSize));
+    double closestY = std::max(squareY - halfSize, std::min(circleY, squareY + halfSize));
+
+    // Compute distance to that point.
+    double dx = circleX - closestX;
+    double dy = circleY - closestY;
+
+    return (dx * dx + dy * dy) <= (radius * radius);
+}
+
 
 void resolveObjectCollision(Object& objA, Object& objB)
 {
@@ -65,5 +93,68 @@ void resolveObjectCollision(Object& objA, Object& objB)
         Vector2D impulse = normal * j;
         objA.vectors.velocity += impulse * invMassA;
         objB.vectors.velocity -= impulse * invMassB;
+    }
+}
+
+void resolveCircleSquareCollision(Object& circle, Obstacle& square)
+{
+    const double REST_VELOCITY_THRESHOLD = 0.01;
+    const double MIN_SEPARATION = 0.01;
+
+    double radius = circle.mLength / 2.0;
+    double halfSize = square.mLength / 2.0;
+
+    double circleX = circle.vectors.position.x;
+    double circleY = circle.vectors.position.y;
+    double squareX = square.vectors.position.x;
+    double squareY = square.vectors.position.y;
+
+    // Find closest point on square to circle
+    double closestX = std::max(squareX - halfSize, std::min(circleX, squareX + halfSize));
+    double closestY = std::max(squareY - halfSize, std::min(circleY, squareY + halfSize));
+
+    double dx = circleX - closestX;
+    double dy = circleY - closestY;
+    double distSq = dx * dx + dy * dy;
+
+    if (distSq == 0.0) {
+        dx = 1.0;
+        dy = 0.0;
+        distSq = 1.0;
+    }
+
+    double distance = std::sqrt(distSq);
+    double overlap = radius - distance;
+
+    if (overlap > 0.0)
+    {
+        // Normalize direction.
+        double normX = dx / distance;
+        double normY = dy / distance;
+
+        // Push out by overlap and small extra separation to prevent sinking.
+        double separation = overlap + MIN_SEPARATION;
+        circle.vectors.position.x += normX * separation;
+        circle.vectors.position.y += normY * separation;
+
+        // Reflect velocity.
+        double dot = circle.vectors.velocity.x * normX + circle.vectors.velocity.y * normY;
+
+        double vBeforeSq = circle.vectors.velocity.x * circle.vectors.velocity.x +
+                           circle.vectors.velocity.y * circle.vectors.velocity.y;
+
+        // Stop bounce if velocity is very low.
+        if (std::sqrt(vBeforeSq) < REST_VELOCITY_THRESHOLD) {
+            circle.vectors.velocity.x = 0.0;
+            circle.vectors.velocity.y = 0.0;
+        } else {
+            // Reflect.
+            circle.vectors.velocity.x -= 2 * dot * normX;
+            circle.vectors.velocity.y -= 2 * dot * normY;
+
+            // Apply restitution.
+            circle.vectors.velocity.x *= circle.coefficientOfRestitution;
+            circle.vectors.velocity.y *= circle.coefficientOfRestitution;
+        }
     }
 }
