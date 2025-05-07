@@ -51,35 +51,36 @@ void handleKeyPress(const char key, World& world)
         return row >= 0 && row < windowSize.ws_row - 1;
     };
 
+    auto useMovement = [&](int dcol, int drow){
+        Position& pos = world.getActiveEntityPosition();
+        Vector2D& vec = world.getActiveEntityVectorPosition();
+
+        if (dcol != 0 && checkColInside(pos.column + dcol)){
+            pos.column += dcol;
+            vec.x += dcol * metersPerChar;
+        }
+        if (drow != 0 && checkRowInside(pos.row + drow)){
+            pos.row += drow;
+            vec.y += -drow * metersPerChar;
+        }
+    };
 
     switch (keyControl)
     {
         case CONTROL_KEY::KEY_MOVEUP:{
-            if (checkRowInside(objRow - 1)){
-                objRow -= 1;
-                object.vectors.position.y += 1.0 * metersPerChar;
-            }
+            useMovement(0, -1);
             break;
         }
         case CONTROL_KEY::KEY_MOVEDOWN:{
-            if (checkRowInside(objRow + 1)){
-                objRow += 1;
-                object.vectors.position.y -= 1.0 * metersPerChar;
-            }
+            useMovement(0, 1);
             break;
         }
         case CONTROL_KEY::KEY_MOVERIGHT:{
-            if (checkColInside(objCol + 1)){
-                objCol += 1;
-                object.vectors.position.x += 1.0 * metersPerChar;
-            }
+            useMovement(1, 0);
             break;
         }
         case CONTROL_KEY::KEY_MOVELEFT:{
-            if (checkColInside(objCol - 1)){
-                objCol -= 1;
-                object.vectors.position.x -= 1.0 * metersPerChar;
-            }
+            useMovement(-1, 0);
             break;
         }
         case CONTROL_KEY::KEY_ACTION:{
