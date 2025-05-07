@@ -10,6 +10,7 @@
 #include "constants/object_char_constants.h"
 
 void updatePosAndDisplayObjects(World&);
+void displayObstacles(World&);
 void fixHighlightColors(Object& object);
 
 void startNcursesLoop(World world)
@@ -38,6 +39,7 @@ void startNcursesLoop(World world)
 
         // Display all object in the simulation.
         updatePosAndDisplayObjects(world);
+        displayObstacles(world);
 
         displaySimulationText(world);
         printFloor();
@@ -83,6 +85,17 @@ void updatePosAndDisplayObjects(World& world)
             mvchgat(pos.row, pos.column, 1, A_NORMAL, pairNum, nullptr);
             fixHighlightColors(obj);
         }
+    }
+}
+
+void displayObstacles(World& world)
+{
+    for (const auto& ob : world.obstacles)
+    {
+        const Position& pos = ob.position;
+        if (!checkPositionInsideDisplay(pos)) continue;
+
+        mvprintw(pos.row, pos.column, OBSTACLE_CHAR);
     }
 }
 
