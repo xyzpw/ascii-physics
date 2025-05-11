@@ -167,6 +167,7 @@ void World::addObject(OBJECT_TYPE type, double kg)
     newObject.resetActionStates();
     newObject.resetVectors();
     newObject.resetPhysicsProperties(this->metersPerChar);
+
     this->objects.push_back(newObject);
     this->activeEntityId = newObject.id;
     this->activeObjectId = newObject.id;
