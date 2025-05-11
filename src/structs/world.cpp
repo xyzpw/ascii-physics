@@ -163,6 +163,7 @@ void World::addObject(OBJECT_TYPE type, double kg)
     newObject.position = getNewObjectPosition(*this);
     if (!checkPositionInsideDisplay(newObject.position))
         return;
+
     newObject.resetActionStates();
     newObject.resetVectors();
     newObject.resetPhysicsProperties(this->metersPerChar);
