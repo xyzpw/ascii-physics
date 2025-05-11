@@ -77,7 +77,7 @@ struct World {
     void resetObjectById(int id);
     void highlightObjectById(int id, double duration);
     void hitFlashObjectById(int id, double duration);
-    void addObject(OBJECT_TYPE, double kg);
+    void addObject(OBJECT_TYPE, double kg, Position pos={-1,-1});
     void addObstacle();
     void removeAllObjects();
     void removeAllObstacles();

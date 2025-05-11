@@ -157,7 +157,7 @@ void World::setOverlayText(std::string text, double duration)
     this->overlayText.shouldDisplay = true;
 }
 
-void World::addObject(OBJECT_TYPE type, double kg)
+void World::addObject(OBJECT_TYPE type, double kg, Position pos)
 {
     Object newObject(type, kg);
 
@@ -169,8 +169,18 @@ void World::addObject(OBJECT_TYPE type, double kg)
     newObject.mLength = this->metersPerChar;
 
     newObject.position = getNewObjectPosition(*this);
-    if (!checkPositionInsideDisplay(newObject.position))
-        return;
+    if (pos.column == -1 && pos.row == -1){
+        newObject.position = getNewObjectPosition(*this);
+        if (!checkPositionInsideDisplay(newObject.position))
+            return;
+    }
+    else{
+        for (auto& it : this->objects){
+            if (it.position == pos)
+                return;
+            newObject.position = pos;
+        }
+    }
 
     newObject.resetActionStates();
     newObject.resetVectors();
