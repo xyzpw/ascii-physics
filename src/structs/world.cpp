@@ -11,7 +11,6 @@
 #include "utils/random_utils.h"
 #include "core/physics/object_physics.h"
 
-void highlightObject(Object&, double seconds);
 Position getNewObjectPosition(World&);
 
 World::World()
@@ -204,16 +203,6 @@ void World::removeAllObjects()
 void World::removeAllObstacles()
 {
     this->obstacles = {};
-}
-
-void highlightObject(Object& object, double seconds)
-{
-    if (object.highlightInfo.isHighlighted)
-        return;
-
-    object.highlightInfo.isHighlighted = true;
-    sleepCurrentThread(static_cast<int>(seconds * 1e+3));
-    object.highlightInfo.isHighlighted = false;
 }
 
 Position getNewObjectPosition(World& world)
