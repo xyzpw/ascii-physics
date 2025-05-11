@@ -65,6 +65,15 @@ Object& World::getObjectById(int id)
     throw std::invalid_argument(errMsg.str());
 }
 
+bool World::checkObjectIdExists(int id)
+{
+    for (auto& obj : this->objects){
+        if (obj.id == id)
+            return true;
+    }
+    return false;
+}
+
 Obstacle& World::getObstacleById(int id)
 {
     for (auto& ob : this->obstacles){

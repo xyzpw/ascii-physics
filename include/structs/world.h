@@ -70,6 +70,7 @@ struct World {
     void setWorldBounds();
     void setOverlayText(std::string text, double duration=1.0);
     Object& getObjectById(int id);
+    bool checkObjectIdExists(int id);
     Obstacle& getObstacleById(int id);
     Vector2D& getActiveEntityVectorPosition();
     Position& getActiveEntityPosition();
