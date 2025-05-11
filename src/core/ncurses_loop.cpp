@@ -3,6 +3,7 @@
 #include "core/ncurses_loop.h"
 #include "setup/ncurses_setup.h"
 #include "core/input/keyboard_input.h"
+#include "core/input/mouse_input.h"
 #include "utils/screen_utils.h"
 #include "utils/epoch_utils.h"
 #include "display/floor_display.h"
@@ -36,6 +37,7 @@ void startNcursesLoop(World world)
         }
 
         handleKeyPress(keyPressed, world);
+        handleMouseClick(keyPressed, world);
 
         // Display all object in the simulation.
         updatePosAndDisplayObjects(world);
