@@ -63,6 +63,12 @@ $ ./physics --preset tennis
 - `I`: input mode
 - `N`: add obstacle
 
+#### Mouse Controls
+Clicking an area on terminal will spawn an object there.<br>
+Clicking on an object will allow you to move it, when the left mouse
+ is released the object will be placed in that position,
+ this can be canceled by pressing right click while left click is still being pressed.
+
 #### Changing Values
 - `KEY_UP`: Increment selected value
 - `KEY_DOWN`: Decrement selected value
