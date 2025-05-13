@@ -73,6 +73,10 @@ Clicking on an object will allow you to move it, when the left mouse
 - `KEY_UP`: Increment selected value
 - `KEY_DOWN`: Decrement selected value
 
+##### Object Selection
+- `KEY_LEFT`: select previous object
+- `KEY_RIGHT`: select next object
+
 ##### Selecting Values to Change
 - `L` Select launch angle
 - `V` Select launch velocity
