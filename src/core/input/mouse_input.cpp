@@ -108,6 +108,7 @@ void releaseButton1(World& world, Position& pos)
 {
     bool isPosValid = true;
     bool isIdValid = world.checkObjectIdExists(idObjectFollowingMouse);
+    Object* object = nullptr;
 
     for (const auto& it : world.objects){
         if (it.position == pos){
@@ -128,15 +129,17 @@ void releaseButton1(World& world, Position& pos)
         }
     }
 
+    if (isIdValid){
+        object = &world.getObjectById(idObjectFollowingMouse);
+    }
+
     if (isPosValid && isIdValid){
-        Object& ob = world.getObjectById(idObjectFollowingMouse);
-        ob.position = pos;
-        ob.vectors.position = positionToVector(pos) * world.metersPerChar;
-        ob.highlightInfo.isHighlighted = false;
+        object->position = pos;
+        object->vectors.position = positionToVector(pos) * world.metersPerChar;
+        object->highlightInfo.isHighlighted = false;
     }
     else if (isIdValid){
-        Object& ob = world.getObjectById(idObjectFollowingMouse);
-        ob.highlightInfo.isHighlighted = false;
+        object->highlightInfo.isHighlighted = false;
         world.setOverlayText("cannot place object here");
     }
 
