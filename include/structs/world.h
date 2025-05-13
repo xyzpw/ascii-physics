@@ -75,8 +75,8 @@ struct World {
     Vector2D& getActiveEntityVectorPosition();
     Position& getActiveEntityPosition();
     void resetObjectById(int id);
-    void highlightObjectById(int id, double duration);
-    void hitFlashObjectById(int id, double duration);
+    void highlightObjectById(int id, double duration=0.5);
+    void hitFlashObjectById(int id, double duration=0.5);
     void addObject(OBJECT_TYPE, double kg, Position pos={-1,-1});
     void addObstacle();
     void removeAllObjects();
