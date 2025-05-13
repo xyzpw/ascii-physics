@@ -1,6 +1,7 @@
 #include <thread>
 #include <sstream>
 #include <cctype>
+#include <string>
 #include "core/input/keyboard_input.h"
 #include "core/input/object_control_scale.h"
 #include "core/physics/object_physics.h"
@@ -29,6 +30,7 @@ void handleKeyPress(const char key, World& world)
     Object& object = world.getObjectById(world.activeObjectId);
     const double& metersPerChar = world.metersPerChar;
     auto& selectParam = world.objectInputInfo.selectParameter;
+    auto& objInputInfo = world.objectInputInfo;
 
     if (keyControl == CONTROL_KEY::KEY_RESET_OBJECT){
         world.resetSimulation();
@@ -145,6 +147,14 @@ void handleKeyPress(const char key, World& world)
             world.setOverlayText(txt, 3);
             world.objectInputInfo.isTakingInput = true;
             world.objectInputInfo.takeInputUntil = getEpochAsDecimal() + 3;
+            break;
+        }
+        case CONTROL_KEY::KEY_SLINGSHOT_MODE:{
+            objInputInfo.isSlingshotMode = objInputInfo.isSlingshotMode ? false : true;
+
+            std::string str = objInputInfo.isSlingshotMode ? "enabled" : "disabled";
+
+            world.setOverlayText(str + " slingshot mode");
             break;
         }
     }

@@ -27,6 +27,8 @@ enum class CONTROL_KEY {
     KEY_NEW_OBSTACLE = 'N',
 
     KEY_CUSTOM_INPUT = 'I',
+
+    KEY_SLINGSHOT_MODE = 'S',
 };
 
 inline CONTROL_KEY getKeyControl(const char key)
