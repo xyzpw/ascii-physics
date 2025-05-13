@@ -113,6 +113,7 @@ void releaseButton1(World& world, Position& pos)
         if (it.position == pos){
             if (isIdValid && it.id == idObjectFollowingMouse){
                 world.activeObjectId = idObjectFollowingMouse;
+                world.activeEntityId = idObjectFollowingMouse;
                 world.highlightObjectById(idObjectFollowingMouse);
                 idObjectFollowingMouse = -1;
                 return;
