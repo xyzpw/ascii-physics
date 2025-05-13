@@ -111,6 +111,13 @@ void releaseButton1(World& world, Position& pos)
 
     for (const auto& it : world.objects){
         if (it.position == pos){
+            if (isIdValid && it.id == idObjectFollowingMouse){
+                world.activeObjectId = idObjectFollowingMouse;
+                world.highlightObjectById(idObjectFollowingMouse);
+                idObjectFollowingMouse = -1;
+                return;
+            }
+
             isPosValid = false;
         }
     }
