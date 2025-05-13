@@ -62,12 +62,16 @@ $ ./physics --preset tennis
 - `n`: add new object
 - `I`: input mode
 - `N`: add obstacle
+- `S`: slingshot mode
 
 #### Mouse Controls
 Clicking an area on terminal will spawn an object there.<br>
 Clicking on an object will allow you to move it, when the left mouse
  is released the object will be placed in that position,
  this can be canceled by pressing right click while left click is still being pressed.
+
+##### Slingshot mode
+When in slingshot mode, click an object, move mouse to a direction and release to launch.
 
 #### Changing Values
 - `KEY_UP`: Increment selected value
