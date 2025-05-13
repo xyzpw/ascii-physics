@@ -1,10 +1,12 @@
 #include <ncurses.h>
+#include <cmath>
 #include "core/input/mouse_input.h"
 #include "structs/world.h"
 #include "structs/position.h"
 #include "enums/object_type.h"
 #include "utils/sleep_utils.h"
 #include "utils/screen_utils.h"
+#include "utils/physics_utils.h"
 
 MEVENT mouseEvent;
 bool isLeftMouseActive = false; // is left mouse being held down
@@ -108,6 +110,8 @@ void releaseButton1(World& world, Position& pos)
 {
     bool isPosValid = true;
     bool isIdValid = world.checkObjectIdExists(idObjectFollowingMouse);
+    const bool& isSlingshot = world.objectInputInfo.isSlingshotMode;
+    Vector2D startVecPos{-1,-1};
     Object* object = nullptr;
 
     for (const auto& it : world.objects){
@@ -134,6 +138,7 @@ void releaseButton1(World& world, Position& pos)
     }
 
     if (isPosValid && isIdValid){
+        startVecPos = object->vectors.position;
         object->position = pos;
         object->vectors.position = positionToVector(pos) * world.metersPerChar;
         object->highlightInfo.isHighlighted = false;
@@ -141,6 +146,13 @@ void releaseButton1(World& world, Position& pos)
     else if (isIdValid){
         object->highlightInfo.isHighlighted = false;
         world.setOverlayText("cannot place object here");
+    }
+
+    if (isIdValid && isPosValid && isSlingshot){
+        double pe = computeElasticPotentialEnergy(object->vectors.position, startVecPos);
+        double vel = std::sqrt(pe * 2 / object->mass);
+        object->launch((startVecPos - object->vectors.position) * vel);
+        if (!world.isSimulating) world.startSimulation();
     }
 
     idObjectFollowingMouse = -1;
