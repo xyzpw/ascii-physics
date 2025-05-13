@@ -24,6 +24,7 @@ struct _ObjectInputInfo {
     bool isTakingInput = false;
     double takeInputUntil;
     std::string customInputValue = "";
+    bool isSlingshotMode = false;
 };
 
 struct World {
