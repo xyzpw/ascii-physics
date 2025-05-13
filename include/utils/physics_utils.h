@@ -9,3 +9,4 @@ double calculateDragForce(double velocity, double dragCoeff, double area);
 double calculateVelocityFinal(double velocity, double acceleration, double t);
 double calculateDisplacement(double velocity, double acceleration, double t);
 Vector2D degreesToVector(double deg);
+double computeElasticPotentialEnergy(Vector2D& heldPos, Vector2D& restPos);

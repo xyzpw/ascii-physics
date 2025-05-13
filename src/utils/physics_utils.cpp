@@ -52,3 +52,13 @@ Vector2D degreesToVector(double deg)
 
     return Vector2D{x, y};
 }
+
+double computeElasticPotentialEnergy(Vector2D& heldPos, Vector2D& restPos)
+{
+    const double dx = std::abs(restPos.x - heldPos.x);
+    const double dy = std::abs(restPos.y - heldPos.y);
+
+    const double displacement = std::sqrt(dx * dx + dy * dy);
+
+    return 0.5 * displacement * displacement;
+}
