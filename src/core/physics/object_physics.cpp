@@ -190,7 +190,8 @@ void simulateObjectsInWorld(World& world)
     {
         for (int s = 0; s < iterStepCount; ++s){
             for (auto& object : world.objects){
-                updateObjectVectors(world, object, deltaInterval / iterStepCount);
+                if (!object.isFrozen)
+                    updateObjectVectors(world, object, deltaInterval / iterStepCount);
                 updateObjectStatistics(object);
                 updateObjectTrail(world);
             }

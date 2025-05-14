@@ -56,6 +56,9 @@ bool checkCircleSquareCollision(Object& circle, Obstacle& square)
 
 void resolveObjectCollision(Object& objA, Object& objB)
 {
+    if (objA.isFrozen) objA.isFrozen = false;
+    if (objB.isFrozen) objB.isFrozen = false;
+
     Vector2D delta = objA.vectors.position - objB.vectors.position;
     double distance = delta.getMagnitude();
     double minDist = (objA.mLength + objB.mLength) / 2.0;
