@@ -60,6 +60,7 @@ void handleMouseClick(const char key, World& world)
 
             if (world.checkObjectIdExists(idObjectFollowingMouse)){
                 Object& obj = world.getObjectById(idObjectFollowingMouse);
+                obj.isFrozen = false;
                 obj.highlightInfo.isHighlighted = false;
             }
 
@@ -92,6 +93,10 @@ void clickButton1(World& world, Position& pos)
 
     if (isAddingObject){
         world.addObject(OBJECT_TYPE::OBJECT_BALL, defValues.objectMass, pos);
+        if (world.objectInputInfo.isSlingshotMode){
+            idObjectFollowingMouse = world.activeObjectId;
+            world.getObjectById(idObjectFollowingMouse).isFrozen = true;
+        }
         return;
     }
     else if (posHasObject && world.checkObjectIdExists(idObjectFollowingMouse)){
@@ -119,6 +124,7 @@ void releaseButton1(World& world, Position& pos)
             if (isIdValid && it.id == idObjectFollowingMouse){
                 world.activeObjectId = idObjectFollowingMouse;
                 world.activeEntityId = idObjectFollowingMouse;
+                world.getObjectById(idObjectFollowingMouse).isFrozen = false;
                 world.highlightObjectById(idObjectFollowingMouse);
                 idObjectFollowingMouse = -1;
                 return;
@@ -145,12 +151,14 @@ void releaseButton1(World& world, Position& pos)
     }
     else if (isIdValid){
         object->highlightInfo.isHighlighted = false;
+        object->isFrozen = false;
         world.setOverlayText("cannot place object here");
     }
 
     if (isIdValid && isPosValid && isSlingshot){
         double pe = computeElasticPotentialEnergy(object->vectors.position, startVecPos);
         double vel = std::sqrt(pe * 2 / object->mass);
+        object->isFrozen = false;
         object->launch((startVecPos - object->vectors.position) * vel);
         if (!world.isSimulating) world.startSimulation();
     }
