@@ -47,6 +47,7 @@ struct Object {
     std::vector<Trail> trails; // trails to highlight (if enabled)
 
     bool isActionUsed = false;
+    bool isFrozen = false;
 
     int id;
 
