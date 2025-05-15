@@ -25,6 +25,7 @@ enum class CONTROL_KEY {
 
     KEY_NEW_OBJECT = 'n',
     KEY_NEW_OBSTACLE = 'N',
+    KEY_UNDO_SPAWN = 'z',
 
     KEY_CUSTOM_INPUT = 'I',
 

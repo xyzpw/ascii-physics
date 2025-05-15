@@ -142,6 +142,13 @@ void handleKeyPress(const char key, World& world)
             world.setOverlayText("cannot add obstacle while simulating", 2);
             break;
         }
+        case CONTROL_KEY::KEY_UNDO_SPAWN:{
+            if (world.entityIdSpawnOrder.size() <= 1){
+                break;
+            }
+            world.undoSpawn();
+            break;
+        }
         case CONTROL_KEY::KEY_CUSTOM_INPUT:{
             std::string txt = "input " + selectParamToStr(selectParam) + ":";
             world.setOverlayText(txt, 3);
