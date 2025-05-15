@@ -1,6 +1,8 @@
 #include <stdexcept>
 #include <sstream>
 #include <thread>
+#include <algorithm>
+#include <mutex>
 #include "structs/world.h"
 #include "structs/object.h"
 #include "structs/obstacle.h"
@@ -10,6 +12,8 @@
 #include "utils/epoch_utils.h"
 #include "utils/random_utils.h"
 #include "core/physics/object_physics.h"
+
+std::mutex undoSpawnMutex;
 
 Position getNewObjectPosition(World&);
 
@@ -208,6 +212,21 @@ void World::addObstacle()
     this->entityIdSpawnOrder.push_back(obstacle.id);
 }
 
+void World::removeEntityById(const int id)
+{
+    auto& order = this->entityIdSpawnOrder;
+
+    auto rmIfExists = [&](auto& vec){
+        auto it = std::remove_if(
+            vec.begin(), vec.end(), [&](auto& t) { return id == t.id; }
+        );
+        vec.erase(it, vec.end());
+    };
+
+    rmIfExists(this->objects);
+    rmIfExists(this->obstacles);
+}
+
 void World::removeAllObjects()
 {
     this->objects = {};
@@ -216,6 +235,29 @@ void World::removeAllObjects()
 void World::removeAllObstacles()
 {
     this->obstacles = {};
+}
+
+// Remove the the last spawned entity.
+void World::undoSpawn()
+{
+    std::lock_guard<std::mutex> lock(undoSpawnMutex);
+
+    int size = this->entityIdSpawnOrder.size();
+
+    this->removeEntityById(this->entityIdSpawnOrder.at(size - 1));
+    this->entityIdSpawnOrder.pop_back();
+    --size;
+
+    this->activeEntityId = this->entityIdSpawnOrder.at(size - 1);
+
+    for (auto index = size - 1; index >= 0; --index){
+        const int& id = this->entityIdSpawnOrder.at(index);
+
+        if (this->checkObjectIdExists(id)){
+            this->activeObjectId = id;
+            break;
+        }
+    }
 }
 
 Position getNewObjectPosition(World& world)
