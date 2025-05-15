@@ -32,6 +32,7 @@ struct World {
 
     std::vector<Object> objects;
     std::vector<Obstacle> obstacles;
+    std::vector<int> entityIdSpawnOrder;
     int activeObjectId;
     int activeEntityId = -1;
 

@@ -43,6 +43,7 @@ void World::resetSimulation()
 
     this->removeAllObjects();
     this->removeAllObstacles();
+    this->entityIdSpawnOrder = {};
     this->addObject(
         this->defaultObjectValues.objectType,
         this->defaultObjectValues.objectMass
@@ -189,6 +190,7 @@ void World::addObject(OBJECT_TYPE type, double kg, Position pos)
     this->objects.push_back(newObject);
     this->activeEntityId = newObject.id;
     this->activeObjectId = newObject.id;
+    this->entityIdSpawnOrder.push_back(newObject.id);
 }
 
 void World::addObstacle()
@@ -203,6 +205,7 @@ void World::addObstacle()
 
     this->obstacles.push_back(obstacle);
     this->activeEntityId = obstacle.id;
+    this->entityIdSpawnOrder.push_back(obstacle.id);
 }
 
 void World::removeAllObjects()
