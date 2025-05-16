@@ -116,6 +116,7 @@ void resolveAllObjectCollisions(World& world)
         {
             Object& A = world.objects[i];
             Object& B = world.objects[j];
+            if (A.isFrozen || B.isFrozen) continue;
 
             std::pair<int, int> pairKey{A.id, B.id};
 
