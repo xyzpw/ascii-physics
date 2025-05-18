@@ -20,6 +20,12 @@ Position getNewObjectPosition(World&);
 World::World()
 {
     this->setWorldBounds();
+    this->menuPanel.items.insert({
+        PANEL_ITEM_KEY::QUIT,
+        MenuPanelItem{PANEL_ITEM_ACTION::QUIT, 0, "quit"}
+    });
+    this->menuPanel.colMax = getWindowSize().ws_col - 1;
+    this->menuPanel.colMin = menuPanel.colMax - 5;
 }
 
 void World::quit()
@@ -34,6 +40,7 @@ void World::startSimulation()
         return;
     }
     this->isSimulating = true;
+    this->menuPanel.items.at(PANEL_ITEM_KEY::QUIT).text = "reset";
     std::thread simThread(simulateObjectsInWorld, std::ref(*this));
     simThread.detach();
 }
@@ -60,6 +67,8 @@ void World::resetSimulation()
     );
     this->activeObjectId = this->objects.at(0).id;
     this->activeEntityId = this->objects.at(0).id;
+
+    this->menuPanel.items.at(PANEL_ITEM_KEY::QUIT).text = "quit";
 }
 
 Object& World::getObjectById(int id)
@@ -299,4 +308,30 @@ Position getNewObjectPosition(World& world)
     }
 
     return Position{-1, -1};
+}
+
+void World::clickPanelItem(PANEL_ITEM_KEY key)
+{
+    MenuPanelItem* item = nullptr;
+
+    for (auto& it : this->menuPanel.items){
+        if (it.first == key)
+            item = &it.second;
+    }
+
+    if (nullptr == item)
+        return;
+
+    switch (item->action)
+    {
+        case PANEL_ITEM_ACTION::QUIT:{
+            if (this->isSimulating){
+                this->resetSimulation();
+                item->text = "quit";
+                break;
+            }
+            this->quit();
+            break;
+        }
+    }
 }

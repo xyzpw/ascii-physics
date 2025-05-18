@@ -4,6 +4,7 @@
 #include <string>
 #include "structs/object.h"
 #include "structs/obstacle.h"
+#include "structs/menu_panel.h"
 #include "enums/select_parameter.h"
 #include "enums/object_type.h"
 #include "constants/physics_constants.h"
@@ -63,6 +64,7 @@ struct World {
 
     _WorldDefaultObjectValues defaultObjectValues;
     _ObjectInputInfo objectInputInfo;
+    MenuPanel menuPanel{};
 
     double metersPerChar = 1.0;
 
@@ -87,4 +89,5 @@ struct World {
     void removeAllObjects();
     void removeAllObstacles();
     void undoSpawn();
+    void clickPanelItem(PANEL_ITEM_KEY);
 };
