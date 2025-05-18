@@ -22,6 +22,12 @@ World::World()
     this->setWorldBounds();
 }
 
+void World::quit()
+{
+    this->isSimulating = false;
+    this->hasQuit = true;
+}
+
 void World::startSimulation()
 {
     if (this->isSimulating){

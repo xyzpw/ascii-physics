@@ -28,6 +28,7 @@ struct _ObjectInputInfo {
 };
 
 struct World {
+    bool hasQuit = false;
     bool isSimulating = false;
 
     std::vector<Object> objects;
@@ -66,6 +67,7 @@ struct World {
     double metersPerChar = 1.0;
 
     World();
+    void quit();
     void startSimulation();
     void stopSimulation();
     void resetSimulation();
