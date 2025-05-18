@@ -41,6 +41,7 @@ void World::startSimulation()
     }
     this->isSimulating = true;
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).text = "reset";
+    menuPanel.adjustColMin();
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).action = PANEL_ACTION::RESET;
     std::thread simThread(simulateObjectsInWorld, std::ref(*this));
     simThread.detach();
@@ -70,6 +71,7 @@ void World::resetSimulation()
     this->activeEntityId = this->objects.at(0).id;
 
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).text = "quit";
+    menuPanel.adjustColMin();
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).action = PANEL_ACTION::QUIT;
 }
 
