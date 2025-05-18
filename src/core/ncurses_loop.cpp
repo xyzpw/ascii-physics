@@ -18,12 +18,11 @@ void startNcursesLoop(World world)
 {
     initializeNcurses();
 
-    bool isRunning = true;
-    while (isRunning)
+    while (!world.hasQuit)
     {
         clear();
 
-        if (!isRunning){
+        if (world.hasQuit){
             break;
         }
 
@@ -31,7 +30,7 @@ void startNcursesLoop(World world)
 
         if (keyPressed == 'q'){
             world.stopSimulation();
-            isRunning = false;
+            world.hasQuit = true;
         }
 
         handleKeyPress(keyPressed, world);
