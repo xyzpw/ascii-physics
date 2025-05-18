@@ -12,6 +12,7 @@
 void displayWorldMiscDisplayText(World&);
 void displayObjectInfo(Object&);
 void displayWorldObjectStats(World&);
+void displayButtons(World&);
 
 void displaySimulationText(World& world)
 {
@@ -31,6 +32,8 @@ void displaySimulationText(World& world)
 
     displayObjectInfo(activeObject);
     displayWorldObjectStats(world);
+    if (world.menuPanel.isOpen)
+        displayButtons(world);
 }
 
 void displayWorldMiscDisplayText(World& world)
@@ -88,4 +91,12 @@ void displayWorldObjectStats(World& world)
     printStat(visibleStats.isCollisionCountVisible, "collisions: ", stats.collisionCount);
     printStat(visibleStats.isMaxSpeedVisible, "max speed: ", stats.maxSpeed, " m/s");
     printStat(visibleStats.isMaxHeightVisible, "max height: ", stats.maxHeight, " m");
+}
+
+void displayButtons(World& world)
+{
+    const int& col = world.menuPanel.colMin;
+    for (const auto& it : world.menuPanel.items){
+        mvprintw(it.second.row, col, it.second.text);
+    }
 }
