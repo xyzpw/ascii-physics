@@ -13,6 +13,9 @@
 #include "utils/random_utils.h"
 #include "core/physics/object_physics.h"
 
+using PANEL_ACTION = PANEL_ITEM_ACTION;
+using PANEL_KEY = PANEL_ITEM_KEY;
+
 std::mutex undoSpawnMutex;
 
 Position getNewObjectPosition(World&);
