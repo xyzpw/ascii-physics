@@ -64,6 +64,7 @@ $ ./physics --preset tennis
 - `N`: add obstacle
 - `S`: slingshot mode
 - `z`: undo spawned object
+- `b`: open menu panel (clickable)
 
 #### Mouse Controls
 Clicking an area on terminal will spawn an object there.<br>
