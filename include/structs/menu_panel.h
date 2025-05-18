@@ -26,4 +26,7 @@ struct MenuPanel {
 
     bool isOpen = false;
     int colMin, colMax; // column range of menu panel appearance
+
+    void addItem(PANEL_ITEM_KEY, PANEL_ITEM_ACTION, std::string txt);
+    void adjustColMin();
 };
