@@ -279,6 +279,31 @@ void World::undoSpawn()
     }
 }
 
+void World::clickPanelItem(PANEL_ITEM_KEY key)
+{
+    MenuPanelItem* item = nullptr;
+
+    for (auto& it : this->menuPanel.items){
+        if (it.first == key)
+            item = &it.second;
+    }
+
+    if (nullptr == item)
+        return;
+
+    switch (item->action)
+    {
+        case PANEL_ACTION::QUIT:{
+            this->quit();
+            break;
+        }
+        case PANEL_ACTION::RESET:{
+            this->resetSimulation();
+            break;
+        }
+    }
+}
+
 Position getNewObjectPosition(World& world)
 {
     Position center = getCenterPosition();
@@ -312,29 +337,4 @@ Position getNewObjectPosition(World& world)
     }
 
     return Position{-1, -1};
-}
-
-void World::clickPanelItem(PANEL_ITEM_KEY key)
-{
-    MenuPanelItem* item = nullptr;
-
-    for (auto& it : this->menuPanel.items){
-        if (it.first == key)
-            item = &it.second;
-    }
-
-    if (nullptr == item)
-        return;
-
-    switch (item->action)
-    {
-        case PANEL_ACTION::QUIT:{
-            this->quit();
-            break;
-        }
-        case PANEL_ACTION::RESET:{
-            this->resetSimulation();
-            break;
-        }
-    }
 }
