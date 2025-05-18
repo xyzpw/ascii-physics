@@ -181,7 +181,7 @@ bool checkClickedMenuPanel(World& world, Position& pos)
     if (!panel.isOpen)
         return false;
 
-    if (pos.column < panel.colMin && pos.column > panel.colMax)
+    if (pos.column < panel.colMin || pos.column > panel.colMax)
         return false;
 
     for (auto& it : panel.items){
