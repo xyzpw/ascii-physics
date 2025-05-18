@@ -328,11 +328,6 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
     switch (item->action)
     {
         case PANEL_ITEM_ACTION::QUIT:{
-            if (this->isSimulating){
-                this->resetSimulation();
-                item->text = "quit";
-                break;
-            }
             this->quit();
             break;
         }
