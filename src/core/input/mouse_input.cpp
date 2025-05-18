@@ -17,6 +17,8 @@ bool hasShownLeftClickMsg = false; // release left mouse to place object
 
 void clickButton1(World&, Position&);
 void releaseButton1(World&, Position&);
+bool checkClickedMenuPanel(World&, Position&);
+void clickPanelRow(World&, const int row);
 
 void handleMouseClick(const char key, World& world)
 {
@@ -73,6 +75,11 @@ void handleMouseClick(const char key, World& world)
 // Handle left click, can be different depending on location.
 void clickButton1(World& world, Position& pos)
 {
+    if (checkClickedMenuPanel(world, pos)){
+        clickPanelRow(world, pos.row);
+        return;
+    }
+
     const auto& defValues = world.defaultObjectValues;
     bool isAddingObject = true;
     bool posHasObject = false;
@@ -164,4 +171,37 @@ void releaseButton1(World& world, Position& pos)
     }
 
     idObjectFollowingMouse = -1;
+}
+
+// Check if any button was clicked on the menu panel.
+bool checkClickedMenuPanel(World& world, Position& pos)
+{
+    auto& panel = world.menuPanel;
+
+    if (!panel.isOpen)
+        return false;
+
+    if (pos.column < panel.colMin && pos.column > panel.colMax)
+        return false;
+
+    for (auto& it : panel.items){
+        if (it.second.row == pos.row)
+            return true;
+    }
+
+    return false;
+}
+
+// Find what item is at the specified row and activate it.
+void clickPanelRow(World& world, const int row)
+{
+    auto& panel = world.menuPanel;
+
+    for (auto& it : panel.items)
+    {
+        if (row == it.second.row){
+            world.clickPanelItem(it.first);
+            break;
+        }
+    }
 }
