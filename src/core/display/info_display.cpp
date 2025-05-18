@@ -97,6 +97,6 @@ void displayButtons(World& world)
 {
     const int& col = world.menuPanel.colMin;
     for (const auto& it : world.menuPanel.items){
-        mvprintw(it.second.row, col, it.second.text);
+        mvprintw(it.second.row, col, it.second.text.c_str());
     }
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <unordered_map>
 
 enum class PANEL_ITEM_ACTION {
@@ -13,7 +14,7 @@ enum class PANEL_ITEM_KEY {
 struct MenuPanelItem {
     PANEL_ITEM_ACTION action;
 
-    const char* text;
+    std::string text;
     int row;
 
     MenuPanelItem(PANEL_ITEM_ACTION a, int r, const char* txt)
