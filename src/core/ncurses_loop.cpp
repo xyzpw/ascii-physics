@@ -18,8 +18,6 @@ void startNcursesLoop(World world)
 {
     initializeNcurses();
 
-    Object& object = world.getObjectById(world.activeObjectId);
-
     bool isRunning = true;
     while (isRunning)
     {
