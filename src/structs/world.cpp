@@ -23,12 +23,9 @@ Position getNewObjectPosition(World&);
 World::World()
 {
     this->setWorldBounds();
-    this->menuPanel.items.insert({
-        PANEL_ITEM_KEY::QUIT,
-        MenuPanelItem{PANEL_ITEM_ACTION::QUIT, 0, "quit"}
-    });
-    this->menuPanel.colMax = getWindowSize().ws_col - 1;
-    this->menuPanel.colMin = menuPanel.colMax - 5;
+    menuPanel.colMax = getWindowSize().ws_col - 1;
+    menuPanel.addItem(PANEL_KEY::QUIT_OR_RESET, PANEL_ACTION::QUIT, "quit");
+    menuPanel.adjustColMin();
 }
 
 void World::quit()
@@ -43,7 +40,8 @@ void World::startSimulation()
         return;
     }
     this->isSimulating = true;
-    this->menuPanel.items.at(PANEL_ITEM_KEY::QUIT).text = "reset";
+    menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).text = "reset";
+    menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).action = PANEL_ACTION::RESET;
     std::thread simThread(simulateObjectsInWorld, std::ref(*this));
     simThread.detach();
 }
@@ -71,7 +69,8 @@ void World::resetSimulation()
     this->activeObjectId = this->objects.at(0).id;
     this->activeEntityId = this->objects.at(0).id;
 
-    this->menuPanel.items.at(PANEL_ITEM_KEY::QUIT).text = "quit";
+    menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).text = "quit";
+    menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).action = PANEL_ACTION::QUIT;
 }
 
 Object& World::getObjectById(int id)
@@ -327,8 +326,12 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
 
     switch (item->action)
     {
-        case PANEL_ITEM_ACTION::QUIT:{
+        case PANEL_ACTION::QUIT:{
             this->quit();
+            break;
+        }
+        case PANEL_ACTION::RESET:{
+            this->resetSimulation();
             break;
         }
     }

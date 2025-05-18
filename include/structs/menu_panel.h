@@ -5,10 +5,11 @@
 
 enum class PANEL_ITEM_ACTION {
     QUIT,
+    RESET,
 };
 
 enum class PANEL_ITEM_KEY {
-    QUIT,
+    QUIT_OR_RESET,
 };
 
 struct MenuPanelItem {
