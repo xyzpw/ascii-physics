@@ -5,6 +5,7 @@
 enum class CONTROL_KEY {
     KEY_QUIT = 'q',
     KEY_RESET_OBJECT = 'r',
+    KEY_OPEN_MENU_PANEL = 'b',
 
     KEY_ACTION = ' ',
     KEY_MOVEUP = 'w',

@@ -164,6 +164,10 @@ void handleKeyPress(const char key, World& world)
             world.setOverlayText(str + " slingshot mode");
             break;
         }
+        case CONTROL_KEY::KEY_OPEN_MENU_PANEL:{
+            world.menuPanel.isOpen = world.menuPanel.isOpen ? false : true;
+            break;
+        }
     }
 }
 
