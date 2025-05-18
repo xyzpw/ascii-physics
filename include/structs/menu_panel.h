@@ -17,7 +17,7 @@ struct MenuPanelItem {
     std::string text;
     int row;
 
-    MenuPanelItem(PANEL_ITEM_ACTION a, int r, const char* txt)
+    MenuPanelItem(PANEL_ITEM_ACTION a, int r, std::string txt)
                 : action(a), row(r), text(txt) {}
 };
 
