@@ -25,6 +25,7 @@ World::World()
     this->setWorldBounds();
     menuPanel.colMax = getWindowSize().ws_col - 1;
     menuPanel.addItem(PANEL_KEY::QUIT_OR_RESET, PANEL_ACTION::QUIT, "quit");
+    menuPanel.addItem(PANEL_KEY::SLINGSHOT, PANEL_ACTION::SLINGSHOT, "slingshot");
     menuPanel.adjustColMin();
 }
 
@@ -299,6 +300,14 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
         }
         case PANEL_ACTION::RESET:{
             this->resetSimulation();
+            break;
+        }
+        case PANEL_ACTION::SLINGSHOT:{
+            bool& slingshot = objectInputInfo.isSlingshotMode;
+            slingshot = slingshot ? false : true;
+
+            std::string str = slingshot ? "enabled" : "disabled";
+            setOverlayText(str + " slingshot mode");
             break;
         }
     }
