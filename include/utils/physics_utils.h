@@ -10,3 +10,4 @@ double calculateVelocityFinal(double velocity, double acceleration, double t);
 double calculateDisplacement(double velocity, double acceleration, double t);
 Vector2D degreesToVector(double deg);
 double computeElasticPotentialEnergy(Vector2D& heldPos, Vector2D& restPos);
+double kineticEnergyToVelocity(double joules, double mass);

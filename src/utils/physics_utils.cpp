@@ -62,3 +62,8 @@ double computeElasticPotentialEnergy(Vector2D& heldPos, Vector2D& restPos)
 
     return 0.5 * displacement * displacement;
 }
+
+double kineticEnergyToVelocity(double joules, double mass)
+{
+    return std::sqrt(joules * 2 / mass);
+}
