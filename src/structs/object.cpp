@@ -94,3 +94,14 @@ void Object::launch(Vector2D velocity)
 {
     this->vectors.velocity += velocity;
 }
+
+// Slingshots object toward the resting position.
+void Object::slingshot(Vector2D restPos)
+{
+    double pe = computeElasticPotentialEnergy(vectors.position, restPos);
+    double vel = kineticEnergyToVelocity(pe, mass);
+
+    isFrozen = false;
+
+    this->launch((restPos - vectors.position) * vel);
+}

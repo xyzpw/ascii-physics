@@ -60,4 +60,5 @@ struct Object {
     void updateTrails();
     void removeExpiredTrails();
     void launch(Vector2D velocity);
+    void slingshot(Vector2D restPos);
 };
