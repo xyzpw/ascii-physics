@@ -163,10 +163,7 @@ void releaseButton1(World& world, Position& pos)
     }
 
     if (isIdValid && isPosValid && isSlingshot){
-        double pe = computeElasticPotentialEnergy(object->vectors.position, startVecPos);
-        double vel = std::sqrt(pe * 2 / object->mass);
-        object->isFrozen = false;
-        object->launch((startVecPos - object->vectors.position) * vel);
+        object->slingshot(startVecPos);
         if (!world.isSimulating) world.startSimulation();
     }
 
