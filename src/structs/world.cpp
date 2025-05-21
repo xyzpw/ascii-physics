@@ -7,6 +7,7 @@
 #include "structs/object.h"
 #include "structs/obstacle.h"
 #include "enums/object_type.h"
+#include "enums/click_power.h"
 #include "utils/screen_utils.h"
 #include "utils/sleep_utils.h"
 #include "utils/epoch_utils.h"
@@ -26,6 +27,7 @@ World::World()
     menuPanel.colMax = getWindowSize().ws_col - 1;
     menuPanel.addItem(PANEL_KEY::QUIT_OR_RESET, PANEL_ACTION::QUIT, "quit");
     menuPanel.addItem(PANEL_KEY::SLINGSHOT, PANEL_ACTION::SLINGSHOT, "slingshot");
+    menuPanel.addItem(PANEL_KEY::REPULSION, PANEL_ACTION::REPULSION, "repulsion");
     menuPanel.adjustColMin();
 }
 
@@ -310,6 +312,14 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
 
             statusStream << "slingshot mode ";
             statusStream << (slingshot ? "enabled" : "disabled");
+            break;
+        }
+        case PANEL_ACTION::REPULSION: {
+            bool isRep = clickPower == CLICK_POWER_REPULSION;
+            clickPower = isRep ? CLICK_POWER_NONE : CLICK_POWER_REPULSION;
+
+            statusStream << "repulsion click ";
+            statusStream << (isRep ? "disabled" : "enabled");
             break;
         }
     }

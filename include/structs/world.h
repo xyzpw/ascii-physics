@@ -7,6 +7,7 @@
 #include "structs/menu_panel.h"
 #include "enums/select_parameter.h"
 #include "enums/object_type.h"
+#include "enums/click_power.h"
 #include "constants/physics_constants.h"
 
 // Default values for added objects.
@@ -65,6 +66,8 @@ struct World {
     _WorldDefaultObjectValues defaultObjectValues;
     _ObjectInputInfo objectInputInfo;
     MenuPanel menuPanel{};
+
+    CLICK_POWER clickPower = CLICK_POWER_NONE;
 
     double metersPerChar = 1.0;
 
