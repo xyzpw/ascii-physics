@@ -12,6 +12,7 @@
 #include "utils/sleep_utils.h"
 #include "utils/epoch_utils.h"
 #include "utils/random_utils.h"
+#include "utils/physics_utils.h"
 #include "core/physics/object_physics.h"
 
 using PANEL_ACTION = PANEL_ITEM_ACTION;
@@ -279,6 +280,19 @@ void World::undoSpawn()
             this->activeObjectId = id;
             break;
         }
+    }
+}
+
+void World::useRepulsionClick(Position& clickPos)
+{
+    const double initVel = 100;
+    const Vector2D clickVec = positionToVector(clickPos) * metersPerChar;
+
+    for (auto& ob : objects){
+        double dist = (ob.vectors.position - clickVec).getMagnitude();
+        if (dist <= 0) continue;
+        double vel = initVel * calculateInverseSquareLaw(dist);
+        ob.launch((ob.vectors.position - clickVec) * vel);
     }
 }
 

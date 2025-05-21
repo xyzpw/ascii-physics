@@ -92,5 +92,6 @@ struct World {
     void removeAllObjects();
     void removeAllObstacles();
     void undoSpawn();
+    void useRepulsionClick(Position& clickPos);
     void clickPanelItem(PANEL_ITEM_KEY);
 };
