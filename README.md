@@ -72,7 +72,7 @@ Clicking on an object will allow you to move it, when the left mouse
  is released the object will be placed in that position,
  this can be canceled by pressing right click while left click is still being pressed.
 
-##### Slingshot mode
+##### Slingshot Mode
 When in slingshot mode, click an object, move mouse to a direction and release to launch.
 
 #### Changing Values
