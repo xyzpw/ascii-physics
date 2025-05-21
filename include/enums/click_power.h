@@ -1,0 +1,6 @@
+#pragma once
+
+enum CLICK_POWER {
+    CLICK_POWER_NONE,
+    CLICK_POWER_REPULSION,
+};
