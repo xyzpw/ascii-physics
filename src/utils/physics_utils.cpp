@@ -67,3 +67,8 @@ double kineticEnergyToVelocity(double joules, double mass)
 {
     return std::sqrt(joules * 2 / mass);
 }
+
+double calculateInverseSquareLaw(double distance)
+{
+    return 1 / (4 * M_PI * distance * distance);
+}
