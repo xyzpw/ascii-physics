@@ -292,6 +292,8 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
     if (nullptr == item)
         return;
 
+    std::stringstream statusStream;
+
     switch (item->action)
     {
         case PANEL_ACTION::QUIT:{
@@ -306,10 +308,14 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
             bool& slingshot = objectInputInfo.isSlingshotMode;
             slingshot = slingshot ? false : true;
 
-            std::string str = slingshot ? "enabled" : "disabled";
-            setOverlayText(str + " slingshot mode");
+            statusStream << "slingshot mode ";
+            statusStream << (slingshot ? "enabled" : "disabled");
             break;
         }
+    }
+
+    if (statusStream.str().length() > 0){
+        setOverlayText(statusStream.str());
     }
 }
 
