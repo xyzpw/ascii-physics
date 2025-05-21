@@ -7,11 +7,13 @@ enum class PANEL_ITEM_ACTION {
     QUIT,
     RESET,
     SLINGSHOT,
+    REPULSION,
 };
 
 enum class PANEL_ITEM_KEY {
     QUIT_OR_RESET,
     SLINGSHOT,
+    REPULSION,
 };
 
 struct MenuPanelItem {
