@@ -75,6 +75,10 @@ Clicking on an object will allow you to move it, when the left mouse
 ##### Slingshot Mode
 When in slingshot mode, click an object, move mouse to a direction and release to launch.
 
+##### Repulsion Click
+When enabled, clicking will push back nearby objects.<br>
+The closer the object the faster they are pushed away.
+
 #### Changing Values
 - `KEY_UP`: Increment selected value
 - `KEY_DOWN`: Decrement selected value
