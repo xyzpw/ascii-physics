@@ -4,6 +4,7 @@
 #include "structs/world.h"
 #include "structs/position.h"
 #include "enums/object_type.h"
+#include "enums/click_power.h"
 #include "utils/sleep_utils.h"
 #include "utils/screen_utils.h"
 #include "utils/physics_utils.h"
@@ -19,6 +20,7 @@ void clickButton1(World&, Position&);
 void releaseButton1(World&, Position&);
 bool checkClickedMenuPanel(World&, Position&);
 void clickPanelRow(World&, const int row);
+bool useClickPowers(World&, Position&);
 
 void handleMouseClick(const char key, World& world)
 {
@@ -79,6 +81,10 @@ void clickButton1(World& world, Position& pos)
         clickPanelRow(world, pos.row);
         return;
     }
+
+    // Use click powers if enabled (then exit if used).
+    if (useClickPowers(world, pos))
+        return;
 
     const auto& defValues = world.defaultObjectValues;
     bool isAddingObject = true;
@@ -201,4 +207,20 @@ void clickPanelRow(World& world, const int row)
             break;
         }
     }
+}
+
+// Use click power if enabled, returns true if the power was successfully used.
+bool useClickPowers(World& world, Position& pos)
+{
+    switch (world.clickPower){
+        case CLICK_POWER_NONE:{
+            return false;
+        }
+        case CLICK_POWER_REPULSION:{
+            world.useRepulsionClick(pos);
+            if (!world.isSimulating) world.startSimulation();
+            return true;
+        }
+    }
+    return false;
 }
