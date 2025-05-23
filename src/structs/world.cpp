@@ -28,7 +28,7 @@ World::World()
     menuPanel.colMax = getWindowSize().ws_col - 1;
     menuPanel.addItem(PANEL_KEY::QUIT_OR_RESET, PANEL_ACTION::QUIT, "quit");
     menuPanel.addItem(PANEL_KEY::SLINGSHOT, PANEL_ACTION::SLINGSHOT, "slingshot");
-    menuPanel.addItem(PANEL_KEY::REPULSION, PANEL_ACTION::REPULSION, "repulsion");
+    menuPanel.addItem(PANEL_KEY::REPEL_ATTRACT, PANEL_ACTION::REPEL_ATTRACT, "repel/attract");
     menuPanel.adjustColMin();
 }
 
@@ -283,16 +283,19 @@ void World::undoSpawn()
     }
 }
 
-void World::useRepulsionClick(Position& clickPos)
+void World::useRepelAttractClick(Position& clickPos, bool isRepel)
 {
     const double initVel = 100;
     const Vector2D clickVec = positionToVector(clickPos, metersPerChar);
 
     for (auto& ob : objects){
+        const Vector2D& obVecPos = ob.vectors.position;
+
         double dist = (ob.vectors.position - clickVec).getMagnitude();
         if (dist <= 0) continue;
         double vel = initVel * calculateInverseSquareLaw(dist);
-        ob.launch((ob.vectors.position - clickVec) * vel);
+        Vector2D dir = isRepel ? obVecPos - clickVec : clickVec - obVecPos;
+        ob.launch(dir * vel);
     }
 }
 
@@ -307,6 +310,8 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
 
     if (nullptr == item)
         return;
+
+    auto checkPow = [&](CLICK_POWER p) { return this->clickPower == p; };
 
     std::stringstream statusStream;
 
@@ -328,11 +333,11 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
             statusStream << (slingshot ? "enabled" : "disabled");
             break;
         }
-        case PANEL_ACTION::REPULSION: {
-            bool isRep = clickPower == CLICK_POWER_REPULSION;
-            clickPower = isRep ? CLICK_POWER_NONE : CLICK_POWER_REPULSION;
+        case PANEL_ACTION::REPEL_ATTRACT: {
+            bool isRep = checkPow(CLICK_POWER_REPEL_ATTRACT);
+            clickPower = isRep ? CLICK_POWER_NONE : CLICK_POWER_REPEL_ATTRACT;
 
-            statusStream << "repulsion click ";
+            statusStream << "repel/attract click ";
             statusStream << (isRep ? "disabled" : "enabled");
             break;
         }

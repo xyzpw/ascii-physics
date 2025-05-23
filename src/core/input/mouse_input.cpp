@@ -17,10 +17,11 @@ int idObjectFollowingMouse = -1;
 bool hasShownLeftClickMsg = false; // release left mouse to place object
 
 void clickButton1(World&, Position&);
+void clickButton3(World&, Position); //right click
 void releaseButton1(World&, Position&);
 bool checkClickedMenuPanel(World&, Position&);
 void clickPanelRow(World&, const int row);
-bool useClickPowers(World&, Position&);
+bool useClickPowers(World&, Position&, bool isLeft);
 
 void handleMouseClick(const char key, World& world)
 {
@@ -58,17 +59,7 @@ void handleMouseClick(const char key, World& world)
             break;
         }
         case BUTTON3_PRESSED:{
-            if (!isLeftMouseActive){
-                break;
-            }
-
-            if (world.checkObjectIdExists(idObjectFollowingMouse)){
-                Object& obj = world.getObjectById(idObjectFollowingMouse);
-                obj.isFrozen = false;
-                obj.highlightInfo.isHighlighted = false;
-            }
-
-            idObjectFollowingMouse = -1;
+            clickButton3(world, mousePos);
             break;
         }
     }
@@ -83,7 +74,7 @@ void clickButton1(World& world, Position& pos)
     }
 
     // Use click powers if enabled (then exit if used).
-    if (useClickPowers(world, pos))
+    if (useClickPowers(world, pos, true))
         return;
 
     const auto& defValues = world.defaultObjectValues;
@@ -121,6 +112,29 @@ void clickButton1(World& world, Position& pos)
             hasShownLeftClickMsg = true;
         }
     }
+}
+
+// Handle right mouse click.
+void clickButton3(World& world, Position pos)
+{
+    const bool isIdValid = world.checkObjectIdExists(idObjectFollowingMouse);
+    const bool hasPowers = world.clickPower != CLICK_POWER_NONE;
+
+    if (!isLeftMouseActive && hasPowers){
+        useClickPowers(world, pos, false);
+        return;
+    }
+    else if (!isLeftMouseActive){
+        return;
+    }
+
+    if (isIdValid){
+        Object& obj = world.getObjectById(idObjectFollowingMouse);
+        obj.isFrozen = false;
+        obj.highlightInfo.isHighlighted = false;
+    }
+
+    idObjectFollowingMouse = -1;
 }
 
 // Handle release left click.
@@ -210,14 +224,14 @@ void clickPanelRow(World& world, const int row)
 }
 
 // Use click power if enabled, returns true if the power was successfully used.
-bool useClickPowers(World& world, Position& pos)
+bool useClickPowers(World& world, Position& pos, bool isLeft)
 {
     switch (world.clickPower){
         case CLICK_POWER_NONE:{
             return false;
         }
-        case CLICK_POWER_REPULSION:{
-            world.useRepulsionClick(pos);
+        case CLICK_POWER_REPEL_ATTRACT:{
+            world.useRepelAttractClick(pos, isLeft);
             if (!world.isSimulating) world.startSimulation();
             return true;
         }
