@@ -236,5 +236,6 @@ bool useClickPowers(World& world, Position& pos, bool isLeft)
             return true;
         }
     }
+
     return false;
 }
