@@ -25,7 +25,7 @@ Object::Object(OBJECT_TYPE type, double kg)
 
 void Object::resetVectors()
 {
-    this->vectors.position = positionToVector(this->position) * this->mLength;
+    vectors.position = positionToVector(position, mLength);
     this->vectors.velocity = Vector2D{0.0, 0.0};
     this->vectors.acceleration = Vector2D{0.0, -GRAVITY_ACCELERATION};
 }
@@ -33,7 +33,7 @@ void Object::resetVectors()
 void Object::resetPositionToCenter(double charSize)
 {
     Position pos = getCenterPosition();
-    Vector2D vec = positionToVector(getCenterPosition()) * charSize;
+    Vector2D vec = positionToVector(getCenterPosition(), charSize);
     pos = vectorToPosition(vec);
 
     this->position = pos;

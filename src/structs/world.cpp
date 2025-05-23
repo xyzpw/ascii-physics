@@ -227,7 +227,7 @@ void World::addObstacle()
     obstacle.position = getNewObjectPosition(*this);
     if (!checkPositionInsideDisplay(obstacle.position))
         return;
-    obstacle.vectors.position = positionToVector(obstacle.position) * metersPerChar;
+    obstacle.vectors.position = positionToVector(obstacle.position, metersPerChar);
     obstacle.mLength = this->metersPerChar;
 
     this->obstacles.push_back(obstacle);
@@ -286,7 +286,7 @@ void World::undoSpawn()
 void World::useRepulsionClick(Position& clickPos)
 {
     const double initVel = 100;
-    const Vector2D clickVec = positionToVector(clickPos) * metersPerChar;
+    const Vector2D clickVec = positionToVector(clickPos, metersPerChar);
 
     for (auto& ob : objects){
         double dist = (ob.vectors.position - clickVec).getMagnitude();

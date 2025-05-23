@@ -159,7 +159,7 @@ void releaseButton1(World& world, Position& pos)
     if (isPosValid && isIdValid){
         startVecPos = object->vectors.position;
         object->position = pos;
-        object->vectors.position = positionToVector(pos) * world.metersPerChar;
+        object->vectors.position = positionToVector(pos, world.metersPerChar);
         object->highlightInfo.isHighlighted = false;
     }
     else if (isIdValid){

@@ -36,7 +36,7 @@ bool checkPositionInsideDisplay(Position pos)
     return canDisplayCol && canDisplayRow;
 }
 
-Vector2D positionToVector(Position pos)
+Vector2D positionToVector(Position pos, double charSize)
 {
     struct winsize ws = getWindowSize();
 
@@ -46,14 +46,16 @@ Vector2D positionToVector(Position pos)
     double y = floorRow - pos.row;
     y -= 1.0;
 
-    return Vector2D{x, y};
+    return Vector2D{x, y} * charSize;
 }
 
-Position vectorToPosition(Vector2D vector)
+Position vectorToPosition(Vector2D vector, double charSize)
 {
     struct winsize ws = getWindowSize();
 
     int rowFloor = ws.ws_row - 1;
+
+    vector = vector / charSize;
 
     int col = std::round(vector.x);
     int row = std::round(rowFloor - (vector.y + 1));

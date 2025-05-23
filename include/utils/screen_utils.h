@@ -7,5 +7,5 @@
 winsize getWindowSize();
 bool checkPositionInsideDisplay(Position);
 Position getCenterPosition();
-Vector2D positionToVector(Position);
-Position vectorToPosition(Vector2D);
+Vector2D positionToVector(Position, double charSize=1.0);
+Position vectorToPosition(Vector2D, double charSize=1.0);

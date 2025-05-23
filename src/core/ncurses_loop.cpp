@@ -67,7 +67,7 @@ void updatePosAndDisplayObjects(World& world)
 
     for (auto& obj : world.objects)
     {
-        obj.position = vectorToPosition(obj.vectors.position / world.metersPerChar);
+        obj.position = vectorToPosition(obj.vectors.position, world.metersPerChar);
         const Position& pos = obj.position;
 
         if (!checkPositionInsideDisplay(pos)){
