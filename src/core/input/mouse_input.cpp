@@ -226,16 +226,20 @@ void clickPanelRow(World& world, const int row)
 // Use click power if enabled, returns true if the power was successfully used.
 bool useClickPowers(World& world, Position& pos, bool isLeft)
 {
+    bool usedPower = false;
+
     switch (world.clickPower){
         case CLICK_POWER_NONE:{
             return false;
         }
         case CLICK_POWER_REPEL_ATTRACT:{
             world.useRepelAttractClick(pos, isLeft);
-            if (!world.isSimulating) world.startSimulation();
-            return true;
+            usedPower = true;
+            break;
         }
     }
 
-    return false;
+    if (usedPower && !world.isSimulating) world.startSimulation();
+
+    return usedPower;
 }
