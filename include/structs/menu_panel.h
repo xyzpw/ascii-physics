@@ -8,12 +8,14 @@ enum class PANEL_ITEM_ACTION {
     RESET,
     SLINGSHOT,
     REPEL_ATTRACT,
+    IMP_VERT,
 };
 
 enum class PANEL_ITEM_KEY {
     QUIT_OR_RESET,
     SLINGSHOT,
     REPEL_ATTRACT,
+    IMP_VERT,
 };
 
 struct MenuPanelItem {

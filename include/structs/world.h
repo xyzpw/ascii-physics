@@ -93,5 +93,6 @@ struct World {
     void removeAllObstacles();
     void undoSpawn();
     void useRepelAttractClick(Position& clickPos, bool isRepel);
+    void useImpulseVertical(bool isUp);
     void clickPanelItem(PANEL_ITEM_KEY);
 };

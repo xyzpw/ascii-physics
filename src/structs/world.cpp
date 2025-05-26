@@ -3,6 +3,7 @@
 #include <thread>
 #include <algorithm>
 #include <mutex>
+#include <cmath>
 #include "structs/world.h"
 #include "structs/object.h"
 #include "structs/obstacle.h"
@@ -29,6 +30,7 @@ World::World()
     menuPanel.addItem(PANEL_KEY::QUIT_OR_RESET, PANEL_ACTION::QUIT, "quit");
     menuPanel.addItem(PANEL_KEY::SLINGSHOT, PANEL_ACTION::SLINGSHOT, "slingshot");
     menuPanel.addItem(PANEL_KEY::REPEL_ATTRACT, PANEL_ACTION::REPEL_ATTRACT, "repel/attract");
+    menuPanel.addItem(PANEL_KEY::IMP_VERT, PANEL_ACTION::IMP_VERT, "vertical impulse");
     menuPanel.adjustColMin();
 }
 
@@ -299,6 +301,20 @@ void World::useRepelAttractClick(Position& clickPos, bool isRepel)
     }
 }
 
+// Increase/decrease objects y-axis velocity.
+void World::useImpulseVertical(bool isUp)
+{
+    double hCeil = worldBounds.ceiling - worldBounds.floor;
+    hCeil *= 0.67;
+    const double acc = (isUp ? -1.0 : 1.0) * GRAVITY_ACCELERATION;
+    double initVel = std::sqrt(2 * GRAVITY_ACCELERATION * hCeil);
+    if (!isUp) initVel = -initVel;
+
+    for (auto& ob : objects){
+        ob.vectors.velocity.y += initVel;
+    }
+}
+
 void World::clickPanelItem(PANEL_ITEM_KEY key)
 {
     MenuPanelItem* item = nullptr;
@@ -339,6 +355,14 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
 
             statusStream << "repel/attract click ";
             statusStream << (isRep ? "disabled" : "enabled");
+            break;
+        }
+        case PANEL_ACTION::IMP_VERT: {
+            bool isImp = checkPow(CLICK_POWER_IMP_VERT);
+            clickPower = isImp ? CLICK_POWER_NONE : CLICK_POWER_IMP_VERT;
+
+            statusStream << "vertical impulse ";
+            statusStream << (isImp ? "disabled" : "enabled");
             break;
         }
     }
