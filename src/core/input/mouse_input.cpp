@@ -237,6 +237,11 @@ bool useClickPowers(World& world, Position& pos, bool isLeft)
             usedPower = true;
             break;
         }
+        case CLICK_POWER_IMP_VERT:{
+            world.useImpulseVertical(isLeft);
+            usedPower = true;
+            break;
+        }
     }
 
     if (usedPower && !world.isSimulating) world.startSimulation();
