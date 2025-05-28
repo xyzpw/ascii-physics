@@ -27,6 +27,7 @@ struct _ObjectInputInfo {
     double takeInputUntil;
     std::string customInputValue = "";
     bool isSlingshotMode = false;
+    bool isWindGustMode = false;
 };
 
 struct World {
@@ -70,6 +71,7 @@ struct World {
     CLICK_POWER clickPower = CLICK_POWER_NONE;
 
     double metersPerChar = 1.0;
+    double windGustVelocity = 32.0; //velocity of wind when applying wind gust
 
     World();
     void quit();
@@ -94,5 +96,6 @@ struct World {
     void undoSpawn();
     void useRepelAttractClick(Position& clickPos, bool isRepel);
     void useImpulseVertical(bool isUp);
+    void useWindGust(Vector2D direction, double duration);
     void clickPanelItem(PANEL_ITEM_KEY);
 };
