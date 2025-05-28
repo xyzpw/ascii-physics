@@ -12,6 +12,8 @@
 #include "utils/epoch_utils.h"
 #include "constants/control_keys.h"
 
+const double WIND_GUST_DUR = 0.25; //duration of world wind gust function
+
 bool checkIsControlKeyMovement(CONTROL_KEY);
 void changeSelectParam(World&, SELECT_PARAMETER);
 void changeSelectParamValueOnInput(World&, SELECT_PARAMETER, bool isPositive);
@@ -36,7 +38,7 @@ void handleKeyPress(const char key, World& world)
         world.resetSimulation();
         return;
     }
-    else if (world.isSimulating && checkIsControlKeyMovement(keyControl)){
+    else if (!objInputInfo.isWindGustMode && world.isSimulating && checkIsControlKeyMovement(keyControl)){
         return;
     }
 
@@ -67,21 +69,37 @@ void handleKeyPress(const char key, World& world)
         }
     };
 
+    // Use wind gust function (starts simulation if not already simulating).
+    //NOTE: Direction order 1 is right or up, -1 is left or down.
+    //NOTE: Wind gust will not be used if disabled (returns true on success).
+    auto useWindGust = [&](double xDir = 0, double yDir = 0){
+        if (!objInputInfo.isWindGustMode) return false;
+        const double& vel = world.windGustVelocity;
+        Vector2D vec{xDir, yDir};
+        world.useWindGust(vec, WIND_GUST_DUR);
+        if (!world.isSimulating) world.startSimulation();
+        return true;
+    };
+
     switch (keyControl)
     {
         case CONTROL_KEY::KEY_MOVEUP:{
+            if (useWindGust(0, 1)) break;
             useMovement(0, -1);
             break;
         }
         case CONTROL_KEY::KEY_MOVEDOWN:{
+            if (useWindGust(0, -1)) break;
             useMovement(0, 1);
             break;
         }
         case CONTROL_KEY::KEY_MOVERIGHT:{
+            if (useWindGust(1, 0)) break;
             useMovement(1, 0);
             break;
         }
         case CONTROL_KEY::KEY_MOVELEFT:{
+            if (useWindGust(-1, 0)) break;
             useMovement(-1, 0);
             break;
         }
