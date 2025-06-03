@@ -188,6 +188,13 @@ void World::setOverlayText(std::string text, double duration)
     this->overlayText.shouldDisplay = true;
 }
 
+void World::promptCustomInput(std::string text, double duration)
+{
+    this->setOverlayText(text, duration);
+    objectInputInfo.isTakingInput = true;
+    objectInputInfo.takeInputUntil = getEpochAsDecimal() + duration;
+}
+
 void World::addObject(OBJECT_TYPE type, double kg, Position pos)
 {
     Object newObject(type, kg);

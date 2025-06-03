@@ -80,6 +80,7 @@ struct World {
     void resetSimulation();
     void setWorldBounds();
     void setOverlayText(std::string text, double duration=1.0);
+    void promptCustomInput(std::string text, double duration=3.0);
     Object& getObjectById(int id);
     bool checkObjectIdExists(int id);
     Obstacle& getObstacleById(int id);
