@@ -10,6 +10,7 @@ enum class PANEL_ITEM_ACTION {
     REPEL_ATTRACT,
     IMP_VERT,
     WIND_GUST,
+    EDIT_WIND_SPEED,
 };
 
 enum class PANEL_ITEM_KEY {
@@ -18,6 +19,7 @@ enum class PANEL_ITEM_KEY {
     REPEL_ATTRACT,
     IMP_VERT,
     WIND_GUST,
+    WIND_SPEED,
 };
 
 struct MenuPanelItem {

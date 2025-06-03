@@ -100,10 +100,31 @@ void updateObjectPhysicsXAxis(World& world, Object& object, double tDelta)
     position.x = newPos;
 }
 
+void applyWindToObject(World& world, Object& object, double tDelta)
+{
+    const double relativeVelocity = world.windVelocity - object.vectors.velocity.x;
+    const bool isVelocityNeg = 0 > relativeVelocity;
+
+    const double dragForceMagnitude = calculateDragForce(
+        std::abs(relativeVelocity),
+        object.dragCoefficient,
+        object.crossSectionalArea
+    );
+
+    const double multiplier = relativeVelocity / std::abs(relativeVelocity);
+    double acceleration = dragForceMagnitude * multiplier / object.mass;
+
+    object.vectors.velocity.x += acceleration * tDelta;
+}
+
 void updateObjectVectors(World& world, Object& object, double tDelta)
 {
     updateObjectPhysicsXAxis(world, object, tDelta);
     updateObjectPhysicsYAxis(world, object, tDelta);
+
+    if (0 != world.windVelocity){
+        applyWindToObject(world, object, tDelta);
+    }
 }
 
 void resolveAllObjectCollisions(World& world)

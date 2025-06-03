@@ -72,6 +72,7 @@ struct World {
 
     double metersPerChar = 1.0;
     double windGustVelocity = 32.0; //velocity of wind when applying wind gust
+    double windVelocity = 0.0; //baseline wind speed
 
     World();
     void quit();

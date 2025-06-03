@@ -6,6 +6,7 @@ enum class SELECT_PARAMETER {
     LAUNCH_ANGLE,
     LAUNCH_VELOCITY,
     OBJECT_MASS,
+    WIND_SPEED,
 };
 
 inline std::string selectParamToStr(SELECT_PARAMETER param)
@@ -17,6 +18,8 @@ inline std::string selectParamToStr(SELECT_PARAMETER param)
             return "launch velocity";
         case SELECT_PARAMETER::OBJECT_MASS:
             return "object mass";
+        case SELECT_PARAMETER::WIND_SPEED:
+            return "wind velocity";
     }
     return "";
 }

@@ -32,6 +32,7 @@ World::World()
     menuPanel.addItem(PANEL_KEY::REPEL_ATTRACT, PANEL_ACTION::REPEL_ATTRACT, "repel/attract");
     menuPanel.addItem(PANEL_KEY::IMP_VERT, PANEL_ACTION::IMP_VERT, "vertical impulse");
     menuPanel.addItem(PANEL_KEY::WIND_GUST, PANEL_ACTION::WIND_GUST, "wind gust");
+    menuPanel.addItem(PANEL_KEY::WIND_SPEED, PANEL_ACTION::EDIT_WIND_SPEED, "edit wind speed");
     menuPanel.adjustColMin();
 }
 
@@ -394,6 +395,11 @@ void World::clickPanelItem(PANEL_ITEM_KEY key)
 
             statusStream << "wind gust mode ";
             statusStream << (wind ? "enabled" : "disabled");
+            break;
+        }
+        case PANEL_ACTION::EDIT_WIND_SPEED:{
+            objectInputInfo.selectParameter = SELECT_PARAMETER::WIND_SPEED;
+            promptCustomInput("input wind speed:");
             break;
         }
     }

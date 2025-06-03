@@ -321,5 +321,9 @@ void setParamValueFromCustomInput(World& world)
             inputInfo.objectLaunchAngle = newVal;
             return;
         }
+        case SELECT_PARAMETER::WIND_SPEED:{
+            world.windVelocity = newVal;
+            return;
+        }
     }
 }
