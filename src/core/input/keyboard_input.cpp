@@ -195,7 +195,7 @@ void handleCustomInput(const char key, World& world)
     std::string& customInputValue = world.objectInputInfo.customInputValue;
 
     const bool hasInputFinished = getEpochAsDecimal() > takeInputUntil;
-    const bool isInputValid = std::isdigit(key) || key == '.';
+    const bool isInputValid = std::isdigit(key) || key == '.' || key == '-';
 
     if (hasInputFinished){
         try {
@@ -304,14 +304,20 @@ void setParamValueFromCustomInput(World& world)
     switch (inputInfo.selectParameter)
     {
         case SELECT_PARAMETER::OBJECT_MASS:{
+            if (0 >= newVal)
+                return;
             object.mass = newVal;
             return;
         }
         case SELECT_PARAMETER::LAUNCH_VELOCITY:{
+            if (0 > newVal)
+                return;
             inputInfo.objectLaunchVelocity = newVal;
             return;
         }
         case SELECT_PARAMETER::LAUNCH_ANGLE:{
+            if (0 > newVal || 360 < newVal)
+                return;
             inputInfo.objectLaunchAngle = newVal;
             return;
         }
