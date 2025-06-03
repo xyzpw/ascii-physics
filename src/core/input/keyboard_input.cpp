@@ -169,9 +169,7 @@ void handleKeyPress(const char key, World& world)
         }
         case CONTROL_KEY::KEY_CUSTOM_INPUT:{
             std::string txt = "input " + selectParamToStr(selectParam) + ":";
-            world.setOverlayText(txt, 3);
-            world.objectInputInfo.isTakingInput = true;
-            world.objectInputInfo.takeInputUntil = getEpochAsDecimal() + 3;
+            world.promptCustomInput(txt);
             break;
         }
         case CONTROL_KEY::KEY_SLINGSHOT_MODE:{
