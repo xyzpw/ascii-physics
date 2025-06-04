@@ -47,10 +47,13 @@ void World::startSimulation()
     if (this->isSimulating){
         return;
     }
+
     this->isSimulating = true;
+
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).text = "reset";
     menuPanel.adjustColMin();
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).action = PANEL_ACTION::RESET;
+
     std::thread simThread(simulateObjectsInWorld, std::ref(*this));
     simThread.detach();
 }
