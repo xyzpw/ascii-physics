@@ -78,7 +78,8 @@ void clickButton1(World& world, Position& pos)
         return;
 
     const auto& defValues = world.defaultObjectValues;
-    bool isAddingObject = true;
+    bool isActiveIdObstacle = world.checkObstacleIdExists(world.activeEntityId);
+    bool isAddingObject = isActiveIdObstacle ? false : true;
     bool posHasObject = false;
 
     for (const auto& it : world.objects){
@@ -112,6 +113,12 @@ void clickButton1(World& world, Position& pos)
             world.setOverlayText("release mouse to place object", 1.5);
             hasShownLeftClickMsg = true;
         }
+    }
+    else if (isActiveIdObstacle){
+        Obstacle& ob = world.getObstacleById(world.activeEntityId);
+
+        ob.position = pos;
+        ob.vectors.position = positionToVector(pos, world.metersPerChar);
     }
 }
 
