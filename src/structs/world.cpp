@@ -118,6 +118,15 @@ Obstacle& World::getObstacleById(int id)
     throw std::invalid_argument(errMsg.str());
 }
 
+bool World::checkObstacleIdExists(int id)
+{
+    for (const auto& ob : obstacles){
+        if (id == ob.id)
+            return true;
+    }
+    return false;
+}
+
 Vector2D& World::getActiveEntityVectorPosition()
 {
     for (auto& ent : this->objects){

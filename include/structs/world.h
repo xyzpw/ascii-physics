@@ -85,6 +85,7 @@ struct World {
     Object& getObjectById(int id);
     bool checkObjectIdExists(int id);
     Obstacle& getObstacleById(int id);
+    bool checkObstacleIdExists(int id);
     Vector2D& getActiveEntityVectorPosition();
     Position& getActiveEntityPosition();
     void resetObjectById(int id);
