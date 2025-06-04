@@ -50,6 +50,8 @@ void World::startSimulation()
 
     this->isSimulating = true;
 
+    activeEntityId = activeObjectId;
+
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).text = "reset";
     menuPanel.adjustColMin();
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).action = PANEL_ACTION::RESET;
