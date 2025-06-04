@@ -86,6 +86,7 @@ void clickButton1(World& world, Position& pos)
             idObjectFollowingMouse = it.id;
             isAddingObject = false;
             posHasObject = true;
+            break;
         }
     }
     for (const auto& it : world.obstacles){
