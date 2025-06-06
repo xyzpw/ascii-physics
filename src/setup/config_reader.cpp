@@ -15,6 +15,7 @@ using std::stod;
 const std::regex RE_CONFIG_LINE_PATTERN{"^([a-zA-Z0-9]+?)\\s((?:-?\\d*?.?)?[0-9]+?)$"};
 
 bool checkIsAlphaNumeric(std::string text);
+bool checkIsLineComment(const std::string& text);
 
 void applyConfigToArgs(ParsedArgs& args, std::string name)
 {
@@ -40,7 +41,7 @@ void applyConfigToArgs(ParsedArgs& args, std::string name)
 
     for (const auto& line : simulationConfigLines)
     {
-        if ("" == line) continue;
+        if ("" == line || checkIsLineComment(line)) continue;
 
         std::pair<std::string, std::string> lineInfo = getLineInfo(line);
 
@@ -59,5 +60,12 @@ bool checkIsAlphaNumeric(std::string text)
         return true;
     }
 
+    return false;
+}
+
+bool checkIsLineComment(const std::string& text)
+{
+    int firstNonSpace = text.find_first_not_of(' ');
+    if (text.at(text.find_first_not_of(' ')) == '#') return true;
     return false;
 }
