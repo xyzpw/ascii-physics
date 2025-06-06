@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+inline const std::string ARG_NAME_MASS = "m";
 inline const std::string ARG_NAME_COR = "cor";
 inline const std::string ARG_NAME_CHAR_SIZE = "char-size";
 inline const std::string ARG_NAME_LAUNCH_VELOCITY = "lvelocity";

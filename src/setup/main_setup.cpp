@@ -26,7 +26,7 @@ World createWorldWithArgs(ParsedArgs args)
         setArgsByPreset(args, preset);
     }
 
-    double mass = stod(getArgOrPrompt(args, "m", "mass (kg): "));
+    double mass = stod(getArgOrPrompt(args, ARG_NAME_MASS, "mass (kg): "));
 
     world.defaultObjectValues.objectMass = mass;
 
