@@ -1,0 +1,23 @@
+#pragma once
+
+/*
+    NOTE: Variables from `constants/arg_name_constants.h` are used!
+*/
+
+#include <string>
+#include <vector>
+#include <utility>
+#include "constants/arg_name_constants.h"
+
+inline const std::string CONF_VAR_NAME_MASS = "mass";
+inline const std::string CONF_VAR_NAME_CHARSIZE = "metersPerChar";
+inline const std::string CONF_VAR_NAME_COR = "cor";
+inline const std::string CONF_VAR_NAME_TRAILS = "trails";
+
+// Config var names and what cmd arg they point to.
+inline const std::vector<std::pair<std::string, std::string>> CONF_VAR_LIST {
+    {CONF_VAR_NAME_MASS, ARG_NAME_MASS},
+    {CONF_VAR_NAME_CHARSIZE, ARG_NAME_CHAR_SIZE},
+    {CONF_VAR_NAME_COR, ARG_NAME_COR},
+    {CONF_VAR_NAME_TRAILS, ARG_NAME_TRAILS},
+};

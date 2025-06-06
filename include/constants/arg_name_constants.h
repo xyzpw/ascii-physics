@@ -15,10 +15,12 @@ inline const std::string ARG_NAME_HIT_FLASH = "hit-flash";
 inline const std::string ARG_NAME_PRESET = "preset";
 inline const std::string ARG_NAME_LIST_PRESET = "list-preset";
 inline const std::string ARG_NAME_TRAILS = "trails";
+inline const std::string ARG_NAME_FILE = "f";
 
 const std::vector<std::pair<std::string, std::string>> helpMenu = {
     {"-m <n>", "mass of object (in kilograms)"},
     {"-g <n>", "acceleration due to gravity (in m/s [def. 9.80665])"},
+    {"-" + ARG_NAME_FILE + " <file>", "name of custom simulation file"},
     {"--cor <n>", "coefficient of restitution"},
     {"--char-size <n>", "size of each character on screen (in meters)"},
     {"--lvelocity <n>", "launch velocity"},

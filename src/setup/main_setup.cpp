@@ -2,6 +2,7 @@
 #include <iostream>
 #include "setup/main_setup.h"
 #include "setup/input_handler.h"
+#include "setup/config_reader.h"
 #include "structs/object.h"
 #include "structs/world.h"
 #include "enums/object_type.h"
@@ -20,6 +21,10 @@ void setArgsByPreset(ParsedArgs&, OBJECT_PRESET);
 World createWorldWithArgs(ParsedArgs args)
 {
     World world;
+
+    if (args.checkKeyExists("f")){
+        applyConfigToArgs(args, args.getKeyValue("f"));
+    }
 
     if (args.checkKeyExists("preset")){
         OBJECT_PRESET preset = strToObjectPreset(args.getKeyValue("preset"));
