@@ -22,40 +22,6 @@ bool checkIsLineComment(const std::string& text);
 std::pair<std::string, std::string> parseConfigLine(const std::string& text,
                                                     const std::regex& pattern);
 
-void applyConfigToArgs(ParsedArgs& args, std::string name)
-{
-    if (!checkIsAlphaNumeric(name)){
-        throw std::runtime_error("invalid simulation name");
-    }
-
-    auto simulationConfigLines = readFileLines("custom/" + name + ".conf");
-
-    std::smatch reMatch;
-
-    auto getLineInfo = [&](const std::string line) {
-        if (std::regex_search(line, reMatch, RE_CONFIG_LINE_PATTERN)) {
-            return std::make_pair(reMatch[1], reMatch[2]);
-        }
-        throw std::runtime_error("invalid config for '" + name + "': '" + line + "'");
-    };
-
-    auto addConfigArg = [&](const auto& var, const auto& info, const auto& key){
-        if (args.checkKeyExists(key) || var != info.first) return;
-        args.append(key, info.second);
-    };
-
-    for (const auto& line : simulationConfigLines)
-    {
-        if ("" == line || checkIsLineComment(line)) continue;
-
-        std::pair<std::string, std::string> lineInfo = getLineInfo(line);
-
-        for (const auto& it : CONF_VAR_LIST){
-            addConfigArg(it.first, lineInfo, it.second);
-        }
-    }
-}
-
 void applyConfigToParsedArgs(
     ParsedArgs& args,
     const std::vector<std::string>& lines)
