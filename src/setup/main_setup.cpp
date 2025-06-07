@@ -23,7 +23,10 @@ World createWorldWithArgs(ParsedArgs args)
     World world;
 
     if (args.checkKeyExists("f")){
-        applyConfigToArgs(args, args.getKeyValue("f"));
+        auto customConfig = readCustomConfig(args.getKeyValue("f"));
+
+        applyConfigToParsedArgs(args, customConfig.at(CONF_KEY_VAR));
+        applyConfigStartEvent(world, customConfig.at(CONF_KEY_ON_START));
     }
 
     if (args.checkKeyExists("preset")){
