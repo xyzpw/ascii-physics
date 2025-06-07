@@ -128,6 +128,8 @@ std::unordered_map<CONF_KEY, std::vector<std::string>> readCustomConfig(
         std::string& line = configFileLines[index];
         const bool isLastIndex = index + 1 == configFileLines.size();
 
+        removeLineComment(line);
+
         if (line == "")
             continue;
 
