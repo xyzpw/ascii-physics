@@ -9,6 +9,11 @@
 #include <utility>
 #include "constants/arg_name_constants.h"
 
+enum CONF_KEY {
+    CONF_KEY_VAR,
+    CONF_KEY_ON_START,
+};
+
 inline const std::string CONF_VAR_NAME_MASS = "mass";
 inline const std::string CONF_VAR_NAME_CHARSIZE = "metersPerChar";
 inline const std::string CONF_VAR_NAME_COR = "cor";
