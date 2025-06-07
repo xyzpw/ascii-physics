@@ -14,10 +14,13 @@ enum CONF_KEY {
     CONF_KEY_ON_START,
 };
 
+inline const std::string CONF_DIR = "custom";
 inline const std::string CONF_VAR_NAME_MASS = "mass";
 inline const std::string CONF_VAR_NAME_CHARSIZE = "metersPerChar";
 inline const std::string CONF_VAR_NAME_COR = "cor";
 inline const std::string CONF_VAR_NAME_TRAILS = "trails";
+inline const std::string CONF_ON_START = "on start:";
+inline const std::string CONF_CMD_LAUNCH = "launch";
 
 // Config var names and what cmd arg they point to.
 inline const std::vector<std::pair<std::string, std::string>> CONF_VAR_LIST {
@@ -26,3 +29,10 @@ inline const std::vector<std::pair<std::string, std::string>> CONF_VAR_LIST {
     {CONF_VAR_NAME_COR, ARG_NAME_COR},
     {CONF_VAR_NAME_TRAILS, ARG_NAME_TRAILS},
 };
+
+// Return the config path for a custom simulation given its name.
+inline std::string getConfigNamePath(std::string name)
+{
+    std::string path = CONF_DIR + "/" + name + ".conf";
+    return path;
+}
