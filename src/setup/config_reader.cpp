@@ -18,7 +18,6 @@ const std::regex RE_CONFIG_EVENT_PATTERN{"^([a-zA-Z0-9]+?)\\s([a-zA-Z0-9,.-]+?)$
 const std::regex RE_VECTOR2D_PATTERN{"^(-?\\d*?\\.?\\d+?),(-?\\d*?\\.?\\d+)"};
 
 bool checkIsAlphaNumeric(std::string text);
-bool checkIsLineComment(const std::string& text);
 std::pair<std::string, std::string> parseConfigLine(const std::string& text,
                                                     const std::regex& pattern);
 void removeLineComment(std::string& text);
@@ -80,13 +79,6 @@ bool checkIsAlphaNumeric(std::string text)
     return false;
 }
 
-bool checkIsLineComment(const std::string& text)
-{
-    int firstNonSpace = text.find_first_not_of(' ');
-    if (text.at(text.find_first_not_of(' ')) == '#') return true;
-    return false;
-}
-
 void removeLineComment(std::string& text)
 {
     auto index = text.find_first_of('#');
@@ -136,7 +128,7 @@ std::unordered_map<CONF_KEY, std::vector<std::string>> readCustomConfig(
         std::string& line = configFileLines[index];
         const bool isLastIndex = index + 1 == configFileLines.size();
 
-        if (line == "" || checkIsLineComment(line))
+        if (line == "")
             continue;
 
         if (line == CONF_ON_START) {
