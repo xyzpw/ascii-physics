@@ -22,6 +22,7 @@ using PANEL_KEY = PANEL_ITEM_KEY;
 std::mutex undoSpawnMutex;
 
 Position getNewObjectPosition(World&);
+void useStartupCommands(World&);
 
 World::World()
 {
@@ -55,6 +56,8 @@ void World::startSimulation()
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).text = "reset";
     menuPanel.adjustColMin();
     menuPanel.items.at(PANEL_KEY::QUIT_OR_RESET).action = PANEL_ACTION::RESET;
+
+    useStartupCommands(*this);
 
     std::thread simThread(simulateObjectsInWorld, std::ref(*this));
     simThread.detach();
@@ -456,4 +459,12 @@ Position getNewObjectPosition(World& world)
     }
 
     return Position{-1, -1};
+}
+
+void useStartupCommands(World& world)
+{
+    auto& commands = world.startupCommands;
+    auto& object = world.getObjectById(world.activeObjectId);
+
+    if (commands.isLaunchValid) object.launch(commands.launch);
 }

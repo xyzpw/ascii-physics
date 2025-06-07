@@ -30,6 +30,11 @@ struct _ObjectInputInfo {
     bool isWindGustMode = false;
 };
 
+struct SimStartupCommands {
+    Vector2D launch{0, 0};
+    bool isLaunchValid = false;
+};
+
 struct World {
     bool hasQuit = false;
     bool isSimulating = false;
@@ -66,6 +71,7 @@ struct World {
 
     _WorldDefaultObjectValues defaultObjectValues;
     _ObjectInputInfo objectInputInfo;
+    SimStartupCommands startupCommands;
     MenuPanel menuPanel{};
 
     CLICK_POWER clickPower = CLICK_POWER_NONE;
