@@ -21,6 +21,7 @@ bool checkIsAlphaNumeric(std::string text);
 bool checkIsLineComment(const std::string& text);
 std::pair<std::string, std::string> parseConfigLine(const std::string& text,
                                                     const std::regex& pattern);
+void removeLineComment(std::string& text);
 
 void applyConfigToParsedArgs(
     ParsedArgs& args,
@@ -84,6 +85,16 @@ bool checkIsLineComment(const std::string& text)
     int firstNonSpace = text.find_first_not_of(' ');
     if (text.at(text.find_first_not_of(' ')) == '#') return true;
     return false;
+}
+
+void removeLineComment(std::string& text)
+{
+    auto index = text.find_first_of('#');
+    if (index == std::string::npos) return;
+
+    text = text.substr(0, index);
+
+    text = text.substr(0, text.find_last_not_of(' ') + 1);
 }
 
 // return pair of line as (key, val), throws exception on regex failure.
