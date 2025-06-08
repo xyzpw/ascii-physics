@@ -31,4 +31,5 @@ The above code will run these commands when the simulation is started.
 - `trails`: enables trails
 
 #### Event Commands
-- launch: launches the object upon simulation commencement
+- launch &lt;x&gt;,&lt;y&gt;
+    - Launches the object with a velocity vector of `(x, y)` m/s.
