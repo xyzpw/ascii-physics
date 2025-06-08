@@ -53,7 +53,7 @@ World createWorldWithArgs(ParsedArgs args)
         world.defaultObjectValues.coefficientOfRestitution = val;
     });
 
-    setDoubleIfExists("g", [&](double val){
+    setDoubleIfExists(ARG_NAME_G, [&](double val){
         changeGravityAcceleration(val);
     });
 
