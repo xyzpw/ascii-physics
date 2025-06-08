@@ -19,6 +19,7 @@ inline const std::string CONF_VAR_NAME_MASS = "mass";
 inline const std::string CONF_VAR_NAME_CHARSIZE = "metersPerChar";
 inline const std::string CONF_VAR_NAME_COR = "cor";
 inline const std::string CONF_VAR_NAME_TRAILS = "trails";
+inline const std::string CONF_VAR_NAME_G = "g";
 inline const std::string CONF_ON_START = "on start:";
 inline const std::string CONF_CMD_LAUNCH = "launch";
 
@@ -28,6 +29,7 @@ inline const std::vector<std::pair<std::string, std::string>> CONF_VAR_LIST {
     {CONF_VAR_NAME_CHARSIZE, ARG_NAME_CHAR_SIZE},
     {CONF_VAR_NAME_COR, ARG_NAME_COR},
     {CONF_VAR_NAME_TRAILS, ARG_NAME_TRAILS},
+    {CONF_VAR_NAME_G, ARG_NAME_G},
 };
 
 // Return the config path for a custom simulation given its name.
