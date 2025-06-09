@@ -31,8 +31,8 @@ struct _ObjectInputInfo {
 };
 
 struct SimStartupCommands {
+    bool active = false;
     Vector2D launch{0, 0};
-    bool isLaunchValid = false;
 };
 
 struct World {

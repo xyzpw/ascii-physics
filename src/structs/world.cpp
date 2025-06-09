@@ -466,5 +466,5 @@ void useStartupCommands(World& world)
     auto& commands = world.startupCommands;
     auto& object = world.getObjectById(world.activeObjectId);
 
-    if (commands.isLaunchValid) object.launch(commands.launch);
+    object.launch(commands.launch);
 }
