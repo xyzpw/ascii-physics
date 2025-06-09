@@ -43,7 +43,12 @@ void applyConfigToParsedArgs(
 
 void applyConfigStartEvent(World& world, const std::vector<std::string>& lines)
 {
+    if (lines.size() == 0){
+        return;
+    }
+
     auto& commands = world.startupCommands;
+    commands.active = true;
 
     std::smatch reMatch;
 
@@ -61,7 +66,6 @@ void applyConfigStartEvent(World& world, const std::vector<std::string>& lines)
 
         if (lineInfo.first == CONF_CMD_LAUNCH){
             commands.launch = parseVecFn(lineInfo.second);
-            commands.isLaunchValid = true;
             continue;
         }
     }
