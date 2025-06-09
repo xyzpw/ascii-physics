@@ -33,6 +33,7 @@ struct _ObjectInputInfo {
 struct SimStartupCommands {
     bool active = false;
     Vector2D launch{0, 0};
+    double windVelocity = 0;
 };
 
 struct World {

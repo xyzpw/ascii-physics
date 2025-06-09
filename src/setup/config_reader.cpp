@@ -68,6 +68,10 @@ void applyConfigStartEvent(World& world, const std::vector<std::string>& lines)
             commands.launch = parseVecFn(lineInfo.second);
             continue;
         }
+        else if (lineInfo.first == CONF_CMD_WIND_VELOCITY){
+            commands.windVelocity = stod(lineInfo.second);
+            continue;
+        }
     }
 }
 

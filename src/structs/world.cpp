@@ -467,4 +467,5 @@ void useStartupCommands(World& world)
     auto& object = world.getObjectById(world.activeObjectId);
 
     object.launch(commands.launch);
+    world.windVelocity = commands.windVelocity;
 }
