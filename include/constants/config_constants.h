@@ -22,6 +22,7 @@ inline const std::string CONF_VAR_NAME_TRAILS = "trails";
 inline const std::string CONF_VAR_NAME_G = "g";
 inline const std::string CONF_ON_START = "on start:";
 inline const std::string CONF_CMD_LAUNCH = "launch";
+inline const std::string CONF_CMD_WIND_VELOCITY = "windVelocity";
 
 // Config var names and what cmd arg they point to.
 inline const std::vector<std::pair<std::string, std::string>> CONF_VAR_LIST {
