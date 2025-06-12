@@ -29,9 +29,9 @@ The above code will run these commands when the simulation is started.
 - `metersPerChar`: size of each char in meters
 - `cor`: default coefficient of restitution
 - `trails`: enables trails
+- addObstacle &lt;x&gt;,&lt;y&gt;
+    - Adds obstacle upon running with a vector position of `(x, y)` meters.
 
 #### Event Commands
 - launch &lt;x&gt;,&lt;y&gt;
     - Launches the object with a velocity vector of `(x, y)` m/s.
-- addObstacle &lt;x&gt;,&lt;y&gt;
-    - Adds obstacle upon running with a vector position of `(x, y)` meters.
