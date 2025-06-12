@@ -21,6 +21,7 @@ bool checkIsAlphaNumeric(std::string text);
 std::pair<std::string, std::string> parseConfigLine(const std::string& text,
                                                     const std::regex& pattern);
 void removeLineComment(std::string& text);
+Vector2D parseVector2D(std::string text);
 
 void applyConfigToParsedArgs(
     ParsedArgs& args,
@@ -73,6 +74,16 @@ void applyConfigStartEvent(World& world, const std::vector<std::string>& lines)
             continue;
         }
     }
+}
+
+Vector2D parseVector2D(std::string text)
+{
+    std::smatch reMatch;
+
+    if (std::regex_search(text, reMatch, RE_VECTOR2D_PATTERN)){
+        return Vector2D{stod(reMatch[1].str()), stod(reMatch[2].str())};
+    }
+    throw std::runtime_error("config contains invalid vector values");
 }
 
 bool checkIsAlphaNumeric(std::string text)
