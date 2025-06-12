@@ -15,7 +15,7 @@ using std::stod;
 
 const std::regex RE_CONFIG_LINE_PATTERN{"^([a-zA-Z0-9]+?)\\s((?:-?\\d*?.?)?[0-9]+?)$"};
 const std::regex RE_CONFIG_EVENT_PATTERN{"^([a-zA-Z0-9]+?)\\s([a-zA-Z0-9,.-]+?)$"};
-const std::regex RE_VECTOR2D_PATTERN{"^(-?\\d*?\\.?\\d+?),(-?\\d*?\\.?\\d+)"};
+const std::regex RE_VECTOR2D_PATTERN{"^(-?\\d+?(?:\\.\\d+?)?),(-?\\d+?(?:\\.\\d+?)?)"};
 
 bool checkIsAlphaNumeric(std::string text);
 std::pair<std::string, std::string> parseConfigLine(const std::string& text,
