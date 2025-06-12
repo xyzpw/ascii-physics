@@ -8,6 +8,7 @@
 #include "structs/vector2d.h"
 #include "utils/arg_parser.h"
 #include "utils/file_utils.h"
+#include "utils/screen_utils.h"
 #include "constants/config_constants.h"
 #include "constants/arg_name_constants.h"
 
@@ -38,6 +39,54 @@ void applyConfigToParsedArgs(
 
         for (const auto& it : CONF_VAR_ARG_LIST){
             addVarFn(it.first, lineInfo, it.second);
+        }
+    }
+}
+
+void applyConfigVars(World& world, ParsedArgs& args,
+                     const std::vector<std::string>& lines)
+{
+    if (lines.size() == 0){
+        return;
+    }
+
+    bool hasFinishedArgs = false; // has finished config args (we do this first)
+
+    for (int i = 0; i < lines.size(); ++i)
+    {
+        const std::string ln = lines.at(i);
+        std::string lnVar = ln.substr(0, ln.find_first_of(' '));
+        std::string lnVal = ln.substr(ln.find_first_of(' ') + 1);
+
+        // Error if line contains more than 1 space.
+        if (lnVal.find_first_of(' ') != std::string::npos){
+            throw std::runtime_error("invalid config usage: '" + ln + "'");
+        }
+
+        for (const auto& it : CONF_VAR_ARG_LIST){
+            if (args.checkKeyExists(it.second) || lnVar != it.first) continue;
+            args.append(it.second, lnVal);
+        }
+
+        if (!hasFinishedArgs && i == lines.size() - 1){
+            i = 0;
+            hasFinishedArgs = true;
+            continue;
+        }
+
+        if (!hasFinishedArgs)
+            continue;
+
+        if (lnVar == CONF_VAR_NAME_OBSTACLE){
+            double size = 1.0;
+            if (args.checkKeyExists(ARG_NAME_CHAR_SIZE)){
+                size = stod(args.getKeyValue(ARG_NAME_CHAR_SIZE));
+                world.metersPerChar = size; // set world char size before adding obstacle
+            }
+
+            Vector2D vec = parseVector2D(lnVal);
+            Position pos = vectorToPosition(vec, size);
+            world.addObstacle(pos);
         }
     }
 }

@@ -10,6 +10,9 @@ void applyConfigToParsedArgs(
     ParsedArgs& args,
     const std::vector<std::string>& lines);
 
+void applyConfigVars(World& world, ParsedArgs& args,
+                     const std::vector<std::string>& lines);
+
 void applyConfigStartEvent(World&, const std::vector<std::string>& lines);
 
 std::unordered_map<CONF_KEY, std::vector<std::string>> readCustomConfig(
