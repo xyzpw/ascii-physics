@@ -20,6 +20,7 @@ inline const std::string CONF_VAR_NAME_CHARSIZE = "metersPerChar";
 inline const std::string CONF_VAR_NAME_COR = "cor";
 inline const std::string CONF_VAR_NAME_TRAILS = "trails";
 inline const std::string CONF_VAR_NAME_G = "g";
+inline const std::string CONF_VAR_NAME_OBSTACLE = "addObstacle";
 inline const std::string CONF_ON_START = "on start:";
 inline const std::string CONF_CMD_LAUNCH = "launch";
 inline const std::string CONF_CMD_WIND_VELOCITY = "windVelocity";
