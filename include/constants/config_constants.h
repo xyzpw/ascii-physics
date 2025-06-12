@@ -26,7 +26,7 @@ inline const std::string CONF_CMD_WIND_VELOCITY = "windVelocity";
 
 // Config var names and what cmd arg key they point to.
 // Example: CONF_VAR_NAME_MASS, ARG_NAME_MASS
-inline const std::vector<std::pair<std::string, std::string>> CONF_VAR_LIST {
+inline const std::vector<std::pair<std::string, std::string>> CONF_VAR_ARG_LIST {
     {CONF_VAR_NAME_MASS, ARG_NAME_MASS},
     {CONF_VAR_NAME_CHARSIZE, ARG_NAME_CHAR_SIZE},
     {CONF_VAR_NAME_COR, ARG_NAME_COR},

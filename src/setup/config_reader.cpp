@@ -35,7 +35,7 @@ void applyConfigToParsedArgs(
     {
         auto lineInfo = parseConfigLine(ln, RE_CONFIG_LINE_PATTERN);
 
-        for (const auto& it : CONF_VAR_LIST){
+        for (const auto& it : CONF_VAR_ARG_LIST){
             addVarFn(it.first, lineInfo, it.second);
         }
     }
