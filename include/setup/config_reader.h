@@ -6,10 +6,6 @@
 #include "utils/arg_parser.h"
 #include "constants/config_constants.h"
 
-void applyConfigToParsedArgs(
-    ParsedArgs& args,
-    const std::vector<std::string>& lines);
-
 void applyConfigVars(World& world, ParsedArgs& args,
                      const std::vector<std::string>& lines);
 

@@ -24,25 +24,6 @@ std::pair<std::string, std::string> parseConfigLine(const std::string& text,
 void removeLineComment(std::string& text);
 Vector2D parseVector2D(std::string text);
 
-void applyConfigToParsedArgs(
-    ParsedArgs& args,
-    const std::vector<std::string>& lines)
-{
-    auto addVarFn = [&](const auto& var, const auto& info, const auto& key){
-        if (args.checkKeyExists(key) || var != info.first) return;
-        args.append(key, info.second);
-    };
-
-    for (const auto& ln : lines)
-    {
-        auto lineInfo = parseConfigLine(ln, RE_CONFIG_LINE_PATTERN);
-
-        for (const auto& it : CONF_VAR_ARG_LIST){
-            addVarFn(it.first, lineInfo, it.second);
-        }
-    }
-}
-
 void applyConfigVars(World& world, ParsedArgs& args,
                      const std::vector<std::string>& lines)
 {
