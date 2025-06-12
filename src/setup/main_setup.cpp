@@ -25,7 +25,7 @@ World createWorldWithArgs(ParsedArgs args)
     if (args.checkKeyExists("f")){
         auto customConfig = readCustomConfig(args.getKeyValue("f"));
 
-        applyConfigToParsedArgs(args, customConfig.at(CONF_KEY_VAR));
+        applyConfigVars(world, args, customConfig.at(CONF_KEY_VAR));
         applyConfigStartEvent(world, customConfig.at(CONF_KEY_ON_START));
     }
 
