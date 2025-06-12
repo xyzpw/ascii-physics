@@ -99,7 +99,7 @@ struct World {
     void highlightObjectById(int id, double duration=0.5);
     void hitFlashObjectById(int id, double duration=0.5);
     void addObject(OBJECT_TYPE, double kg, Position pos={-1,-1});
-    void addObstacle();
+    void addObstacle(Position pos={-1,-1});
     void removeEntityById(int id);
     void removeAllObjects();
     void removeAllObstacles();

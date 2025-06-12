@@ -248,13 +248,23 @@ void World::addObject(OBJECT_TYPE type, double kg, Position pos)
     this->entityIdSpawnOrder.push_back(newObject.id);
 }
 
-void World::addObstacle()
+void World::addObstacle(Position pos)
 {
     Obstacle obstacle{.id=randInt()};
 
-    obstacle.position = getNewObjectPosition(*this);
-    if (!checkPositionInsideDisplay(obstacle.position))
-        return;
+    if (pos.column == -1 && pos.row == -1){
+        obstacle.position = getNewObjectPosition(*this);
+        if (!checkPositionInsideDisplay(obstacle.position))
+            return;
+    }
+    else {
+        for (auto& it : this->obstacles){
+            if (it.position == pos)
+                return;
+        }
+        obstacle.position = pos;
+    }
+
     obstacle.vectors.position = positionToVector(obstacle.position, metersPerChar);
     obstacle.mLength = this->metersPerChar;
 
