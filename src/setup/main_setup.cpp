@@ -86,7 +86,6 @@ World createWorldWithArgs(ParsedArgs args)
     }
 
     world.addObject(OBJECT_TYPE::OBJECT_BALL, mass);
-    world.activeObjectId = world.objects.at(0).id;
 
     return world;
 }
