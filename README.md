@@ -87,6 +87,9 @@ The closer the object the faster they are pushed away.
 - `KEY_LEFT`: select previous object
 - `KEY_RIGHT`: select next object
 
+###### Resizing obstacles
+Use arrow keys to resize selected obstacle.
+
 ##### Selecting Values to Change
 - `L` Select launch angle
 - `V` Select launch velocity
