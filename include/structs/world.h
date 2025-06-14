@@ -36,6 +36,13 @@ struct SimStartupCommands {
     double windVelocity = 0;
 };
 
+// Info for selecting multiple entities at once.
+struct EntityMultiselect {
+    std::vector<int> selectedIds;
+    void clear() { selectedIds = {}; } // deselect all ids
+    void add(int id) { selectedIds.push_back(id); } // add id
+};
+
 struct World {
     bool hasQuit = false;
     bool isSimulating = false;
@@ -73,6 +80,7 @@ struct World {
     _WorldDefaultObjectValues defaultObjectValues;
     _ObjectInputInfo objectInputInfo;
     SimStartupCommands startupCommands;
+    EntityMultiselect entityMultiselect;
     MenuPanel menuPanel{};
 
     CLICK_POWER clickPower = CLICK_POWER_NONE;

@@ -279,6 +279,7 @@ void World::addObject(OBJECT_TYPE type, double kg, Position pos)
     this->activeEntityId = newObject.id;
     this->activeObjectId = newObject.id;
     this->entityIdSpawnOrder.push_back(newObject.id);
+    entityMultiselect.clear();
 }
 
 void World::addObstacle(Position pos)
@@ -289,6 +290,7 @@ void World::addObstacle(Position pos)
         obstacle.position = getNewObjectPosition(*this);
         if (!checkPositionInsideDisplay(obstacle.position))
             return;
+        entityMultiselect.clear();
     }
     else {
         for (auto& it : this->obstacles){
@@ -302,19 +304,24 @@ void World::addObstacle(Position pos)
     obstacle.mLength = this->metersPerChar;
 
     this->obstacles.push_back(obstacle);
-    this->activeEntityId = obstacle.id;
+    if (entityMultiselect.selectedIds.size() == 0)
+        this->activeEntityId = obstacle.id;
     this->entityIdSpawnOrder.push_back(obstacle.id);
+
+    entityMultiselect.add(obstacle.id);
 }
 
 void World::removeEntityById(const int id)
 {
     auto& order = this->entityIdSpawnOrder;
+    auto& mIds = entityMultiselect.selectedIds;
 
     auto rmIfExists = [&](auto& vec){
         auto it = std::remove_if(
             vec.begin(), vec.end(), [&](auto& t) { return id == t.id; }
         );
         vec.erase(it, vec.end());
+        mIds.erase(std::remove(mIds.begin(), mIds.end(), id), mIds.end());
     };
 
     rmIfExists(this->objects);
@@ -329,16 +336,24 @@ void World::removeEntityByPosition(const Position pos)
 void World::removeAllObjects()
 {
     this->objects = {};
+    entityMultiselect.clear();
 }
 
 void World::removeAllObstacles()
 {
     this->obstacles = {};
+    entityMultiselect.clear();
 }
 
 // Remove the the last spawned entity.
 void World::undoSpawn()
 {
+    // Cancel if selected multiselect is active.
+    for (auto id : entityMultiselect.selectedIds){
+        if (id == activeEntityId)
+            return;
+    }
+
     std::lock_guard<std::mutex> lock(undoSpawnMutex);
 
     int size = this->entityIdSpawnOrder.size();
