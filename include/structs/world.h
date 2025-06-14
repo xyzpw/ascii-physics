@@ -93,6 +93,9 @@ struct World {
     bool checkObjectIdExists(int id);
     Obstacle& getObstacleById(int id);
     bool checkObstacleIdExists(int id);
+    Position& getEntityPositionById(int id);
+    Vector2D& getEntityVectorPositionById(int id);
+    int getEntityIdByPosition(const Position& pos);
     Vector2D& getActiveEntityVectorPosition();
     Position& getActiveEntityPosition();
     void resetObjectById(int id);
@@ -101,6 +104,7 @@ struct World {
     void addObject(OBJECT_TYPE, double kg, Position pos={-1,-1});
     void addObstacle(Position pos={-1,-1});
     void removeEntityById(int id);
+    void removeEntityByPosition(const Position pos);
     void removeAllObjects();
     void removeAllObstacles();
     void undoSpawn();

@@ -135,6 +135,39 @@ bool World::checkObstacleIdExists(int id)
     return false;
 }
 
+Position& World::getEntityPositionById(int id)
+{
+    if (checkObjectIdExists(id)) return getObjectById(id).position;
+    else if (checkObstacleIdExists(id)) return getObstacleById(id).position;
+
+    throw std::runtime_error("object id does not exist");
+}
+
+Vector2D& World::getEntityVectorPositionById(int id)
+{
+    if (checkObjectIdExists(id))
+        return getObstacleById(id).vectors.position;
+    else if (checkObstacleIdExists(id))
+        return getObstacleById(id).vectors.position;
+
+    throw std::runtime_error("object id does not exist");
+}
+
+int World::getEntityIdByPosition(const Position& pos)
+{
+    for (const auto& ob : objects){
+        if (ob.position == pos)
+            return ob.id;
+    }
+    for (const auto& ob : obstacles){
+        if (ob.position == pos){
+            return ob.id;
+        }
+    }
+
+    return -1;
+}
+
 Vector2D& World::getActiveEntityVectorPosition()
 {
     for (auto& ent : this->objects){
@@ -286,6 +319,11 @@ void World::removeEntityById(const int id)
 
     rmIfExists(this->objects);
     rmIfExists(this->obstacles);
+}
+
+void World::removeEntityByPosition(const Position pos)
+{
+    removeEntityById(getEntityIdByPosition(pos));
 }
 
 void World::removeAllObjects()
