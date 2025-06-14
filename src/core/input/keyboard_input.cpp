@@ -4,6 +4,7 @@
 #include <string>
 #include "core/input/keyboard_input.h"
 #include "core/input/object_control_scale.h"
+#include "core/input/multiselect_input.h"
 #include "core/physics/object_physics.h"
 #include "structs/object.h"
 #include "structs/world.h"
@@ -34,6 +35,8 @@ void handleKeyPress(const char key, World& world)
     auto& selectParam = world.objectInputInfo.selectParameter;
     auto& objInputInfo = world.objectInputInfo;
 
+    bool isActiveIdObstacle = world.checkObstacleIdExists(world.activeEntityId);
+
     if (keyControl == CONTROL_KEY::KEY_RESET_OBJECT){
         world.resetSimulation();
         return;
@@ -56,6 +59,11 @@ void handleKeyPress(const char key, World& world)
     };
 
     auto useMovement = [&](int dcol, int drow){
+        if (isActiveIdObstacle){
+            moveSelectedEntities(world, dcol, drow);
+            return;
+        }
+
         Position& pos = world.getActiveEntityPosition();
         Vector2D& vec = world.getActiveEntityVectorPosition();
 
@@ -122,10 +130,19 @@ void handleKeyPress(const char key, World& world)
             break;
         }
         case CONTROL_KEY::KEY_SCALE_CONTROL_UP:{
+            if (isActiveIdObstacle){
+                resizeSelectedObstacleY(world, 1);
+                break;
+            }
+
             changeSelectParamValueOnInput(world, selectParam, true);
             break;
         }
         case CONTROL_KEY::KEY_SCALE_CONTROL_DOWN:{
+            if (isActiveIdObstacle){
+                resizeSelectedObstacleY(world, -1);
+                break;
+            }
             changeSelectParamValueOnInput(world, selectParam, false);
             break;
         }
