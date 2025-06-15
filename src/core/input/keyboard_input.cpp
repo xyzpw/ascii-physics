@@ -131,7 +131,7 @@ void handleKeyPress(const char key, World& world)
         }
         case CONTROL_KEY::KEY_SCALE_CONTROL_UP:{
             if (isActiveIdObstacle){
-                resizeSelectedObstacleY(world, 1);
+                resizeSelectedObstacleY(world, true);
                 break;
             }
 
@@ -140,7 +140,7 @@ void handleKeyPress(const char key, World& world)
         }
         case CONTROL_KEY::KEY_SCALE_CONTROL_DOWN:{
             if (isActiveIdObstacle){
-                resizeSelectedObstacleY(world, -1);
+                resizeSelectedObstacleY(world, false);
                 break;
             }
             changeSelectParamValueOnInput(world, selectParam, false);

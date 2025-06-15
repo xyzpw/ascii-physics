@@ -8,41 +8,18 @@
 
 bool checkMultiselectCanMove(World&, int dCol, int dRow);
 
-void resizeSelectedObstacleY(World& world, int rCount)
+void resizeSelectedObstacleY(World& world, bool isAdding)
 {
-    if (rCount == 0) return;
-    else if (world.entityMultiselect.selectedIds.size() == 0) return;
-
-    bool isRemoving = rCount < 0;
-
-    // Convert unit count to absolute value.
-    if (isRemoving) rCount = rCount - rCount * 2.0;
-
-    // Adjust row of object position to fit the position of next object.
-    auto fixPosIfIncreasing = [&](Position& top, Position& bottom) {
-        if (isRemoving) return;
-        top.row -= 1;
-        bottom.row += 1;
-    };
+    auto& idList = world.entityMultiselect.selectedIds;
 
     // Remove obstacle if resize count is negative, otherwise add.
     auto addOrRemoveObs = [&](Position& p){
-        if (isRemoving) world.removeEntityByPosition(p);
-        else world.addObstacle(p);
+        if (isAdding) world.addObstacle(p);
+        else world.removeEntityByPosition(p);
     };
 
-    auto& idList = world.entityMultiselect.selectedIds;
-
-    if (isRemoving && idList.size() <= 1) return;
-    else if (!isRemoving &&
-            (!checkMultiselectCanMove(world, 0, 1) ||
-            !checkMultiselectCanMove(world, 0, -1)))
-    {
-        return;
-    }
-
-    const int& obsCol = world.getActiveEntityPosition().column;
     int obsTopRow = -1, obsBottomRow = -1;
+    int leftmostCol = -1, rightmostCol = -1;
 
     // Get row number of highest and lowest obstacle.
     for (int i = 0; i < idList.size(); ++i){
@@ -51,22 +28,23 @@ void resizeSelectedObstacleY(World& world, int rCount)
         // Set top/bottom row numbers if they are not already set.
         if (obsTopRow == -1) obsTopRow = pos.row;
         if (obsBottomRow == -1) obsBottomRow = pos.row;
+        if (leftmostCol == -1) leftmostCol = pos.column;
+        if (rightmostCol == -1) rightmostCol = pos.column;
 
         if (pos.row < obsTopRow) obsTopRow = pos.row;
         if (pos.row > obsBottomRow) obsBottomRow = pos.row;
+        if (pos.column < leftmostCol) leftmostCol = pos.column;
+        if (pos.column > rightmostCol) rightmostCol = pos.column;
     }
 
-    for (int i = 0; i < rCount; ++i){
-        Position topPos{obsCol, obsTopRow};
-        Position bottomPos{obsCol, obsBottomRow};
+    if (!isAdding && obsTopRow == obsBottomRow) return;
 
-        fixPosIfIncreasing(topPos, bottomPos);
-
+    for (int c = leftmostCol; c < rightmostCol + 1; ++c){
+        Position topPos{c, obsTopRow};
+        Position bottomPos{c, obsBottomRow};
+        if (isAdding) { topPos.row -= 1; bottomPos.row += 1; }
         addOrRemoveObs(topPos);
         addOrRemoveObs(bottomPos);
-
-        obsTopRow += isRemoving ? 1 : -1;
-        obsBottomRow += isRemoving ? -1 : 1;
     }
 }
 
