@@ -48,6 +48,55 @@ void resizeSelectedObstacleY(World& world, bool isAdding)
     }
 }
 
+void resizeSelectedObstacleX(World& world, bool isAdding)
+{
+    auto& idList = world.entityMultiselect.selectedIds;
+
+    int leftmostCol = -1, rightmostCol = -1;
+    int topRow = -1, bottomRow = -1;
+
+    // Set value to a specified default if it equals -1.
+    auto setIfNeg1 = [&](int& val1, int& val2, const int& def){
+        if (val1 == -1) val1 = def;
+        if (val2 == -1) val2 = def;
+    };
+
+    // Move position to next empty space where the new obstacle will be added.
+    auto fixAddingPos = [&](Position& left, Position& right){
+        left.column -= 1;
+        right.column += 1;
+    };
+
+    // Add or remove an obstacle at this position depending on the resize method.
+    auto resizeStep = [&](Position& p){
+        if (isAdding) world.addObstacle(p);
+        else world.removeEntityByPosition(p);
+    };
+
+    for (const auto& id : idList){
+        auto& pos = world.getEntityPositionById(id);
+        int& col = pos.column;
+        int& row = pos.row;
+
+        setIfNeg1(leftmostCol, rightmostCol, pos.column);
+        setIfNeg1(topRow, bottomRow, pos.row);
+
+        if (col < leftmostCol) leftmostCol = col;
+        if (col > rightmostCol) rightmostCol = col;
+        if (row < topRow) topRow = row;
+        if (row > bottomRow) bottomRow = row;
+    }
+
+    if (!isAdding && rightmostCol == leftmostCol) return;
+
+    for (int r = topRow; r < bottomRow + 1; ++r){
+        Position posR{rightmostCol, r};
+        Position posL{leftmostCol, r};
+        if (isAdding) fixAddingPos(posL, posR);
+        resizeStep(posR); resizeStep(posL);
+    }
+}
+
 void moveSelectedEntities(World& world, int dCol, int dRow)
 {
     if (world.entityMultiselect.selectedIds.size() == 0 ||
