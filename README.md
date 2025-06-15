@@ -5,7 +5,8 @@
 
 Ncurses application to simulate physics.
 
-https://github.com/user-attachments/assets/e69e9cca-b94e-4830-9cd3-b9cc407de519
+
+https://github.com/user-attachments/assets/3d38d247-7a0e-471f-9747-e85783d59044
 
 ## Usage
 Make executable and execute:
