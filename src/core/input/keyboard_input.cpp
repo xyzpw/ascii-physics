@@ -148,6 +148,11 @@ void handleKeyPress(const char key, World& world)
         }
         case CONTROL_KEY::KEY_OBJECT_SELECT_NEXT:
         case CONTROL_KEY::KEY_OBJECT_SELECT_PREV:
+            if (isActiveIdObstacle){
+                bool isAdd = keyControl == CONTROL_KEY::KEY_OBJECT_SELECT_NEXT;
+                resizeSelectedObstacleX(world, isAdd);
+                break;
+            }
             selectObjectNextOrPrev(world, keyControl);
             world.highlightObjectById(world.activeObjectId, 0.5);
             break;
